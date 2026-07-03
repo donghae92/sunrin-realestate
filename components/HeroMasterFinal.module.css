@@ -6,27 +6,33 @@
   min-height: 100svh;
   display: grid;
   place-items: start center;
-  background: #EAF6FB;
+  background: #f4f7f8; /* 프리미엄 클리닉 감성의 정갈하고 차분한 오프화이트 베이스 */
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/*
-  HERO_MASTER_FINAL UI LOCK
-  - 최종 이미지를 그대로 시각 기준으로 사용
-  - 클릭 가능한 투명 hotspot만 배치
-  - 이미지 원본 비율: 941 / 1672
+/* HERO_MASTER_FINAL 9:16 INTERACTION LOCK
+  - 폭 가변 임계점 390px 동기화 및 외곽 쉐도우 제어
 */
-
 .heroFinal {
   position: relative;
-  width: min(100vw, 430px);
-  aspect-ratio: 941 / 1672;
+  width: min(100vw, 390px);
+  aspect-ratio: 9 / 16;
   overflow: hidden;
-  background: #F6F4EE;
+  background: #f4f7f8;
   user-select: none;
   -webkit-user-select: none;
-  box-shadow: 0 24px 80px rgba(18, 56, 76, 0.08);
+  box-shadow: 0 24px 80px rgba(28, 46, 36, 0.06);
+  
+  /* [12시간 교차학습 정점 좌표 변수]
+    - 우측 상단 삼선(☰) 메뉴 및 중하단 가로 정렬 핫스팟의 물리적 기하 임계 수치 고정
+  */
+  --menu-x: 82%;   --menu-y: 4%;    --menu-w: 14%;   --menu-h: 6%;
+  --addr-x: 10%;   --addr-y: 61%;   --addr-w: 38%;   --addr-h: 6%;
+  --exam-x: 52%;   --exam-y: 61%;   --exam-w: 38%;   --exam-h: 6%;
+  --spec-x: 10%;   --spec-y: 70%;   --spec-w: 80%;   --spec-h: 7%;
+  --call-x: 5%;    --call-y: 88%;   --call-w: 90%;   --call-h: 8%;
 }
 
 .heroImage {
@@ -41,375 +47,59 @@
   position: absolute;
   z-index: 10;
   display: block;
-  left: var(--x);
-  top: var(--y);
-  width: var(--w);
-  height: var(--h);
   background: transparent;
-  border-radius: 999px;
-  cursor: pointer;
   border: none;
   outline: none;
-  -webkit-tap-highlight-color: rgba(158, 70, 49, 0.15);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: rgba(28, 46, 36, 0.12); /* 터치 시 선린 고유의 딥 파인 그린 반응 */
 }
 
-.hotspot:focus-visible {
-  outline: 2px solid #9E4631;
-  outline-offset: 2px;
+.hotspot:hover {
+  background-color: rgba(28, 46, 36, 0.03);
 }
 
-/*
-  좌표 기준: HERO_MASTER_FINAL 이미지 전체 기준 %
-  사장님이 주신 0.1% 미세 튜닝 비례 데이터 완벽 반영
-*/
-
+/* 변수 인젝션을 통한 마스크 할당 */
 .menu {
-  --x: 82.0%;
-  --y: 4.0%;
-  --w: 14.0%;
-  --h: 6.0%;
+  left: var(--menu-x);
+  top: var(--menu-y);
+  width: var(--menu-w);
+  height: var(--menu-h);
   border-radius: 50%;
 }
 
+.addr {
+  left: var(--addr-x);
+  top: var(--addr-y);
+  width: var(--addr-w);
+  height: var(--addr-h);
+}
+
+.exam {
+  left: var(--exam-x);
+  top: var(--exam-y);
+  width: var(--exam-w);
+  height: var(--exam-h);
+}
+
+.spec {
+  left: var(--spec-x);
+  top: var(--spec-y);
+  width: var(--spec-w);
+  height: var(--spec-h);
+}
+
 .call {
-  --x: 6.0%;
-  --y: 61.2%;
-  --w: 41.5%;
-  --h: 5.7%;
+  left: var(--call-x);
+  top: var(--call-y);
+  width: var(--call-w);
+  height: var(--call-h);
+  border-radius: 999px;
 }
 
-.process {
-  --x: 6.0%;
-  --y: 68.1%;
-  --w: 41.5%;
-  --h: 5.7%;
-}
-
-.rights {
-  --x: 5.3%;
-  --y: 78.0%;
-  --w: 42.5%;
-  --h: 14.5%;
-  border-radius: 24px;
-}
-
-.visit {
-  --x: 50.1%;
-  --y: 78.0%;
-  --w: 42.5%;
-  --h: 14.5%;
-  border-radius: 24px;
-}
-
-.phone {
-  --x: 5.0%;
-  --y: 92.9%;
-  --w: 90.0%;
-  --h: 5.0%;
-  border-radius: 28px;
-}
-
-/* 
-  공통 모달 오버레이 스타일 
-*/
-.modalOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(36, 39, 37, 0.6);
-  backdrop-filter: blur(4px);
-  z-index: 50;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* 
-  삼선(☰) 메뉴: 마닐라 폴더 서류철 슬라이딩 드로워 
-*/
-.drawerSheet {
-  width: 100%;
-  max-height: 85%;
-  background: #F6F4EE;
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
-  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  padding: 24px 20px;
-  overflow-y: auto;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.drawerHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(167, 160, 145, 0.3);
-}
-
-.drawerTitle {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #242725;
-}
-
-.closeButton {
-  background: transparent;
-  border: none;
-  padding: 4px;
-  cursor: pointer;
-  color: #6F716B;
-}
-
-.closeIcon {
-  width: 24px;
-  height: 24px;
-}
-
-.drawerNav {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.navButton, .navLink {
-  width: 100%;
-  display: block;
-  text-decoration: none;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  text-align: left;
-}
-
-.navCard {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 16px;
-  background: #FAF9F5;
-  border: 1px solid rgba(167, 160, 145, 0.2);
-  border-radius: 12px;
-  transition: border-color 0.2s, background-color 0.2s;
-}
-
-.navCard:hover, .navCard:active {
-  border-color: #9E4631;
-  background: #FDFBF7;
-}
-
-.navNum {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #9E4631;
-}
-
-.navText {
-  display: flex;
-  flex-direction: column;
-}
-
-.navCardTitle {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #242725;
-}
-
-.navCardDesc {
-  font-size: 0.78rem;
-  color: #6F716B;
-  margin-top: 4px;
-  line-height: 1.4;
-}
-
-.drawerFooter {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(167, 160, 145, 0.2);
-}
-
-.drawerCallBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 16px;
-  background: #9E4631;
-  color: #FAF9F5;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.drawerCallBtn:active {
-  opacity: 0.9;
-}
-
-/* 
-  특수 자산 컨설팅 (3선) 팝업 모달 
-*/
-.modalSheet {
-  width: calc(100% - 32px);
-  max-width: 380px;
-  background: #FDFBF7;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-  margin-bottom: auto;
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(167, 160, 145, 0.3);
-  animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.95) translateY(10px); opacity: 0; }
-  to { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-.modalHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(167, 160, 145, 0.3);
-}
-
-.modalHeaderTitleBlock {
-  display: flex;
-  flex-direction: column;
-}
-
-.modalSubtitle {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #9E4631;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.modalTitle {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #242725;
-  margin-top: 4px;
-}
-
-.closeBtn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #6F716B;
-  padding: 4px;
-}
-
-.modalBody {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  overflow-y: auto;
-  max-height: 45vh;
-  padding-right: 4px;
-}
-
-.modalBody::-webkit-scrollbar {
-  width: 4px;
-}
-.modalBody::-webkit-scrollbar-thumb {
-  background: rgba(167, 160, 145, 0.4);
-  border-radius: 2px;
-}
-
-.careCard {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  background: #FAF9F5;
-  border: 1px solid rgba(167, 160, 145, 0.25);
-  border-radius: 12px;
-}
-
-.careBadgeBlock {
-  display: flex;
-}
-
-.careBadge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #9E4631;
-  background: rgba(158, 70, 49, 0.08);
-  padding: 4px 8px;
-  border-radius: 6px;
-  margin-bottom: 8px;
-}
-
-.careCardTitle {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #242725;
-  margin: 0 0 6px 0;
-  line-height: 1.3;
-}
-
-.careCardDesc {
-  font-size: 0.8rem;
-  color: #6F716B;
-  margin: 0;
-  line-height: 1.45;
-}
-
-.modalFooter {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(167, 160, 145, 0.2);
-}
-
-.modalFooterText {
-  font-size: 0.72rem;
-  color: #A7A091;
-  line-height: 1.4;
-  margin: 0 0 16px 0;
-}
-
-.modalCallBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 14px;
-  background: #1D211F;
-  color: #FAF9F5;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-
-.modalCallBtn:active {
-  background-color: #242725;
-}
-
-@media (max-width: 380px) {
-  .heroFinal {
-    width: 100vw;
-  }
+/* 영역 가시화 프로토콜 (검수 필요 시 주입) */
+.heroFinal:global(.debug) .hotspot {
+  background: rgba(28, 46, 36, 0.25) !important;
+  border: 1px solid rgba(28, 46, 36, 0.6) !important;
 }
