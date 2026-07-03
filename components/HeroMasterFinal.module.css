@@ -10,14 +10,6 @@
   margin: 0;
 }
 
-/*
-  HERO_MASTER_FINAL UI LOCK
-  - 최종 이미지를 그대로 시각 기준으로 사용
-  - 한글 텍스트/CTA/카드를 HTML로 다시 만들지 않음
-  - 클릭 가능한 투명 hotspot만 배치
-  - 이미지 원본 비율: 941 / 1672
-*/
-
 .heroFinal {
   position: relative;
   width: min(100vw, 430px);
@@ -45,14 +37,25 @@
   top: var(--y);
   width: var(--w);
   height: var(--h);
+  padding: 0;
+  margin: 0;
+  border: 0;
   background: transparent;
   border-radius: 999px;
+  cursor: pointer;
   -webkit-tap-highlight-color: rgba(72, 184, 234, 0.25);
 }
 
-.heroFinal.debug .hotspot {
-  background: rgba(0, 153, 255, 0.18);
-  outline: 2px solid rgba(0, 153, 255, 0.72);
+.hotspot:focus-visible {
+  outline: 2px solid rgba(0, 112, 243, 0.85);
+  outline-offset: 2px;
+}
+
+.menu {
+  --x: 84.0%;
+  --y: 6.1%;
+  --w: 10.5%;
+  --h: 4.8%;
 }
 
 .call {
@@ -91,6 +94,36 @@
   --w: 90.0%;
   --h: 5.0%;
   border-radius: 28px;
+}
+
+.menuPanel {
+  position: absolute;
+  z-index: 10;
+  top: 11.5%;
+  right: 5.5%;
+  width: 52%;
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(45, 45, 45, 0.12);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 48px rgba(18, 56, 76, 0.16);
+}
+
+.menuPanel a {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  color: #383838;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(45, 45, 45, 0.08);
 }
 
 @media (max-width: 380px) {
