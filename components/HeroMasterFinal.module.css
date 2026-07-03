@@ -1,208 +1,106 @@
+:root {
+  color-scheme: light;
+}
+
 .shell {
   min-height: 100svh;
-  background:
-    radial-gradient(circle at top left, rgba(158, 70, 49, 0.08), transparent 28rem),
-    linear-gradient(180deg, #f7f3ea 0%, #eee7d8 100%);
-  color: #242725;
-  padding: 24px;
-}
-
-.hero {
-  width: min(1120px, 100%);
-  min-height: calc(100svh - 48px);
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-  gap: 24px;
-  align-items: center;
-}
-
-.copy {
-  border: 1px solid rgba(36, 39, 37, 0.14);
-  border-radius: 30px;
-  padding: clamp(32px, 6vw, 72px);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.74)),
-    repeating-linear-gradient(
-      0deg,
-      rgba(36, 39, 37, 0.035) 0,
-      rgba(36, 39, 37, 0.035) 1px,
-      transparent 1px,
-      transparent 32px
-    );
-  box-shadow: 0 28px 80px rgba(36, 39, 37, 0.12);
-}
-
-.eyebrow {
-  margin: 0 0 18px;
-  color: #9e4631;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  word-break: keep-all;
-}
-
-.title {
+  place-items: start center;
+  background: #eaf6fb;
   margin: 0;
-  font-size: clamp(46px, 8vw, 92px);
-  line-height: 0.95;
-  letter-spacing: -0.075em;
-  font-weight: 900;
 }
 
-.subtitle {
-  max-width: 640px;
-  margin: 28px 0 0;
-  font-size: clamp(17px, 2.3vw, 22px);
-  line-height: 1.72;
-  color: rgba(36, 39, 37, 0.72);
-  word-break: keep-all;
-}
+/*
+  HERO_MASTER_FINAL UI LOCK
+  - 최종 이미지를 그대로 시각 기준으로 사용
+  - 한글 텍스트/CTA/카드를 HTML로 다시 만들지 않음
+  - 클릭 가능한 투명 hotspot만 배치
+  - 이미지 원본 비율: 941 / 1672
+*/
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 34px;
-}
-
-.primary,
-.secondary {
-  min-height: 54px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 850;
-}
-
-.primary {
-  background: #242725;
-  color: #fffaf0;
-}
-
-.secondary {
-  color: #242725;
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(36, 39, 37, 0.2);
-}
-
-.card {
-  border: 1px solid rgba(36, 39, 37, 0.14);
-  border-radius: 30px;
-  padding: 22px;
-  background: rgba(255, 255, 255, 0.58);
-  box-shadow: 0 24px 70px rgba(36, 39, 37, 0.1);
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: center;
-  margin-bottom: 18px;
-  color: rgba(36, 39, 37, 0.62);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-}
-
-.cardHeader strong {
-  color: #242725;
-  font-size: 15px;
-  letter-spacing: 0;
-}
-
-.mapPanel {
+.heroFinal {
   position: relative;
-  min-height: 340px;
+  width: min(100vw, 430px);
+  aspect-ratio: 941 / 1672;
   overflow: hidden;
-  border-radius: 24px;
-  border: 1px solid rgba(36, 39, 37, 0.14);
-  background:
-    linear-gradient(90deg, rgba(36, 39, 37, 0.055) 1px, transparent 1px),
-    linear-gradient(rgba(36, 39, 37, 0.055) 1px, transparent 1px),
-    #f4efe4;
-  background-size: 36px 36px;
+  background: #f4f7f8;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: 0 24px 80px rgba(18, 56, 76, 0.08);
 }
 
-.mapPanel::before,
-.mapPanel::after {
-  content: '';
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.hotspot {
   position: absolute;
-  width: 140%;
-  height: 1px;
-  left: -20%;
-  background: rgba(158, 70, 49, 0.38);
-}
-
-.mapPanel::before {
-  top: 38%;
-  transform: rotate(-16deg);
-}
-
-.mapPanel::after {
-  top: 62%;
-  transform: rotate(11deg);
-}
-
-.mapLabel {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  color: rgba(36, 39, 37, 0.48);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-}
-
-.pin {
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  transform: translate(-50%, -50%);
-  background: #9e4631;
-  color: #fffaf0;
+  z-index: 5;
+  display: block;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+  background: transparent;
   border-radius: 999px;
-  padding: 12px 18px;
-  font-weight: 900;
-  box-shadow: 0 18px 42px rgba(158, 70, 49, 0.28);
+  -webkit-tap-highlight-color: rgba(72, 184, 234, 0.25);
 }
 
-.checkPanel {
-  margin-top: 18px;
-  padding: 20px;
-  border-radius: 22px;
-  background: rgba(36, 39, 37, 0.045);
+.heroFinal.debug .hotspot {
+  background: rgba(0, 153, 255, 0.18);
+  outline: 2px solid rgba(0, 153, 255, 0.72);
 }
 
-.checkPanel p {
-  margin: 0 0 12px;
-  font-weight: 900;
+.call {
+  --x: 6.0%;
+  --y: 61.2%;
+  --w: 41.5%;
+  --h: 5.7%;
 }
 
-.checkPanel ul {
-  margin: 0;
-  padding-left: 18px;
-  line-height: 1.9;
-  color: rgba(36, 39, 37, 0.72);
+.process {
+  --x: 6.0%;
+  --y: 68.1%;
+  --w: 41.5%;
+  --h: 5.7%;
 }
 
-@media (max-width: 860px) {
+.rights {
+  --x: 5.3%;
+  --y: 78.0%;
+  --w: 42.5%;
+  --h: 14.5%;
+  border-radius: 24px;
+}
+
+.visit {
+  --x: 50.1%;
+  --y: 78.0%;
+  --w: 42.5%;
+  --h: 14.5%;
+  border-radius: 24px;
+}
+
+.phone {
+  --x: 5.0%;
+  --y: 92.9%;
+  --w: 90.0%;
+  --h: 5.0%;
+  border-radius: 28px;
+}
+
+@media (max-width: 380px) {
+  .heroFinal {
+    width: 100vw;
+  }
+}
+
+@media (min-width: 431px) {
   .shell {
-    padding: 14px;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .card {
-    order: -1;
-  }
-
-  .mapPanel {
-    min-height: 220px;
+    padding: 16px 0;
   }
 }
