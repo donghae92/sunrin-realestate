@@ -1,0 +1,112 @@
+:root {
+  color-scheme: light;
+}
+
+.shell {
+  min-height: 100svh;
+  display: grid;
+  place-items: start center;
+  background: #eaf6fb;
+  margin: 0;
+}
+
+/*
+  HERO_MASTER_FINAL UI LOCK
+  - 최종 이미지를 그대로 시각 기준으로 사용
+  - 한글 텍스트/CTA/카드를 HTML로 다시 만들지 않음
+  - 클릭 가능한 투명 hotspot만 배치
+  - 이미지 원본 비율: 941 / 1672
+*/
+
+.heroFinal {
+  position: relative;
+  width: min(100vw, 430px);
+  aspect-ratio: 941 / 1672;
+  overflow: hidden;
+  background: #f4f7f8;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: 0 24px 80px rgba(18, 56, 76, 0.08);
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 5;
+  display: block;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+  background: transparent;
+  border-radius: 999px;
+  -webkit-tap-highlight-color: rgba(72, 184, 234, 0.25);
+}
+
+/* 임시 검수 시 section에 debug 클래스를 붙이면 영역이 보임 */
+.heroFinal.debug .hotspot {
+  background: rgba(0, 153, 255, 0.18);
+  outline: 2px solid rgba(0, 153, 255, 0.72);
+}
+
+/*
+  좌표 기준: HERO_MASTER_FINAL 이미지 전체 기준 %
+  필요 시 0.5~1.0% 단위로 조정.
+*/
+
+.call {
+  --x: 6.0%;
+  --y: 61.2%;
+  --w: 41.5%;
+  --h: 5.7%;
+}
+
+.process {
+  --x: 6.0%;
+  --y: 68.1%;
+  --w: 41.5%;
+  --h: 5.7%;
+}
+
+.rights {
+  --x: 5.3%;
+  --y: 78.0%;
+  --w: 42.5%;
+  --h: 14.5%;
+  border-radius: 24px;
+}
+
+.visit {
+  --x: 50.1%;
+  --y: 78.0%;
+  --w: 42.5%;
+  --h: 14.5%;
+  border-radius: 24px;
+}
+
+.phone {
+  --x: 5.0%;
+  --y: 92.9%;
+  --w: 90.0%;
+  --h: 5.0%;
+  border-radius: 28px;
+}
+
+@media (max-width: 380px) {
+  .heroFinal {
+    width: 100vw;
+  }
+}
+
+@media (min-width: 431px) {
+  .shell {
+    padding: 16px 0;
+  }
+}
