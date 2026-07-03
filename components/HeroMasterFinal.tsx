@@ -1,49 +1,72 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './HeroMasterFinal.module.css';
 
 type PanelId = 'reserve' | 'process' | 'rights' | 'visit';
 
 type PanelContent = {
-  eyebrow: string;
+  kicker: string;
   title: string;
   body: string[];
   action?: 'call' | 'map';
 };
 
+const menuItems: Array<{ id: PanelId; label: string; desc: string }> = [
+  {
+    id: 'reserve',
+    label: '상담 예약하기',
+    desc: '전화 후 방문 시간을 맞춥니다.',
+  },
+  {
+    id: 'process',
+    label: '확인 절차 보기',
+    desc: '주소·등기·대장·보증금을 순서대로 봅니다.',
+  },
+  {
+    id: 'rights',
+    label: '권리검토 보기',
+    desc: '근저당·선순위·보증금 위험을 분리합니다.',
+  },
+  {
+    id: 'visit',
+    label: '방문 상담 안내',
+    desc: '산격로95 위치와 방문 준비를 확인합니다.',
+  },
+];
+
 const panels: Record<PanelId, PanelContent> = {
   reserve: {
-    eyebrow: 'APPOINTMENT',
+    kicker: 'APPOINTMENT',
     title: '상담 예약하기',
     body: [
       '전화 상담 후 방문 가능 시간을 맞춥니다.',
-      '주소, 보증금, 월세, 관리비, 등기 확인 여부를 먼저 정리합니다.',
-      '방문 전 필요한 서류가 있으면 미리 안내합니다.',
+      '주소, 보증금, 월세, 관리비를 먼저 정리합니다.',
+      '서류 확인이 필요한 경우 방문 전 지참 자료를 안내합니다.',
     ],
     action: 'call',
   },
   process: {
-    eyebrow: 'CHECK PROCESS',
+    kicker: 'CHECK PROCESS',
     title: '확인 절차 보기',
     body: [
-      '1. 주소와 실제 건물 위치를 먼저 확인합니다.',
+      '1. 주소와 실제 건물 위치를 먼저 맞춥니다.',
       '2. 등기부등본으로 소유자, 근저당, 권리관계를 확인합니다.',
       '3. 건축물대장으로 용도, 면적, 확인이 필요한 이유를 봅니다.',
       '4. 보증금, 월세, 관리비, 선순위 보증금을 함께 확인합니다.',
     ],
   },
   rights: {
-    eyebrow: 'RIGHTS REVIEW',
+    kicker: 'RIGHTS REVIEW',
     title: '권리검토 보기',
     body: [
-      '계약 전 등기부와 건축물대장을 기준으로 위험 요소를 분리합니다.',
-      '선순위 권리, 보증금 회수 가능성, 실제 점유 상태를 함께 확인합니다.',
-      '확정할 수 없는 부분은 단정하지 않고 추가 확인 대상으로 남깁니다.',
+      '등기부와 건축물대장을 기준으로 계약 전 확인 항목을 분리합니다.',
+      '선순위 권리, 보증금 회수 가능성, 실제 점유 상태를 함께 봅니다.',
+      '확정할 수 없는 항목은 단정하지 않고 추가 확인 대상으로 남깁니다.',
     ],
   },
   visit: {
-    eyebrow: 'VISIT',
+    kicker: 'LOCAL VISIT',
     title: '방문 상담 안내',
     body: [
       '주소: 대구 북구 산격로 95',
@@ -54,34 +77,22 @@ const panels: Record<PanelId, PanelContent> = {
   },
 };
 
-const menuItems: Array<{ id: PanelId; label: string }> = [
-  { id: 'reserve', label: '상담 예약하기' },
-  { id: 'process', label: '확인 절차 보기' },
-  { id: 'rights', label: '권리검토 보기' },
-  { id: 'visit', label: '방문 상담 안내' },
-];
-
-const proofItems = [
-  '주소 확인',
-  '등기부등본',
-  '건축물대장',
-  '선순위 보증금',
-];
-
-const steps = [
-  ['01', '주소', '실제 위치와 건물 기준을 먼저 맞춥니다.'],
-  ['02', '등기', '소유자와 권리관계를 확인합니다.'],
-  ['03', '대장', '확인이 필요한 이유를 정리합니다.'],
-  ['04', '조건', '보증금·월세·관리비를 함께 봅니다.'],
-];
-
 export default function HeroMasterFinal() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePanel, setActivePanel] = useState<PanelId | null>(null);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, []);
+
   const openPanel = (id: PanelId) => {
     setActivePanel(id);
     setMenuOpen(false);
+  };
+
+  const closeOverlay = () => {
+    setMenuOpen(false);
+    setActivePanel(null);
   };
 
   const active = activePanel ? panels[activePanel] : null;
@@ -89,10 +100,10 @@ export default function HeroMasterFinal() {
   return (
     <main className={styles.shell}>
       <section className={styles.hero} aria-label="선린공인중개사사무소 메인">
-        <div className={styles.mapLayer} aria-hidden="true">
-          <div className={styles.landBlockOne} />
-          <div className={styles.landBlockTwo} />
-          <div className={styles.seal}>95</div>
+        <div className={styles.background} aria-hidden="true">
+          <span className={styles.gridSeal}>95</span>
+          <span className={styles.landLineOne} />
+          <span className={styles.landLineTwo} />
         </div>
 
         <header className={styles.topBar}>
@@ -106,23 +117,16 @@ export default function HeroMasterFinal() {
             className={`${styles.menuButton} ${menuOpen ? styles.menuButtonOpen : ''}`}
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((value) => !value)}
+            onClick={() => {
+              setMenuOpen((value) => !value);
+              setActivePanel(null);
+            }}
           >
             <span />
             <span />
             <span />
           </button>
         </header>
-
-        {menuOpen && (
-          <nav className={styles.menuPanel} aria-label="빠른 메뉴">
-            {menuItems.map((item) => (
-              <button key={item.id} type="button" onClick={() => openPanel(item.id)}>
-                {item.label}
-              </button>
-            ))}
-          </nav>
-        )}
 
         <section className={styles.copy}>
           <p className={styles.eyebrow}>주소 · 서류 · 권리관계 확인</p>
@@ -151,57 +155,67 @@ export default function HeroMasterFinal() {
           </div>
         </section>
 
-        <section className={styles.proofRail} aria-label="확인 기준">
-          {proofItems.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </section>
-
-        <section className={styles.stepPanel} aria-label="상담 확인 절차">
-          {steps.map(([num, title, desc]) => (
-            <button key={num} type="button" onClick={() => openPanel('process')}>
-              <b>{num}</b>
-              <strong>{title}</strong>
-              <span>{desc}</span>
-            </button>
-          ))}
+        <section className={styles.miniProof} aria-label="확인 기준">
+          <button type="button" onClick={() => openPanel('process')}>주소</button>
+          <button type="button" onClick={() => openPanel('rights')}>등기</button>
+          <button type="button" onClick={() => openPanel('process')}>건축물대장</button>
+          <button type="button" onClick={() => openPanel('rights')}>선순위 보증금</button>
         </section>
 
         <section className={styles.cards} aria-label="주요 상담 메뉴">
           <button type="button" className={styles.card} onClick={() => openPanel('rights')}>
             <small>DOCUMENT REVIEW</small>
-            <span>권리검토</span>
-            <b>→</b>
+            <strong>권리검토</strong>
+            <span>→</span>
           </button>
 
           <button type="button" className={styles.card} onClick={() => openPanel('visit')}>
             <small>LOCAL VISIT</small>
-            <span>방문 상담</span>
-            <b>→</b>
+            <strong>방문 상담</strong>
+            <span>→</span>
           </button>
         </section>
 
         <footer className={styles.phoneBar}>
           <a href="tel:0539441116">☎ 053-944-1116</a>
-          <span />
+          <i />
           <button type="button" onClick={() => openPanel('reserve')}>
             전화상담 06:00~23:00
           </button>
         </footer>
 
+        {menuOpen && (
+          <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="빠른 메뉴">
+            <button type="button" className={styles.overlayDim} onClick={closeOverlay} aria-label="메뉴 닫기" />
+
+            <nav className={styles.menuScreen}>
+              <div className={styles.menuHead}>
+                <p>QUICK MENU</p>
+                <h2>필요한 상담을 선택하세요</h2>
+              </div>
+
+              <div className={styles.menuList}>
+                {menuItems.map((item) => (
+                  <button key={item.id} type="button" onClick={() => openPanel(item.id)}>
+                    <strong>{item.label}</strong>
+                    <span>{item.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </nav>
+          </div>
+        )}
+
         {active && (
-          <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={active.title}>
-            <div className={styles.sheetCard}>
-              <button
-                type="button"
-                className={styles.close}
-                aria-label="닫기"
-                onClick={() => setActivePanel(null)}
-              >
+          <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={active.title}>
+            <button type="button" className={styles.overlayDim} onClick={closeOverlay} aria-label="닫기" />
+
+            <section className={styles.panelScreen}>
+              <button type="button" className={styles.close} onClick={closeOverlay} aria-label="닫기">
                 ×
               </button>
 
-              <p>{active.eyebrow}</p>
+              <p>{active.kicker}</p>
               <h2>{active.title}</h2>
 
               <ul>
@@ -211,14 +225,14 @@ export default function HeroMasterFinal() {
               </ul>
 
               {active.action === 'call' && (
-                <a className={styles.sheetAction} href="tel:0539441116">
+                <a className={styles.panelAction} href="tel:0539441116">
                   053-944-1116 전화하기
                 </a>
               )}
 
               {active.action === 'map' && (
                 <a
-                  className={styles.sheetAction}
+                  className={styles.panelAction}
                   href="https://map.naver.com/p/search/대구%20북구%20산격로%2095"
                   target="_blank"
                   rel="noreferrer"
@@ -226,7 +240,7 @@ export default function HeroMasterFinal() {
                   네이버 지도에서 위치 확인
                 </a>
               )}
-            </div>
+            </section>
           </div>
         )}
       </section>

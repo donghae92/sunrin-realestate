@@ -1,7 +1,8 @@
-export const fetchCache = 'force-no-store';
-export const revalidate = 0;
-export const dynamic = 'force-dynamic';
 import HeroMasterFinal from '../components/HeroMasterFinal';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 export const metadata = {
   title: '선린공인중개사사무소 | 대구 북구 산격로 95',
