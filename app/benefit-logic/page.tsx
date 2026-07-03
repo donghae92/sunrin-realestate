@@ -1,12 +1,3 @@
-# 선린부동산 안심 산식 명세 React 코드 (benefit-logic/page.tsx)
-
-본 마크다운 문서에는 대구광역시 전용 기준인 **8,000만 원 기본재산액 공제** 및 2026년 복지부 최신 개정이 반영된 주거급여 안심 산식 명세 페이지의 React 최종 코드가 포함되어 있습니다.
-
-⚠️ **중요 (Vercel 빌드 오류 방지):**
-사장님, 깃허브의 **`app/benefit-logic/page.tsx`** 파일 내부에 코드를 붙여넣으실 때, 본 마크다운 파일의 제목(#...)이나 설명글을 포함해서 통째로 붙여넣으면 Next.js 빌드가 실패합니다. 
-반드시 아래 코드 상자( **`'use client';`** 로 시작해서 **맨 마지막의 `}`** 로 끝나는 코드 영역) 내부의 **순수한 React 코드만 드래그하여 복사** 하신 뒤 덮어쓰기해 주십시오!
-
-```tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -23,25 +14,17 @@ const OFFICE = {
 export default function BenefitLogicPage() {
   const [activeTab, setActiveTab] = useState<'income' | 'burden' | 'benefit'>('income');
 
-  // Interactive Simple Demo states
-  const [deposit, setDeposit] = useState<number>(5000); // Default 50 million won (5000만 원)
-  const [otherLoans, setOtherLoans] = useState<number>(1000); // Default 10 million won
-  const [monthlyRent, setMonthlyRent] = useState<number>(20); // Default 200,000 KRW
+  // 대화형 시뮬레이션 기본 초깃값 설정 (단위: 만 원)
+  const [deposit, setDeposit] = useState<number>(5000); // 기본 보증금 5,000만 원 (5000만 원)
+  const [otherLoans, setOtherLoans] = useState<number>(1000); // 선순위 채권/타 세대 보증금 합계 1,000만 원
 
-  // Daegu Gwangyeoksi Basic Asset Deduction: 8,000 million KRW (80,000,000 KRW)
+  // 대구광역시 기본재산액 공제한도 고시 락킹: 8,000만 원
   const basicDeduction = 8000; 
-  // Financial Asset Deduction: 500 million KRW (5,000,000 KRW)
-  const financialDeduction = 500;
-  // Standard Conversion Rate for Asset to Income: 1.04% per month
-  const conversionRate = 0.0104;
+  const conversionRate = 0.0104; // 재산의 소득환산율 월 1.04%
 
-  // Calculators
-  const netAssetValue = Math.max(0, deposit - basicDeduction);
-  const monthlyAssetIncome = Math.round(netAssetValue * conversionRate * 10000); // In KRW
-  
-  // Daegu Auction Liquidation Rate: 63.5%
+  // 대구광역시 산격동 단독·다가구 경락낙찰가율 기본 가중치 63.5% 반영
   const liquidationRate = 0.635;
-  const estimatedMarketValue = 12000; // Estimated building unit value: 120 million won
+  const estimatedMarketValue = 12000; // 가상 모의 건물 가치 1억 2,000만 원 가정
   const safetyLimit = Math.round(estimatedMarketValue * liquidationRate);
   const isSafe = deposit + otherLoans <= safetyLimit;
 
@@ -58,7 +41,7 @@ export default function BenefitLogicPage() {
             주거급여 안심 산식 명세서
           </h1>
           <p className="text-[0.8rem] text-[#6F716B] mt-1.5 leading-relaxed">
-            대구광역시(광역시) 기초생활보장 수급 기준에 맞춘 3대 법률 산식과 산격권역 다가구 경락가율을 기반으로, 계약 전 실질 월세 보조금 수급 변동을 정밀 검증합니다.
+            대구광역시(광역시) 기준의 기초생활보장 수급 지침과 산격동 단독·다가구 경매 경락가율을 기반으로, 계약 전 보증금 손실 위험과 주거급여 보조금 수급 변동을 사전 진단합니다.
           </p>
         </header>
 
@@ -119,7 +102,7 @@ export default function BenefitLogicPage() {
                 <ul className="space-y-3 list-none pl-0">
                   <li className="flex gap-2">
                     <span className="text-[#9E4631] font-bold">✔</span>
-                    <span><strong>대구광역시 기본재산공제 8,000만 원:</strong> 광역시 전용 기준으로 계약 체결 시 보증금 중 8,000만 원까지는 소득인정액 산정에서 완전 비과세 공제 처리됩니다. (수원/성남 등 일반시의 7,700만 원 기준보다 대구 어르신들에게 유리한 조항입니다.)</span>
+                    <span><strong>대구광역시 기본재산공제 8,000만 원:</strong> 광역시 전용 기준으로 계약 체결 시 보증금 중 8,000만 원까지는 소득인정액 산정에서 완전 비과세 공제 처리됩니다. (일반시의 7,700만 원 기준보다 대구 어르신들에게 훨씬 유리합니다.)</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#9E4631]">✔</span>
@@ -131,7 +114,7 @@ export default function BenefitLogicPage() {
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#9E4631] font-bold">✔</span>
-                    <span><strong>자녀 보장 사적이전소득 공제 (월 36.6만 원):</strong> 수도권이나 구미 등지에서 자랑스러운 자녀 세대가 부쳐오는 정기 용돈은 1인 가구 최신 기준 <strong>월 366,376원</strong> 한도 내에서 일괄 소득 산입이 면제됩니다.</span>
+                    <span><strong>자녀 보장 사적이전소득 공제 (월 36.6만 원):</strong> 수도권이나 구미 등지에서 자녀 세대가 부쳐오는 정기 용돈은 1인 가구 최신 기준 <strong>월 366,376원</strong> 한도 내에서 일괄 소득 산입이 면제됩니다.</span>
                   </li>
                 </ul>
               </div>
@@ -254,9 +237,9 @@ export default function BenefitLogicPage() {
           </h3>
           <p className="text-[0.85rem] text-[#6F716B] mt-2 leading-relaxed">
             {isSafe ? (
-              `현재 가상 계산 결과, 입력하신 보증금(${deposit}만 원)과 채권금액은 대구 북구 산격권역 단독·다가구 경락 기준선(${safetyLimit}만 원) 이내에 머무는 비교적 안전한 축에 속합니다. 다만, 실질적인 국세 체납 및 임차인 선순위 보증금 총액 대조를 유선으로 최종 매핑해 보셔야 안전을 보증할 수 있습니다.`
+              `현재 모의 계산 결과, 입력하신 보증금(${deposit}만 원)과 채권금액은 대구 북구 산격권역 단독·다가구 경락 기준선(${safetyLimit}만 원) 이내에 머무는 비교적 안전한 축에 속합니다. 다만, 실질적인 국세 체납 및 임차인 선순위 보증금 총액 대조를 유선으로 최종 매핑해 보셔야 안전을 보증할 수 있습니다.`
             ) : (
-              `⚠️ 현재 가상 계산 결과, 입력하신 보증금(${deposit}만 원)과 선순위 채무금액의 합계가 대구 북구 산격권역의 경락 낙찰선 안전 한도(${safetyLimit}만 원)를 초과하여 경고등이 켜졌습니다. 계약 전 반드시 공부 대조가 요구되며, 성급하게 가계약금이나 계약금을 넣지 마시고 선린부동산 유선 상담을 통해 위험성을 정량 소명받으시기 바랍니다.`
+              `⚠️ 현재 모의 계산 결과, 입력하신 보증금(${deposit}만 원)과 선순위 채무금액의 합계가 대구 북구 산격권역의 경락 낙찰선 안전 한도(${safetyLimit}만 원)를 초과하여 경고등이 켜졌습니다. 계약 전 반드시 공부 대조가 요구되며, 성급하게 가계약금이나 계약금을 넣지 마시고 선린부동산 유선 상담을 통해 위험성을 정량 소명받으시기 바랍니다.`
             )}
           </p>
         </section>
