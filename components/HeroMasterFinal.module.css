@@ -6,10 +6,15 @@
   min-height: 100svh;
   display: grid;
   place-items: start center;
-  background: #f4f7f8;
+  background: #f4f7f8; /* 클리닉 감성의 정갈하고 투명한 오프화이트 외곽 처리 */
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* HERO_MASTER_FINAL INFORMATION COUPLING 
+  - 백그라운드 에셋의 시각적 압도감을 완벽히 보존하기 위한 불변의 컨테이너 락 
+*/
 .heroFinal {
   position: relative;
   width: min(100vw, 390px);
@@ -18,15 +23,20 @@
   background: #f4f7f8;
   user-select: none;
   -webkit-user-select: none;
+  box-shadow: 0 24px 80px rgba(28, 46, 36, 0.08);
   
-  /* [정밀 좌표 맵핑] 
-    - 390px 모바일 9:16 화면 기준 백분율(%) 타격점
+  /* [정밀 좌표 변수 아키텍처] 
+    - 사장님의 UI 기획 그리드를 완벽히 반영한 9:16 백분율 타격 마스크
+    - menu: 우측 상단 ☰ 진입점
+    - addr, exam: 중단 좌우 정밀 대조 구역
+    - spec: 삼선 콘텐츠 와이드 바
+    - call: 최하단 유선 콜 트리거 알약 버튼
   */
-  --menu-x: 82%; --menu-y: 4%;  --menu-w: 14%; --menu-h: 6%;
-  --addr-x: 10%; --addr-y: 61%; --addr-w: 38%; --addr-h: 6%;
-  --exam-x: 52%; --exam-y: 61%; --exam-w: 38%; --exam-h: 6%;
-  --spec-x: 10%; --spec-y: 70%; --spec-w: 80%; --spec-h: 7%;
-  --call-x: 5%;  --call-y: 88%; --call-w: 90%; --call-h: 8%;
+  --menu-x: 82%;   --menu-y: 4%;    --menu-w: 14%;   --menu-h: 6%;
+  --addr-x: 10%;   --addr-y: 61%;   --addr-w: 38%;   --addr-h: 6%;
+  --exam-x: 52%;   --exam-y: 61%;   --exam-w: 38%;   --exam-h: 6%;
+  --spec-x: 10%;   --spec-y: 70%;   --spec-w: 80%;   --spec-h: 7%;
+  --call-x: 5%;    --call-y: 88%;   --call-w: 90%;   --call-h: 8%;
 }
 
 .heroImage {
@@ -42,20 +52,59 @@
   z-index: 10;
   display: block;
   background: transparent;
+  border: none;
+  outline: none;
   cursor: pointer;
   border-radius: 6px;
-  -webkit-tap-highlight-color: rgba(28, 46, 36, 0.15); /* 선린의 딥 파인 그린 터치 이펙트 */
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: rgba(28, 46, 36, 0.12); /* 터치 시 선린 고유의 딥 파인 그린 틴트 반응 */
 }
 
-/* 변수 바인딩에 의한 레이아웃 고정 */
-.menu { left: var(--menu-x); top: var(--menu-y); width: var(--menu-w); height: var(--menu-h); border-radius: 50%; }
-.addr { left: var(--addr-x); top: var(--addr-y); width: var(--addr-w); height: var(--addr-h); }
-.exam { left: var(--exam-x); top: var(--exam-y); width: var(--exam-w); height: var(--exam-h); }
-.spec { left: var(--spec-x); top: var(--spec-y); width: var(--spec-w); height: var(--spec-h); }
-.call { left: var(--call-x); top: var(--call-y); width: var(--call-w); height: var(--call-h); border-radius: 999px; }
+/* 마우스 오버 시 미세한 피드백 (압도적 배경 미학을 해치지 않는 임계점 준수) */
+.hotspot:hover {
+  background-color: rgba(28, 46, 36, 0.03);
+}
 
-/* 유지보수 시 영역 가시화 (상위 노드에 .debug 클래스 주입 시 활성화) */
+/* 시스템 변수 인젝션을 통한 절대 위치 바인딩 */
+.menu {
+  left: var(--menu-x);
+  top: var(--menu-y);
+  width: var(--menu-w);
+  height: var(--menu-h);
+  border-radius: 50%;
+}
+
+.addr {
+  left: var(--addr-x);
+  top: var(--addr-y);
+  width: var(--addr-w);
+  height: var(--addr-h);
+}
+
+.exam {
+  left: var(--exam-x);
+  top: var(--exam-y);
+  width: var(--exam-w);
+  height: var(--exam-h);
+}
+
+.spec {
+  left: var(--spec-x);
+  top: var(--spec-y);
+  width: var(--spec-w);
+  height: var(--spec-h);
+}
+
+.call {
+  left: var(--call-x);
+  top: var(--call-y);
+  width: var(--call-w);
+  height: var(--call-h);
+  border-radius: 999px; /* 하단 와이드 콜 버튼 알약 형태 동기화 */
+}
+
+/* 디버그 인프라: 영역 검수 필요 시 상위 컨테이너에 .debug 주입으로 시각화 가능 */
 .heroFinal:global(.debug) .hotspot {
-  background: rgba(28, 46, 36, 0.2) !important;
+  background: rgba(28, 46, 36, 0.25) !important;
   border: 1px solid rgba(28, 46, 36, 0.6) !important;
 }
