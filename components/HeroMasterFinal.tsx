@@ -3,10 +3,18 @@
 import { useState } from 'react';
 import styles from './HeroMasterFinal.module.css';
 
-type PanelKey = 'reserve' | 'process' | 'rights' | 'visit' | null;
+type PanelId = 'reserve' | 'process' | 'rights' | 'visit';
 
-const panelContent: Record<Exclude<PanelKey, null>, { title: string; body: string[]; action?: 'call' | 'map' }> = {
+type PanelContent = {
+  eyebrow: string;
+  title: string;
+  body: string[];
+  action?: 'call' | 'map';
+};
+
+const panels: Record<PanelId, PanelContent> = {
   reserve: {
+    eyebrow: 'APPOINTMENT',
     title: '상담 예약하기',
     body: [
       '전화 상담 후 방문 가능 시간을 맞춥니다.',
@@ -16,6 +24,7 @@ const panelContent: Record<Exclude<PanelKey, null>, { title: string; body: strin
     action: 'call',
   },
   process: {
+    eyebrow: 'CHECK PROCESS',
     title: '확인 절차 보기',
     body: [
       '1. 주소와 실제 건물 위치를 먼저 확인합니다.',
@@ -25,6 +34,7 @@ const panelContent: Record<Exclude<PanelKey, null>, { title: string; body: strin
     ],
   },
   rights: {
+    eyebrow: 'RIGHTS REVIEW',
     title: '권리검토 보기',
     body: [
       '계약 전 등기부와 건축물대장을 기준으로 위험 요소를 분리합니다.',
@@ -33,6 +43,7 @@ const panelContent: Record<Exclude<PanelKey, null>, { title: string; body: strin
     ],
   },
   visit: {
+    eyebrow: 'VISIT',
     title: '방문 상담 안내',
     body: [
       '주소: 대구 북구 산격로 95',
@@ -43,38 +54,49 @@ const panelContent: Record<Exclude<PanelKey, null>, { title: string; body: strin
   },
 };
 
-const menuItems: Array<{ key: Exclude<PanelKey, null>; label: string }> = [
-  { key: 'reserve', label: '상담 예약하기' },
-  { key: 'process', label: '확인 절차 보기' },
-  { key: 'rights', label: '권리검토 보기' },
-  { key: 'visit', label: '방문 상담 안내' },
+const menuItems: Array<{ id: PanelId; label: string }> = [
+  { id: 'reserve', label: '상담 예약하기' },
+  { id: 'process', label: '확인 절차 보기' },
+  { id: 'rights', label: '권리검토 보기' },
+  { id: 'visit', label: '방문 상담 안내' },
+];
+
+const proofItems = [
+  '주소 확인',
+  '등기부등본',
+  '건축물대장',
+  '선순위 보증금',
+];
+
+const steps = [
+  ['01', '주소', '실제 위치와 건물 기준을 먼저 맞춥니다.'],
+  ['02', '등기', '소유자와 권리관계를 확인합니다.'],
+  ['03', '대장', '확인이 필요한 이유를 정리합니다.'],
+  ['04', '조건', '보증금·월세·관리비를 함께 봅니다.'],
 ];
 
 export default function HeroMasterFinal() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activePanel, setActivePanel] = useState<PanelKey>(null);
+  const [activePanel, setActivePanel] = useState<PanelId | null>(null);
 
-  const openPanel = (key: Exclude<PanelKey, null>) => {
-    setActivePanel(key);
+  const openPanel = (id: PanelId) => {
+    setActivePanel(id);
     setMenuOpen(false);
   };
 
-  const closePanel = () => {
-    setActivePanel(null);
-    setMenuOpen(false);
-  };
+  const active = activePanel ? panels[activePanel] : null;
 
   return (
     <main className={styles.shell}>
       <section className={styles.hero} aria-label="선린공인중개사사무소 메인">
-        <div className={styles.visual} aria-hidden="true">
-          <div className={styles.paperMark} />
-          <div className={styles.circleMark} />
-          <div className={styles.lineMark} />
+        <div className={styles.mapLayer} aria-hidden="true">
+          <div className={styles.landBlockOne} />
+          <div className={styles.landBlockTwo} />
+          <div className={styles.seal}>95</div>
         </div>
 
         <header className={styles.topBar}>
-          <div>
+          <div className={styles.brand}>
             <strong>선린공인중개사사무소</strong>
             <span>대구 북구 산격로 95</span>
           </div>
@@ -95,7 +117,7 @@ export default function HeroMasterFinal() {
         {menuOpen && (
           <nav className={styles.menuPanel} aria-label="빠른 메뉴">
             {menuItems.map((item) => (
-              <button key={item.key} type="button" onClick={() => openPanel(item.key)}>
+              <button key={item.id} type="button" onClick={() => openPanel(item.id)}>
                 {item.label}
               </button>
             ))}
@@ -129,17 +151,31 @@ export default function HeroMasterFinal() {
           </div>
         </section>
 
-        <p className={styles.location}>⌖ 산격로95 방문 상담 · 서류 지참 가능</p>
+        <section className={styles.proofRail} aria-label="확인 기준">
+          {proofItems.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </section>
 
-        <section className={styles.cards} aria-label="상담 메뉴">
+        <section className={styles.stepPanel} aria-label="상담 확인 절차">
+          {steps.map(([num, title, desc]) => (
+            <button key={num} type="button" onClick={() => openPanel('process')}>
+              <b>{num}</b>
+              <strong>{title}</strong>
+              <span>{desc}</span>
+            </button>
+          ))}
+        </section>
+
+        <section className={styles.cards} aria-label="주요 상담 메뉴">
           <button type="button" className={styles.card} onClick={() => openPanel('rights')}>
-            <small>DOCUMENT</small>
+            <small>DOCUMENT REVIEW</small>
             <span>권리검토</span>
             <b>→</b>
           </button>
 
           <button type="button" className={styles.card} onClick={() => openPanel('visit')}>
-            <small>VISIT</small>
+            <small>LOCAL VISIT</small>
             <span>방문 상담</span>
             <b>→</b>
           </button>
@@ -153,28 +189,34 @@ export default function HeroMasterFinal() {
           </button>
         </footer>
 
-        {activePanel && (
-          <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={panelContent[activePanel].title}>
+        {active && (
+          <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={active.title}>
             <div className={styles.sheetCard}>
-              <button type="button" className={styles.close} onClick={closePanel} aria-label="닫기">
+              <button
+                type="button"
+                className={styles.close}
+                aria-label="닫기"
+                onClick={() => setActivePanel(null)}
+              >
                 ×
               </button>
 
-              <h2>{panelContent[activePanel].title}</h2>
+              <p>{active.eyebrow}</p>
+              <h2>{active.title}</h2>
 
               <ul>
-                {panelContent[activePanel].body.map((line) => (
+                {active.body.map((line) => (
                   <li key={line}>{line}</li>
                 ))}
               </ul>
 
-              {panelContent[activePanel].action === 'call' && (
+              {active.action === 'call' && (
                 <a className={styles.sheetAction} href="tel:0539441116">
                   053-944-1116 전화하기
                 </a>
               )}
 
-              {panelContent[activePanel].action === 'map' && (
+              {active.action === 'map' && (
                 <a
                   className={styles.sheetAction}
                   href="https://map.naver.com/p/search/대구%20북구%20산격로%2095"

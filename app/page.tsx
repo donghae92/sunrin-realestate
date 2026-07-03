@@ -6,6 +6,6 @@ export const metadata = {
     '대구 북구 산격로 95 선린공인중개사사무소. 주소, 등기부, 건축물대장, 선순위 보증금을 함께 확인합니다.',
 };
 
-export default function Home() {
+export default function HomePage() {
   return <HeroMasterFinal />;
 }

@@ -1,15 +1,22 @@
 export const metadata = {
-  title: '주거급여 안심 산식 | 선린공인중개사사무소',
-  description: '대구광역시 주거급여 상담을 위한 기본 산식 안내 페이지',
+  title: '확인 절차 | 선린공인중개사사무소',
+  description: '주소, 등기부, 건축물대장, 보증금 조건을 확인하는 상담 절차 안내',
 };
+
+const steps = [
+  ['1', '주소 확인', '주소와 실제 건물 위치를 먼저 맞춥니다.'],
+  ['2', '등기부 확인', '소유자, 근저당, 권리관계를 확인합니다.'],
+  ['3', '건축물대장 확인', '용도, 면적, 확인이 필요한 이유를 정리합니다.'],
+  ['4', '보증금 조건 확인', '보증금, 월세, 관리비, 선순위 보증금을 함께 봅니다.'],
+];
 
 export default function BenefitLogicPage() {
   return (
     <main
       style={{
         minHeight: '100svh',
-        background: '#f6f4ee',
-        color: '#242725',
+        background: '#f8f2e9',
+        color: '#322f2a',
         padding: '32px 18px',
         fontFamily:
           'Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
@@ -19,87 +26,53 @@ export default function BenefitLogicPage() {
         style={{
           width: 'min(920px, 100%)',
           margin: '0 auto',
-          background: 'rgba(255,255,255,0.78)',
-          border: '1px solid rgba(36,39,37,0.14)',
-          borderRadius: 24,
+          background: 'rgba(255,255,255,0.72)',
+          border: '1px solid rgba(50,47,42,0.12)',
+          borderRadius: 28,
           padding: 'clamp(28px, 5vw, 56px)',
-          boxShadow: '0 24px 70px rgba(36,39,37,0.10)',
+          boxShadow: '0 24px 70px rgba(50,47,42,0.10)',
         }}
       >
-        <p
-          style={{
-            margin: '0 0 14px',
-            color: '#9e4631',
-            fontSize: 14,
-            fontWeight: 800,
-            letterSpacing: '0.04em',
-          }}
-        >
-          선린공인중개사사무소 · 주거급여 안심 산식
+        <p style={{ margin: '0 0 12px', color: '#8b4831', fontWeight: 800 }}>
+          선린공인중개사사무소 · 확인 절차
         </p>
 
         <h1
           style={{
             margin: 0,
             fontSize: 'clamp(34px, 6vw, 64px)',
-            lineHeight: 1.05,
-            letterSpacing: '-0.06em',
+            lineHeight: 1.06,
+            letterSpacing: '-0.07em',
           }}
         >
-          주소와 보증금 조건을 먼저 확인합니다
+          주소와 서류를 먼저 확인합니다
         </h1>
-
-        <p
-          style={{
-            margin: '24px 0 0',
-            maxWidth: 720,
-            fontSize: 'clamp(17px, 2.2vw, 21px)',
-            lineHeight: 1.75,
-            color: 'rgba(36,39,37,0.72)',
-            wordBreak: 'keep-all',
-          }}
-        >
-          이 페이지는 대구 북구 산격동·복현동 생활권의 LH 전세임대,
-          주거급여, 임대 조건 상담을 위한 내부 확인용 안내 페이지입니다.
-          실제 가능 여부는 주소, 보증금, 월세, 가구원, 소득·재산 조건을
-          함께 확인해야 합니다.
-        </p>
 
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
             gap: 14,
             marginTop: 34,
           }}
         >
-          {[
-            ['1단계', '주소 확인'],
-            ['2단계', '보증금·월세 확인'],
-            ['3단계', '가구 기준 확인'],
-            ['4단계', 'LH·주거급여 가능성 분리'],
-          ].map(([label, value]) => (
-            <div
-              key={label}
+          {steps.map(([num, title, desc]) => (
+            <article
+              key={num}
               style={{
-                border: '1px solid rgba(36,39,37,0.14)',
-                borderRadius: 18,
+                display: 'grid',
+                gridTemplateColumns: '44px 140px 1fr',
+                gap: 14,
+                alignItems: 'center',
                 padding: 18,
-                background: '#fffaf0',
+                borderRadius: 20,
+                background: '#fffaf4',
+                border: '1px solid rgba(50,47,42,0.10)',
               }}
             >
-              <span
-                style={{
-                  display: 'block',
-                  marginBottom: 8,
-                  fontSize: 13,
-                  color: 'rgba(36,39,37,0.55)',
-                }}
-              >
-                {label}
-              </span>
-              <strong style={{ fontSize: 19 }}>{value}</strong>
-            </div>
+              <b>{num}</b>
+              <strong>{title}</strong>
+              <span>{desc}</span>
+            </article>
           ))}
         </div>
 
@@ -113,8 +86,8 @@ export default function BenefitLogicPage() {
             marginTop: 34,
             padding: '0 22px',
             borderRadius: 999,
-            background: '#242725',
-            color: '#fffaf0',
+            background: '#322f2a',
+            color: '#fffaf4',
             textDecoration: 'none',
             fontWeight: 800,
           }}
