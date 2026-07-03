@@ -280,11 +280,9 @@
 
 .visitCard {
   background:
-    linear-gradient(180deg, rgba(25, 20, 14, 0.16) 0%, rgba(25, 20, 14, 0.62) 100%),
-    linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02)),
-    url('/assets/visit-office.jpg');
-  background-size: cover;
-  background-position: center;
+    linear-gradient(180deg, rgba(80, 72, 62, 0.08) 0%, rgba(80, 72, 62, 0.52) 100%),
+    radial-gradient(circle at 70% 24%, rgba(255, 255, 255, 0.72), transparent 42%),
+    linear-gradient(135deg, #e3d7c5, #ad8b70);
 }
 
 .card small {
