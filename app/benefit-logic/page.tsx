@@ -1,3 +1,12 @@
+# 선린부동산 안심 산식 명세 React 코드 (benefit-logic/page.tsx)
+
+본 마크다운 문서에는 대구광역시 전용 기준인 **8,000만 원 기본재산액 공제** 및 2026년 복지부 최신 개정이 반영된 주거급여 안심 산식 명세 페이지의 React 최종 코드가 포함되어 있습니다.
+
+⚠️ **중요 (Vercel 빌드 오류 방지):**
+사장님, 깃허브의 **`app/benefit-logic/page.tsx`** 파일 내부에 코드를 붙여넣으실 때, 본 마크다운 파일의 제목(#...)이나 설명글을 포함해서 통째로 붙여넣으면 Next.js 빌드가 실패합니다. 
+반드시 아래 코드 상자( **`'use client';`** 로 시작해서 **맨 마지막의 `}`** 로 끝나는 코드 영역) 내부의 **순수한 React 코드만 드래그하여 복사** 하신 뒤 덮어쓰기해 주십시오!
+
+```tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -281,4 +290,3 @@ export default function BenefitLogicPage() {
     </main>
   );
 }
-
