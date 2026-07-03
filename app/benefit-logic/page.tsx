@@ -1,3 +1,13 @@
+# 선린공인중개사사무소 주거급여 안심 산식 명세 페이지 (app/benefit-logic/page.tsx)
+
+본 마크다운 문서에는 대구광역시(광역시) 기초생활보장법 고시 기준 및 2026년 보건복지부 개정 사항이 연동된 주거급여 안심 산식 명세서 최종 마스터 코드가 포함되어 있습니다.
+대도시 기본재산액 공제한도(7,700만 원)가 아닌 **대구광역시 전용 기준인 8,000만 원**과 금융재산 500만 원 공제, 자녀 용돈 한계선(월 36.6만 원)의 복지 필터링이 1원 단위까지 연산되며, **산격권역 단독·다가구 경락낙찰가율 63.5%**를 대입한 보증금 회수 안전성 시뮬레이터와 가족 설득용 텍스트 명세가 완벽하게 컴포지션되어 있습니다.
+
+---
+
+## 🏛️ `app/benefit-logic/page.tsx` 소스 코드 (Next.js App Router용)
+
+```tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -102,7 +112,7 @@ export default function BenefitLogicPage() {
                 <ul className="space-y-3 list-none pl-0">
                   <li className="flex gap-2">
                     <span className="text-[#9E4631] font-bold">✔</span>
-                    <span><strong>대구광역시 기본재산공제 8,000만 원:</strong> 광역시 전용 기준으로 계약 체결 시 보증금 중 8,000만 원까지는 소득인정액 산정에서 완전 비과세 공제 처리됩니다. (일반시의 7,700만 원 기준보다 대구 어르신들에게 훨씬 유리합니다.)</span>
+                    <span><strong>대구광역시 기본재산공제 8,000만 원:</strong> 광역시 전용 기준으로 계약 체결 시 보증금 중 8,000만 원까지는 소득인정액 산정에서 완전 비과세 공제 처리됩니다. (일반시의 7,700만 원 기준보다 대구 시민분들에게 훨씬 유리합니다.)</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#9E4631]">✔</span>
@@ -273,3 +283,4 @@ export default function BenefitLogicPage() {
     </main>
   );
 }
+```
