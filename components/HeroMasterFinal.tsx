@@ -1,75 +1,68 @@
-'use client';
-
-import React from 'react';
 import styles from './HeroMasterFinal.module.css';
 
-interface HotspotConfig {
-  key: string;
-  href: string;
-  label: string;
-  title: string;
-  className: string;
-}
+const checks = [
+  '주소 확인',
+  '등기부 확인',
+  '건축물대장 확인',
+  '보증금·월세 조건 확인',
+];
 
 export default function HeroMasterFinal() {
-  const hotspots: HotspotConfig[] = [
-    {
-      key: 'menu',
-      href: '#navigation',
-      label: '플랫폼 자산 궤적 전체 탐색',
-      title: '메뉴',
-      className: styles.menu
-    },
-    {
-      key: 'addr',
-      href: '#address-verification',
-      label: '지번 서류 검증: 공적 장부 기반 원장 팩트 대조',
-      title: '서류 정밀 대조',
-      className: styles.addr
-    },
-    {
-      key: 'exam',
-      href: '#quantitative-review',
-      label: '권리 정량 분석: 은닉 채권 및 리스크 선제 소거',
-      title: '권리 검토',
-      className: styles.exam
-    },
-    {
-      key: 'spec',
-      href: '#special-asset-consulting',
-      label: '특수 자산 컨설팅: 정주 환경 격상 케어, 공공 금융 기금 심사 매칭, 비공개 점포 임대차 아키텍처',
-      title: '선린 특수 케어',
-      className: styles.spec
-    },
-    {
-      key: 'call',
-      href: 'tel:0539441116',
-      label: '즉각 유선 연결: 06시-23시 다이렉트 비대면 유선 문의 및 주소 선포착 접수',
-      title: '전화 문의 (연중무휴)',
-      className: styles.call
-    }
-  ];
-
   return (
     <main className={styles.shell}>
-      <section className={styles.heroFinal} aria-label="선린공인중개사사무소 자산 리스크 헷지 플랫폼">
-        {/* 텍스트 중복 및 시각 왜곡을 영구 차단하기 위한 단일 마스터 자산 백그라운드 홀딩 */}
-        <img
-          className={styles.heroImage}
-          src="/assets/hero-master-final.png"
-          alt="주소와 서류는 정밀하게, 상담은 편하게. 선린공인중개사사무소"
-          draggable={false}
-        />
+      <section className={styles.hero}>
+        <div className={styles.copy}>
+          <p className={styles.eyebrow}>선린공인중개사사무소 · 대구 북구 산격로 95</p>
 
-        {hotspots.map((spot) => (
-          <a
-            key={spot.key}
-            href={spot.href}
-            className={`${styles.hotspot} ${spot.className}`}
-            aria-label={spot.label}
-            title={spot.title}
-          />
-        ))}
+          <h1 className={styles.title}>
+            주소와 서류는
+            <br />
+            정밀하게,
+            <br />
+            상담은 편하게.
+          </h1>
+
+          <p className={styles.subtitle}>
+            산격동·복현동 생활권의 임대, 매매, LH 전세임대 상담을
+            주소·등기·건축물대장 기준으로 차분하게 확인합니다.
+          </p>
+
+          <div className={styles.actions}>
+            <a className={styles.primary} href="tel:053-944-1116">
+              053-944-1116 전화상담
+            </a>
+
+            <a
+              className={styles.secondary}
+              href="https://map.naver.com/p/search/대구%20북구%20산격로%2095"
+              target="_blank"
+              rel="noreferrer"
+            >
+              위치 확인
+            </a>
+          </div>
+        </div>
+
+        <aside className={styles.card}>
+          <div className={styles.cardHeader}>
+            <span>LOCAL DOCUMENT CHECK</span>
+            <strong>산격로 95</strong>
+          </div>
+
+          <div className={styles.mapPanel}>
+            <span className={styles.mapLabel}>SANGYEOK-DONG</span>
+            <span className={styles.pin}>선린</span>
+          </div>
+
+          <div className={styles.checkPanel}>
+            <p>상담 전 확인 순서</p>
+            <ul>
+              {checks.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </aside>
       </section>
     </main>
   );

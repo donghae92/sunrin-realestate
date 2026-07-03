@@ -1,105 +1,208 @@
-:root {
-  color-scheme: light;
-}
-
 .shell {
   min-height: 100svh;
+  background:
+    radial-gradient(circle at top left, rgba(158, 70, 49, 0.08), transparent 28rem),
+    linear-gradient(180deg, #f7f3ea 0%, #eee7d8 100%);
+  color: #242725;
+  padding: 24px;
+}
+
+.hero {
+  width: min(1120px, 100%);
+  min-height: calc(100svh - 48px);
+  margin: 0 auto;
   display: grid;
-  place-items: start center;
-  background: #f4f7f8; /* 프리미엄 클리닉 감성의 정갈하고 차분한 오프화이트 베이스 */
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.copy {
+  border: 1px solid rgba(36, 39, 37, 0.14);
+  border-radius: 30px;
+  padding: clamp(32px, 6vw, 72px);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.74)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(36, 39, 37, 0.035) 0,
+      rgba(36, 39, 37, 0.035) 1px,
+      transparent 1px,
+      transparent 32px
+    );
+  box-shadow: 0 28px 80px rgba(36, 39, 37, 0.12);
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: #9e4631;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  word-break: keep-all;
+}
+
+.title {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-size: clamp(46px, 8vw, 92px);
+  line-height: 0.95;
+  letter-spacing: -0.075em;
+  font-weight: 900;
 }
 
-/* HERO_MASTER_FINAL 9:16 INTERACTION LOCK
-  - 폭 가변 임계점 390px 동기화 및 외곽 쉐도우 제어
-*/
-.heroFinal {
-  position: relative;
-  width: min(100vw, 390px);
-  aspect-ratio: 9 / 16;
-  overflow: hidden;
-  background: #f4f7f8;
-  user-select: none;
-  -webkit-user-select: none;
-  box-shadow: 0 24px 80px rgba(28, 46, 36, 0.06);
-  
-  /* [12시간 교차학습 정점 좌표 변수]
-    - 우측 상단 삼선(☰) 메뉴 및 중하단 가로 정렬 핫스팟의 물리적 기하 임계 수치 고정
-  */
-  --menu-x: 82%;   --menu-y: 4%;    --menu-w: 14%;   --menu-h: 6%;
-  --addr-x: 10%;   --addr-y: 61%;   --addr-w: 38%;   --addr-h: 6%;
-  --exam-x: 52%;   --exam-y: 61%;   --exam-w: 38%;   --exam-h: 6%;
-  --spec-x: 10%;   --spec-y: 70%;   --spec-w: 80%;   --spec-h: 7%;
-  --call-x: 5%;    --call-y: 88%;   --call-w: 90%;   --call-h: 8%;
+.subtitle {
+  max-width: 640px;
+  margin: 28px 0 0;
+  font-size: clamp(17px, 2.3vw, 22px);
+  line-height: 1.72;
+  color: rgba(36, 39, 37, 0.72);
+  word-break: keep-all;
 }
 
-.heroImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
 }
 
-.hotspot {
-  position: absolute;
-  z-index: 10;
-  display: block;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-  -webkit-tap-highlight-color: rgba(28, 46, 36, 0.12); /* 터치 시 선린 고유의 딥 파인 그린 반응 */
-}
-
-.hotspot:hover {
-  background-color: rgba(28, 46, 36, 0.03);
-}
-
-/* 변수 인젝션을 통한 마스크 할당 */
-.menu {
-  left: var(--menu-x);
-  top: var(--menu-y);
-  width: var(--menu-w);
-  height: var(--menu-h);
-  border-radius: 50%;
-}
-
-.addr {
-  left: var(--addr-x);
-  top: var(--addr-y);
-  width: var(--addr-w);
-  height: var(--addr-h);
-}
-
-.exam {
-  left: var(--exam-x);
-  top: var(--exam-y);
-  width: var(--exam-w);
-  height: var(--exam-h);
-}
-
-.spec {
-  left: var(--spec-x);
-  top: var(--spec-y);
-  width: var(--spec-w);
-  height: var(--spec-h);
-}
-
-.call {
-  left: var(--call-x);
-  top: var(--call-y);
-  width: var(--call-w);
-  height: var(--call-h);
+.primary,
+.secondary {
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
   border-radius: 999px;
+  text-decoration: none;
+  font-weight: 850;
 }
 
-/* 영역 가시화 프로토콜 (검수 필요 시 주입) */
-.heroFinal:global(.debug) .hotspot {
-  background: rgba(28, 46, 36, 0.25) !important;
-  border: 1px solid rgba(28, 46, 36, 0.6) !important;
+.primary {
+  background: #242725;
+  color: #fffaf0;
+}
+
+.secondary {
+  color: #242725;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(36, 39, 37, 0.2);
+}
+
+.card {
+  border: 1px solid rgba(36, 39, 37, 0.14);
+  border-radius: 30px;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 24px 70px rgba(36, 39, 37, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+  color: rgba(36, 39, 37, 0.62);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.cardHeader strong {
+  color: #242725;
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.mapPanel {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(36, 39, 37, 0.14);
+  background:
+    linear-gradient(90deg, rgba(36, 39, 37, 0.055) 1px, transparent 1px),
+    linear-gradient(rgba(36, 39, 37, 0.055) 1px, transparent 1px),
+    #f4efe4;
+  background-size: 36px 36px;
+}
+
+.mapPanel::before,
+.mapPanel::after {
+  content: '';
+  position: absolute;
+  width: 140%;
+  height: 1px;
+  left: -20%;
+  background: rgba(158, 70, 49, 0.38);
+}
+
+.mapPanel::before {
+  top: 38%;
+  transform: rotate(-16deg);
+}
+
+.mapPanel::after {
+  top: 62%;
+  transform: rotate(11deg);
+}
+
+.mapLabel {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: rgba(36, 39, 37, 0.48);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.pin {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  background: #9e4631;
+  color: #fffaf0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 900;
+  box-shadow: 0 18px 42px rgba(158, 70, 49, 0.28);
+}
+
+.checkPanel {
+  margin-top: 18px;
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(36, 39, 37, 0.045);
+}
+
+.checkPanel p {
+  margin: 0 0 12px;
+  font-weight: 900;
+}
+
+.checkPanel ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.9;
+  color: rgba(36, 39, 37, 0.72);
+}
+
+@media (max-width: 860px) {
+  .shell {
+    padding: 14px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .card {
+    order: -1;
+  }
+
+  .mapPanel {
+    min-height: 220px;
+  }
 }
