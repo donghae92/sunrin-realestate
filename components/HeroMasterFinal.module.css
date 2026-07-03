@@ -6,26 +6,27 @@
   min-height: 100svh;
   display: grid;
   place-items: start center;
-  background: #eaf6fb;
+  background: #f4f7f8;
   margin: 0;
 }
 
-/*
-  HERO_MASTER_FINAL UI LOCK
-  - 최종 이미지를 그대로 시각 기준으로 사용
-  - 클릭 가능한 투명 hotspot만 배치
-  - 이미지 원본 비율: 941 / 1672
-*/
-
 .heroFinal {
   position: relative;
-  width: min(100vw, 430px);
-  aspect-ratio: 941 / 1672;
+  width: min(100vw, 390px);
+  aspect-ratio: 9 / 16;
   overflow: hidden;
   background: #f4f7f8;
   user-select: none;
   -webkit-user-select: none;
-  box-shadow: 0 24px 80px rgba(18, 56, 76, 0.08);
+  
+  /* [정밀 좌표 맵핑] 
+    - 390px 모바일 9:16 화면 기준 백분율(%) 타격점
+  */
+  --menu-x: 82%; --menu-y: 4%;  --menu-w: 14%; --menu-h: 6%;
+  --addr-x: 10%; --addr-y: 61%; --addr-w: 38%; --addr-h: 6%;
+  --exam-x: 52%; --exam-y: 61%; --exam-w: 38%; --exam-h: 6%;
+  --spec-x: 10%; --spec-y: 70%; --spec-w: 80%; --spec-h: 7%;
+  --call-x: 5%;  --call-y: 88%; --call-w: 90%; --call-h: 8%;
 }
 
 .heroImage {
@@ -38,74 +39,23 @@
 
 .hotspot {
   position: absolute;
-  z-index: 5;
+  z-index: 10;
   display: block;
-  left: var(--x);
-  top: var(--y);
-  width: var(--w);
-  height: var(--h);
   background: transparent;
-  border-radius: 999px;
-  -webkit-tap-highlight-color: rgba(72, 184, 234, 0.25);
+  cursor: pointer;
+  border-radius: 6px;
+  -webkit-tap-highlight-color: rgba(28, 46, 36, 0.15); /* 선린의 딥 파인 그린 터치 이펙트 */
 }
 
-/* 임시 검수 시 section에 debug 클래스를 붙이면 영역이 보임 */
-.heroFinal.debug .hotspot {
-  background: rgba(0, 153, 255, 0.18);
-  outline: 2px solid rgba(0, 153, 255, 0.72);
-}
+/* 변수 바인딩에 의한 레이아웃 고정 */
+.menu { left: var(--menu-x); top: var(--menu-y); width: var(--menu-w); height: var(--menu-h); border-radius: 50%; }
+.addr { left: var(--addr-x); top: var(--addr-y); width: var(--addr-w); height: var(--addr-h); }
+.exam { left: var(--exam-x); top: var(--exam-y); width: var(--exam-w); height: var(--exam-h); }
+.spec { left: var(--spec-x); top: var(--spec-y); width: var(--spec-w); height: var(--spec-h); }
+.call { left: var(--call-x); top: var(--call-y); width: var(--call-w); height: var(--call-h); border-radius: 999px; }
 
-/*
-  좌표 기준: HERO_MASTER_FINAL 이미지 전체 기준 %
-  사장님이 주신 0.1% 미세 튜닝 비례 데이터 완벽 반영
-*/
-
-.call {
-  --x: 6.0%;
-  --y: 61.2%;
-  --w: 41.5%;
-  --h: 5.7%;
-}
-
-.process {
-  --x: 6.0%;
-  --y: 68.1%;
-  --w: 41.5%;
-  --h: 5.7%;
-}
-
-.rights {
-  --x: 5.3%;
-  --y: 78.0%;
-  --w: 42.5%;
-  --h: 14.5%;
-  border-radius: 24px;
-}
-
-.visit {
-  --x: 50.1%;
-  --y: 78.0%;
-  --w: 42.5%;
-  --h: 14.5%;
-  border-radius: 24px;
-}
-
-.phone {
-  --x: 5.0%;
-  --y: 92.9%;
-  --w: 90.0%;
-  --h: 5.0%;
-  border-radius: 28px;
-}
-
-@media (max-width: 380px) {
-  .heroFinal {
-    width: 100vw;
-  }
-}
-
-@media (min-width: 431px) {
-  .shell {
-    padding: 16px 0;
-  }
+/* 유지보수 시 영역 가시화 (상위 노드에 .debug 클래스 주입 시 활성화) */
+.heroFinal:global(.debug) .hotspot {
+  background: rgba(28, 46, 36, 0.2) !important;
+  border: 1px solid rgba(28, 46, 36, 0.6) !important;
 }
