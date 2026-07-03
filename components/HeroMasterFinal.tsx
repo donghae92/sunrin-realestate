@@ -59,9 +59,23 @@ export default function HeroMasterFinal() {
         <img
           className={styles.heroImage}
           src="/assets/hero-master-final.png"
-          alt="선린공인중개사사무소: 권리관계는 정밀하게, 상담은 편하게. 대구 북구 산격로 95, 전화상담 053-944-1116"
+          alt="선린공인중개사사무소. 주소와 서류는 정밀하게, 상담은 편하게. 대구 북구 산격로 95, 전화상담 053-944-1116"
           draggable={false}
         />
+
+        <div className={styles.copyOverlay} aria-hidden="true">
+          <p className={styles.overlayEyebrow}>주소 · 서류 · 권리관계 확인</p>
+          <h1 className={styles.overlayTitle}>
+            주소와 서류는
+            <br />
+            정밀하게,
+            <br />
+            상담은 편하게
+          </h1>
+          <p className={styles.overlaySubtitle}>
+            등기부 · 건축물대장 · 선순위 보증금을 함께 확인합니다.
+          </p>
+        </div>
 
         {hotspots.map((spot) => {
           if (spot.onClick) {
