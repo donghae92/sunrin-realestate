@@ -8,201 +8,421 @@
   place-items: start center;
   background: #eaf6fb;
   margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    system-ui,
+    sans-serif;
 }
 
-.heroFinal {
+.hero {
   position: relative;
   width: min(100vw, 430px);
-  aspect-ratio: 941 / 1672;
+  min-height: 100svh;
   overflow: hidden;
   background: #f4f7f8;
-  user-select: none;
-  -webkit-user-select: none;
+  color: #403d37;
   box-shadow: 0 24px 80px rgba(18, 56, 76, 0.08);
 }
 
-.heroImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
-}
-
 /*
-  새 문구 레이어
-  - 기존 PNG 안의 옛 문구 영역을 부드럽게 덮고
-  - 실제 HTML 텍스트를 위에 표시한다.
+  사진은 배경으로만 사용한다.
+  기존 PNG 안의 옛 문구는 왼쪽 반투명 레이어로 덮고,
+  실제 문구/버튼/메뉴는 전부 HTML로 표시한다.
 */
 
-.copyOverlay {
+.photoLayer {
   position: absolute;
-  z-index: 4;
-  left: 5.5%;
-  top: 34.8%;
-  width: 58%;
-  min-height: 25%;
-  padding: 4.5% 3.5% 4%;
-  border-radius: 22px;
+  inset: 0;
   background:
     linear-gradient(
       90deg,
-      rgba(247, 244, 237, 0.94) 0%,
-      rgba(247, 244, 237, 0.86) 72%,
-      rgba(247, 244, 237, 0.36) 100%
-    );
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  pointer-events: none;
+      rgba(246, 241, 232, 0.97) 0%,
+      rgba(246, 241, 232, 0.93) 43%,
+      rgba(246, 241, 232, 0.48) 63%,
+      rgba(246, 241, 232, 0.12) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.04) 58%,
+      rgba(234, 222, 205, 0.45) 100%
+    ),
+    url("/assets/hero-master-final.png");
+  background-size: cover;
+  background-position: center top;
+  transform: scale(1.015);
 }
 
-.overlayEyebrow {
-  margin: 0 0 8px;
-  color: rgba(65, 62, 56, 0.72);
-  font-size: clamp(10px, 2.6vw, 13px);
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  word-break: keep-all;
+.topBar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 28px 22px 0;
+  padding: 18px 20px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 48px rgba(60, 51, 42, 0.08);
 }
 
-.overlayTitle {
-  margin: 0;
-  color: #403d37;
-  font-family: "Noto Serif KR", "Apple SD Gothic Neo", serif;
-  font-size: clamp(33px, 8.7vw, 45px);
-  line-height: 1.22;
-  letter-spacing: -0.08em;
-  font-weight: 500;
-  word-break: keep-all;
-}
-
-.overlaySubtitle {
-  margin: 14px 0 0;
-  color: rgba(55, 52, 47, 0.86);
-  font-size: clamp(12px, 3.1vw, 15px);
-  line-height: 1.65;
-  letter-spacing: -0.04em;
-  font-weight: 600;
-  word-break: keep-all;
-}
-
-.hotspot {
-  position: absolute;
-  z-index: 5;
+.topBar strong {
   display: block;
-  left: var(--x);
-  top: var(--y);
-  width: var(--w);
-  height: var(--h);
-  padding: 0;
-  margin: 0;
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: -0.06em;
+}
+
+.topBar span {
+  display: block;
+  margin-top: 7px;
+  color: rgba(64, 61, 55, 0.68);
+  font-size: 12px;
+  letter-spacing: -0.03em;
+}
+
+.menuButton {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  gap: 0;
+  padding: 9px;
   border: 0;
   background: transparent;
-  border-radius: 999px;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(72, 184, 234, 0.25);
 }
 
-.hotspot:focus-visible {
-  outline: 2px solid rgba(0, 112, 243, 0.85);
-  outline-offset: 2px;
-}
-
-.menu {
-  --x: 84.0%;
-  --y: 6.1%;
-  --w: 10.5%;
-  --h: 4.8%;
-}
-
-.call {
-  --x: 6.0%;
-  --y: 61.2%;
-  --w: 41.5%;
-  --h: 5.7%;
-}
-
-.process {
-  --x: 6.0%;
-  --y: 68.1%;
-  --w: 41.5%;
-  --h: 5.7%;
-}
-
-.rights {
-  --x: 5.3%;
-  --y: 78.0%;
-  --w: 42.5%;
-  --h: 14.5%;
-  border-radius: 24px;
-}
-
-.visit {
-  --x: 50.1%;
-  --y: 78.0%;
-  --w: 42.5%;
-  --h: 14.5%;
-  border-radius: 24px;
-}
-
-.phone {
-  --x: 5.0%;
-  --y: 92.9%;
-  --w: 90.0%;
-  --h: 5.0%;
-  border-radius: 28px;
+.menuButton span {
+  width: 28px;
+  height: 2px;
+  background: rgba(64, 61, 55, 0.72);
+  border-radius: 999px;
 }
 
 .menuPanel {
   position: absolute;
-  z-index: 10;
-  top: 11.5%;
-  right: 5.5%;
-  width: 52%;
+  z-index: 8;
+  top: 104px;
+  right: 21px;
+  width: 230px;
   display: grid;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(45, 45, 45, 0.12);
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 18px 48px rgba(18, 56, 76, 0.16);
+  gap: 9px;
+  padding: 13px;
+  border-radius: 23px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(60, 51, 42, 0.18);
 }
 
-.menuPanel a {
+.menuPanel button {
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(60, 51, 42, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+  color: #403d37;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  margin: 138px 28px 0;
+  max-width: 300px;
+}
+
+.eyebrow {
+  margin: 0 0 13px;
+  color: rgba(64, 61, 55, 0.72);
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.copy h1 {
+  margin: 0;
+  font-family: "Noto Serif KR", "Apple SD Gothic Neo", serif;
+  font-size: 47px;
+  line-height: 1.23;
+  letter-spacing: -0.09em;
+  font-weight: 500;
+  color: #403d37;
+}
+
+.subtitle {
+  margin: 22px 0 0;
+  max-width: 285px;
+  color: rgba(64, 61, 55, 0.82);
+  font-size: 16px;
+  line-height: 1.72;
+  letter-spacing: -0.05em;
+  font-weight: 650;
+  word-break: keep-all;
+}
+
+.actions {
+  display: grid;
+  gap: 12px;
+  width: 250px;
+  margin-top: 28px;
+}
+
+.primary,
+.secondary {
+  min-height: 56px;
   display: flex;
   align-items: center;
-  min-height: 42px;
-  padding: 0 14px;
+  justify-content: space-between;
+  padding: 0 23px;
   border-radius: 999px;
-  color: #383838;
   text-decoration: none;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  cursor: pointer;
+}
+
+.primary {
+  color: #403d37;
+  background: linear-gradient(90deg, #dceef9 0%, #f3f7fa 100%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 28px rgba(92, 136, 160, 0.13);
+}
+
+.secondary {
+  color: rgba(64, 61, 55, 0.72);
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.86);
+}
+
+.location {
+  position: relative;
+  z-index: 2;
+  margin: 23px 28px 0;
+  color: rgba(64, 61, 55, 0.86);
   font-size: 14px;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(45, 45, 45, 0.08);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.cards {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 22px 22px 0;
+}
+
+.card {
+  min-height: 125px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 18px;
+  padding: 18px;
+  color: #fff;
+  text-align: left;
+  background:
+    linear-gradient(180deg, rgba(30, 30, 30, 0.05) 0%, rgba(30, 30, 30, 0.48) 100%),
+    rgba(255, 255, 255, 0.48);
+  box-shadow: 0 14px 36px rgba(60, 51, 42, 0.1);
+  cursor: pointer;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/assets/hero-master-final.png");
+  background-size: 220%;
+  background-position: left bottom;
+  opacity: 0.38;
+}
+
+.card:nth-child(2)::before {
+  background-position: right bottom;
+}
+
+.card span,
+.card b {
+  position: relative;
+  z-index: 1;
+}
+
+.card span {
+  display: block;
+  margin-top: 62px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.card b {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.68);
+  color: #403d37;
+  font-size: 20px;
+}
+
+.phoneBar {
+  position: relative;
+  z-index: 2;
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 22px 22px;
+  padding: 0 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.phoneBar a,
+.phoneBar button {
+  color: rgba(64, 61, 55, 0.78);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.phoneBar span {
+  height: 24px;
+  background: rgba(64, 61, 55, 0.18);
+}
+
+.sheet {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: end center;
+  padding: 20px;
+  background: rgba(44, 48, 50, 0.26);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.sheetCard {
+  position: relative;
+  width: 100%;
+  max-height: 68%;
+  overflow: auto;
+  padding: 28px 22px 22px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 24px 70px rgba(30, 30, 30, 0.22);
+}
+
+.close {
+  position: absolute;
+  top: 13px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(64, 61, 55, 0.08);
+  color: #403d37;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.sheetCard h2 {
+  margin: 0 0 15px;
+  font-size: 25px;
+  letter-spacing: -0.07em;
+}
+
+.sheetCard ul {
+  margin: 0;
+  padding-left: 20px;
+  color: rgba(64, 61, 55, 0.78);
+  line-height: 1.75;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.sheetAction {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  border-radius: 999px;
+  background: #403d37;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 850;
 }
 
 @media (max-width: 380px) {
-  .heroFinal {
-    width: 100vw;
+  .topBar {
+    margin: 18px 16px 0;
   }
 
-  .copyOverlay {
-    left: 5.2%;
-    top: 34.5%;
-    width: 59.5%;
+  .copy {
+    margin: 118px 22px 0;
   }
 
-  .overlayTitle {
-    font-size: clamp(31px, 8.5vw, 40px);
+  .copy h1 {
+    font-size: 42px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .actions {
+    width: 230px;
+  }
+
+  .cards {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .phoneBar {
+    margin-left: 16px;
+    margin-right: 16px;
   }
 }
 
 @media (min-width: 431px) {
   .shell {
     padding: 16px 0;
+  }
+
+  .hero {
+    min-height: calc(100svh - 32px);
+    border-radius: 0;
   }
 }
