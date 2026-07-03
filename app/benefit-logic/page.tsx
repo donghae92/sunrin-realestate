@@ -1,271 +1,283 @@
-## 1. `app/benefit-logic/page.tsx` 
-
-```tsx
 'use client';
 
 import React, { useState } from 'react';
-import Head from 'next/head';
 
 const OFFICE = {
   name: '선린공인중개사사무소',
   address: '대구광역시 북구 산격로 95, 1층 101호',
   phone: '053-944-1116',
   telHref: 'tel:053-944-1116',
-  owner: '이용호',
-  registrationNumber: '제 27230-2023-00042호'
-} as const;
-
-const THEME = {
-  colors: {
-    bg: '#F6F4EE',       // 미색 종이 질감
-    inkText: '#242725',  // 묵직한 먹색
-    sealPoint: '#9E4631',// 도장 적갈색
-    brass: '#A78B5F',    // 황동색
-    border: 'rgba(28, 46, 36, 0.08)',
-    cardBg: '#FAF9F5'    // 고대비 카드 배경
-  }
+  registrationNumber: '제 27230-2023-00042호',
+  owner: '이용호'
 } as const;
 
 export default function BenefitLogicPage() {
   const [activeTab, setActiveTab] = useState<'income' | 'burden' | 'benefit'>('income');
 
-  return (
-    <>
-      <Head>
-        <title>안심 산식 명세서 | 선린공인중개사사무소</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
-        <meta name="description" content="대구 북구 산격동 선린부동산. 대구광역시 기초생활수급자 자격 및 주거급여 변화율 3대 법률 산식(소득인정액, 자기부담분, 실질주거보조금) 정밀 명세서." />
-      </Head>
+  // Interactive Simple Demo states
+  const [deposit, setDeposit] = useState<number>(5000); // Default 50 million won (5000만 원)
+  const [otherLoans, setOtherLoans] = useState<number>(1000); // Default 10 million won
+  const [monthlyRent, setMonthlyRent] = useState<number>(20); // Default 200,000 KRW
 
-      <main 
-        className="relative w-full mx-auto overflow-x-hidden"
-        style={{
-          backgroundColor: THEME.colors.bg,
-          color: THEME.colors.inkText,
-          maxWidth: '430px',
-          minHeight: '100svh'
-        }}
-      >
-        {/* 상단 띠 내비게이션 */}
-        <header className="px-6 py-4 flex items-center justify-between border-b" style={{ borderColor: THEME.colors.border }}>
-          <a href="/" className="text-xs font-bold hover:underline" style={{ color: THEME.colors.sealPoint }}>
-            ← 메인 화면으로 돌아가기
-          </a>
-          <span className="text-[10px] font-bold tracking-wider" style={{ color: THEME.colors.brass }}>
-            LEGAL CALCULATION MATRIX
+  // Daegu Gwangyeoksi Basic Asset Deduction: 8,000 million KRW (80,000,000 KRW)
+  const basicDeduction = 8000; 
+  // Financial Asset Deduction: 500 million KRW (5,000,000 KRW)
+  const financialDeduction = 500;
+  // Standard Conversion Rate for Asset to Income: 1.04% per month
+  const conversionRate = 0.0104;
+
+  // Calculators
+  const netAssetValue = Math.max(0, deposit - basicDeduction);
+  const monthlyAssetIncome = Math.round(netAssetValue * conversionRate * 10000); // In KRW
+  
+  // Daegu Auction Liquidation Rate: 63.5%
+  const liquidationRate = 0.635;
+  const estimatedMarketValue = 12000; // Estimated building unit value: 120 million won
+  const safetyLimit = Math.round(estimatedMarketValue * liquidationRate);
+  const isSafe = deposit + otherLoans <= safetyLimit;
+
+  return (
+    <main className="min-h-screen bg-[#F6F4EE] text-[#242725] px-4 py-8 font-sans flex flex-col items-center">
+      <div className="w-full max-w-[430px] flex flex-col bg-[#FDFBF7] shadow-2xl rounded-md border border-[#A7A091]/30 overflow-hidden pb-24">
+        
+        {/* Header */}
+        <header className="px-6 py-6 border-b border-[#A7A091]/30 bg-[#FAF9F5]">
+          <span className="text-[0.7rem] text-[#9E4631] font-bold uppercase tracking-widest">
+            선린 행정·복지 수호 진단 원장
           </span>
+          <h1 className="text-[1.4rem] font-bold mt-1 text-[#242725]">
+            주거급여 안심 산식 명세서
+          </h1>
+          <p className="text-[0.8rem] text-[#6F716B] mt-1.5 leading-relaxed">
+            대구광역시(광역시) 기초생활보장 수급 기준에 맞춘 3대 법률 산식과 산격권역 다가구 경락가율을 기반으로, 계약 전 실질 월세 보조금 수급 변동을 정밀 검증합니다.
+          </p>
         </header>
 
-        {/* 에디토리얼 타이틀 섹션 */}
-        <section className="px-6 py-8 space-y-4">
-          <span className="text-[10px] font-bold px-2 py-1 rounded text-white" style={{ backgroundColor: THEME.colors.sealPoint }}>
-            행정·법률 수호 검증망
-          </span>
-          <h2 className="text-xl font-bold tracking-tight leading-snug">
-            대구광역시 수급권 보호를 위한<br />
-            <span style={{ color: THEME.colors.sealPoint }}>주거급여 변화율 안심 명세서</span>
-          </h2>
-          <p className="text-xs opacity-85 leading-relaxed">
-            임대차 계약서에 찍히는 보증금과 월세의 비율 변화는 단순히 금액의 문제가 아닙니다. 단 1만 원의 보증금 오차로도 평생 일군 수급 자격이 박탈될 수 있기에, 선린은 계약 전 3대 법률 산식을 1원 단위까지 역산하여 검증합니다.
-          </p>
-        </section>
-
-        {/* 3대 산식 동적 탭 스위처 (44px 이상 터치타겟 및 ARIA 반영) */}
-        <section className="px-6">
-          <div className="grid grid-cols-3 rounded-md overflow-hidden border" style={{ borderColor: THEME.colors.border }}>
+        {/* 3대 산식 셀렉트 탭 */}
+        <div className="px-6 pt-6">
+          <div className="flex bg-[#E7E0D2]/50 p-1 rounded-md border border-[#A7A091]/20">
             <button
               onClick={() => setActiveTab('income')}
-              className="py-3 text-xs font-bold transition-all focus:outline-none focus-visible:bg-white"
-              style={{
-                backgroundColor: activeTab === 'income' ? THEME.colors.sealPoint : 'transparent',
-                color: activeTab === 'income' ? '#FFFFFF' : THEME.colors.inkText,
-                minHeight: '44px'
-              }}
-              aria-selected={activeTab === 'income'}
-              role="tab"
+              className={`flex-1 py-3 text-[0.85rem] font-bold rounded transition-all ${
+                activeTab === 'income'
+                  ? 'bg-[#1D211F] text-white shadow'
+                  : 'text-[#6F716B] hover:text-[#242725]'
+              }`}
             >
-              01. 소득인정액
+              1. 소득인정액
             </button>
             <button
               onClick={() => setActiveTab('burden')}
-              className="py-3 text-xs font-bold transition-all focus:outline-none focus-visible:bg-white"
-              style={{
-                backgroundColor: activeTab === 'burden' ? THEME.colors.sealPoint : 'transparent',
-                color: activeTab === 'burden' ? '#FFFFFF' : THEME.colors.inkText,
-                minHeight: '44px'
-              }}
-              aria-selected={activeTab === 'burden'}
-              role="tab"
+              className={`flex-1 py-3 text-[0.85rem] font-bold rounded transition-all ${
+                activeTab === 'burden'
+                  ? 'bg-[#1D211F] text-white shadow'
+                  : 'text-[#6F716B] hover:text-[#242725]'
+              }`}
             >
-              02. 자기부담분
+              2. 자기부담분
             </button>
             <button
               onClick={() => setActiveTab('benefit')}
-              className="py-3 text-xs font-bold transition-all focus:outline-none focus-visible:bg-white"
-              style={{
-                backgroundColor: activeTab === 'benefit' ? THEME.colors.sealPoint : 'transparent',
-                color: activeTab === 'benefit' ? '#FFFFFF' : THEME.colors.inkText,
-                minHeight: '44px'
-              }}
-              aria-selected={activeTab === 'benefit'}
-              role="tab"
+              className={`flex-1 py-3 text-[0.85rem] font-bold rounded transition-all ${
+                activeTab === 'benefit'
+                  ? 'bg-[#1D211F] text-white shadow'
+                  : 'text-[#6F716B] hover:text-[#242725]'
+              }`}
             >
-              03. 주거급여액
+              3. 실질급여액
             </button>
           </div>
-        </section>
+        </div>
 
-        {/* 동적 산식 명세 카드 영역 */}
-        <section className="px-6 py-6">
+        {/* 세부 명세 영역 */}
+        <div className="px-6 py-8 flex-1">
           {activeTab === 'income' && (
-            <div className="p-6 rounded-lg border space-y-6" style={{ backgroundColor: THEME.colors.cardBg, borderColor: THEME.colors.border }}>
-              <div className="flex flex-col border-b pb-4" style={{ borderColor: THEME.colors.border }}>
-                <span className="text-[10px] font-bold" style={{ color: THEME.colors.brass }}>FORMULA 01</span>
-                <h3 className="text-base font-bold mt-1 text-gray-900">임차보증금의 소득환산 연산 수식</h3>
+            <div className="space-y-6">
+              <div className="border-l-4 border-[#9E4631] pl-3">
+                <span className="text-[0.75rem] font-bold text-[#9E4631]">FORMULA 01</span>
+                <h2 className="text-[1.1rem] font-bold text-[#242725]">임차보증금의 재산 소득환산율 연산</h2>
               </div>
 
-              {/* 공식 뷰어 */}
-              <div className="p-4 rounded bg-white border font-mono text-xs space-y-2" style={{ borderColor: THEME.colors.border }}>
-                <div className="font-bold text-gray-800">재산의 소득환산액 =</div>
-                <div className="text-[#9E4631] font-bold">
-                  (임차보증금 - 기본재산액 공제 - 금융재산 공제) × 월 1.04%
-                </div>
+              <div className="p-4 bg-[#E7E0D2]/30 rounded border border-[#A7A091]/30 text-center">
+                <p className="text-[0.8rem] text-[#6F716B] font-bold">임대 보증금의 재산소득 환산 공식</p>
+                <p className="text-[0.95rem] font-bold text-[#9E4631] mt-1 font-mono">
+                  [(보증금 - 기본재산공제 8,000만) × 월 1.04%]
+                </p>
               </div>
 
-              {/* 디테일 법률 팩트 명세 */}
-              <div className="text-xs space-y-4 leading-relaxed">
-                <div>
-                  <h4 className="font-bold" style={{ color: THEME.colors.sealPoint }}>• 대구광역시(광역시) 기본재산공제: 8,000만 원</h4>
-                  <p className="mt-1 text-gray-700">
-                    일반 중소도시(7,700만 원)와 달리 대구광역시는 **8,000만 원**이 일괄 기초공제됩니다. 단 300만 원의 오차가 월 31,200원의 가상 소득인정액 차이를 만들어내므로 광역시 기준을 반드시 정확히 락킹해야 합니다.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold" style={{ color: THEME.colors.sealPoint }}>• 금융재산 생활준비금 공제: 500만 원</h4>
-                  <p className="mt-1 text-gray-700">
-                    수급가구의 보증금 마련 및 생활안정을 보존하기 위해 통장 내 금융재산에서 **500만 원**을 우선 제외하고 소득환산을 가중합니다.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold" style={{ color: THEME.colors.sealPoint }}>• 1인 가구 정기 사적이전소득 공제: 월 366,376원</h4>
-                  <p className="mt-1 text-gray-700">
-                    수도권 자녀들이 대구의 부모님께 매달 부치는 regular 생활비는 2026년 기준 중위소득의 15% 한도인 **월 366,376원(약 36.6만 원)**까지 전액 면제되며, 초과분에 한해서만 소득에 반영합니다.
-                  </p>
-                </div>
-                <div className="bg-white/70 p-3 rounded text-[11px] border" style={{ borderColor: THEME.colors.border }}>
-                  <span className="font-bold">선린 안심 조언:</span> 보증금이 공제한도를 넘어서면 월 1.04%라는 매우 높은 이율로 소득이 간주되므로, 수급권 한계선에 걸쳐있는 임차인의 보증금액 조정은 대단히 예민하게 다루어야 합니다.
-                </div>
+              <div className="space-y-4 text-[0.9rem] text-[#6F716B] leading-relaxed text-left">
+                <h3 className="font-bold text-[#242725]">대구광역시 1원 단위 행정 면제 기준</h3>
+                <ul className="space-y-3 list-none pl-0">
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631] font-bold">✔</span>
+                    <span><strong>대구광역시 기본재산공제 8,000만 원:</strong> 광역시 전용 기준으로 계약 체결 시 보증금 중 8,000만 원까지는 소득인정액 산정에서 완전 비과세 공제 처리됩니다. (수원/성남 등 일반시의 7,700만 원 기준보다 대구 어르신들에게 유리한 조항입니다.)</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631]">✔</span>
+                    <span><strong>비상 금융재산 공제 500만 원:</strong> 기초수급가구 통장의 소액 금융 자산 중 500만 원까지는 소득 산정에서 추가 제외됩니다.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631] font-bold">✔</span>
+                    <span><strong>금융소득 기본공제 월 10만 원:</strong> 통장에서 발생하는 예금 이자 등의 금융 소득 중 월 10만 원까지 전액 비과세 처리됩니다.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631] font-bold">✔</span>
+                    <span><strong>자녀 보장 사적이전소득 공제 (월 36.6만 원):</strong> 수도권이나 구미 등지에서 자랑스러운 자녀 세대가 부쳐오는 정기 용돈은 1인 가구 최신 기준 <strong>월 366,376원</strong> 한도 내에서 일괄 소득 산입이 면제됩니다.</span>
+                  </li>
+                </ul>
               </div>
             </div>
           )}
 
           {activeTab === 'burden' && (
-            <div className="p-6 rounded-lg border space-y-6" style={{ backgroundColor: THEME.colors.cardBg, borderColor: THEME.colors.border }}>
-              <div className="flex flex-col border-b pb-4" style={{ borderColor: THEME.colors.border }}>
-                <span className="text-[10px] font-bold" style={{ color: THEME.colors.brass }}>FORMULA 02</span>
-                <h3 className="text-base font-bold mt-1 text-gray-900">기준 초과 소득에 따른 자기부담분 산식</h3>
+            <div className="space-y-6">
+              <div className="border-l-4 border-[#9E4631] pl-3">
+                <span className="text-[0.75rem] font-bold text-[#9E4631]">FORMULA 02</span>
+                <h2 className="text-[1.1rem] font-bold text-[#242725]">최저 생계수급 기준 초과분 차감 산식</h2>
               </div>
 
-              {/* 공식 뷰어 */}
-              <div className="p-4 rounded bg-white border font-mono text-xs space-y-2" style={{ borderColor: THEME.colors.border }}>
-                <div className="font-bold text-gray-800">자기부담분 =</div>
-                <div className="text-[#9E4631] font-bold">
-                  (소득인정액 - 생계급여 선정기준) × 30%
-                </div>
+              <div className="p-4 bg-[#E7E0D2]/30 rounded border border-[#A7A091]/30 text-center">
+                <p className="text-[0.8rem] text-[#6F716B] font-bold">월 자기부담 차감액 산출 공식</p>
+                <p className="text-[0.95rem] font-bold text-[#9E4631] mt-1 font-mono">
+                  [(소득인정액 - 2026년 생계급여 기준 781,602원) × 30%]
+                </p>
               </div>
 
-              {/* 디테일 법률 팩트 명세 */}
-              <div className="text-xs space-y-4 leading-relaxed">
-                <div>
-                  <h4 className="font-bold" style={{ color: THEME.colors.sealPoint }}>• 생계급여 최저보장 선정기준: 1인 가구 781,602원</h4>
-                  <p className="mt-1 text-gray-700">
-                    소득인정액이 2026년 1인 가구 기준 생계기준선인 **781,602원** 이하인 경우에는 국가 주거급여(지원 한도금액 내)가 전액 무상 지급되며 자기부담분은 발생하지 않습니다.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold" style={{ color: THEME.colors.sealPoint }}>• 초과액에 대한 30% 자기부담 감액제</h4>
-                  <p className="mt-1 text-gray-700">
-                    소득인정액이 생계급여 기준선을 초과하면, 초과된 금액의 정확히 **30%**를 실제 매달 지급되던 주거급여 지원액에서 차감청산한 후 잔액만 입금됩니다.
-                  </p>
-                </div>
-                <div className="bg-white/70 p-3 rounded text-[11px] border" style={{ borderColor: THEME.colors.border }}>
-                  <span className="font-bold">선린 안심 조언:</span> 자녀가 부치는 지원금이나 잘못 이전된 임차보증금이 소득인정액을 단돈 10만 원만 올리더라도, 자기부담금이 매달 3만 원씩 늘어나 주거 보조 혜택이 대폭 삭감됩니다.
-                </div>
+              <div className="space-y-4 text-[0.9rem] text-[#6F716B] leading-relaxed text-left">
+                <h3 className="font-bold text-[#242725]">자기부담분 산입 및 감액 방어 요건</h3>
+                <ul className="space-y-3 list-none pl-0">
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631] font-bold">✔</span>
+                    <span><strong>생계급여 기준 이내 (전액 지급):</strong> 소득인정액이 최저 생계급여 선정 기준인 <strong>781,602원</strong> 이하인 경우, 주거 보조금에서 차감되는 금액은 0원이며 주거급여 전액이 안전하게 수급됩니다.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631] font-bold">✔</span>
+                    <span><strong>기준 초과 시 (30% 차감):</strong> 초과 금액에 한해 <strong>30%의 비율만큼</strong> 주거급여가 감액 지급되므로, 보증금과 월세 비율을 선제적으로 설계해야만 수령액을 안전하게 지킬 수 있습니다.</span>
+                  </li>
+                </ul>
               </div>
             </div>
           )}
 
           {activeTab === 'benefit' && (
-            <div className="p-6 rounded-lg border space-y-6" style={{ backgroundColor: THEME.colors.cardBg, borderColor: THEME.colors.border }}>
-              <div className="flex flex-col border-b pb-4" style={{ borderColor: THEME.colors.border }}>
-                <span className="text-[10px] font-bold" style={{ color: THEME.colors.brass }}>FORMULA 03</span>
-                <h3 className="text-base font-bold mt-1 text-gray-900">대구광역시 주거급여 실질 변화율 연산</h3>
+            <div className="space-y-6">
+              <div className="border-l-4 border-[#9E4631] pl-3">
+                <span className="text-[0.75rem] font-bold text-[#9E4631]">FORMULA 03</span>
+                <h2 className="text-[1.1rem] font-bold text-[#242725]">대구 북구(2급지) 주거보장 및 실질 수령 산식</h2>
               </div>
 
-              {/* 공식 뷰어 */}
-              <div className="p-4 rounded bg-white border font-mono text-xs space-y-2" style={{ borderColor: THEME.colors.border }}>
-                <div className="font-bold text-gray-800">최종 주거급여 지급액 =</div>
-                <div className="text-[#9E4631] font-bold">
-                  Min(실제 임차료, 대구 기준임대료) - 자기부담분
-                </div>
+              <div className="p-4 bg-[#E7E0D2]/30 rounded border border-[#A7A091]/30 text-center">
+                <p className="text-[0.8rem] text-[#6F716B] font-bold">최종 실질 주거급여액 산출식</p>
+                <p className="text-[0.95rem] font-bold text-[#9E4631] mt-1 font-mono">
+                  [기준임대료(26.8만)와 실제 임차료 중 최저값] - 자기부담분
+                </p>
               </div>
 
-              {/* 디테일 법률 팩트 명세 */}
-              <div className="text-xs space-y-4 leading-relaxed">
-                <div>
-                  <h4 className="font-bold" style={{ color: THEME.colors.sealPoint }}>• 대구광역시(2급지) 주거급여 지급 상한: 268,000원</h4>
-                  <p className="mt-1 text-gray-700">
-                    2026년 기준 2급지(대구 등 광역시) 1인 가구 기준임대료 상한선은 **268,000원**입니다. 실제 내는 월세가 이를 초과하더라도 국가 보조금은 최대 26.8만 원 한도 안에서만 작동합니다.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold" style={{ color: THEME.colors.sealPoint }}>• 월세 감면 이면의 실질 수령 변화율 조율</h4>
-                  <p className="mt-1 text-gray-700">
-                    보증금을 1,000만 원 올려서 주거 부담 월세를 5만 원 줄이려고 시도하면 안 됩니다. 보증금 상승으로 소득인정액 가중치가 올라가 주거보조 수령금이 5만 원 넘게 삭감되어 오히려 마이너스 총액 손실이 발생할 수 있습니다.
-                  </p>
-                </div>
-                <div className="bg-white/70 p-3 rounded text-[11px] border" style={{ borderColor: THEME.colors.border }}>
-                  <span className="font-bold">선린 안심 조언:</span> "보증금을 얼마 올리면 주거급여 통장으로 매달 입금되는 지원금이 정확히 몇 퍼센트 삭감되는지"를 사전에 역산·소명해 주는 부동산은 선린공인중개사사무소가 유일합니다.
-                </div>
+              <div className="space-y-4 text-[0.9rem] text-[#6F716B] leading-relaxed text-left">
+                <h3 className="font-bold text-[#242725]">주거급여 변화율 및 실질 수급 안전선</h3>
+                <ul className="space-y-3 list-none pl-0">
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631] font-bold">✔</span>
+                    <span><strong>대구광역시 1인 가구 기준임대료 (268,000원):</strong> 대구 북구 권역의 주거급여 실질 지급 상한선은 <strong>26.8만 원</strong>입니다. 계약 보증금 조절을 통해 실제 임차료 변동 대비 통장 실수급액 변화율을 1원 단위까지 역산 제어합니다.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#9E4631] font-bold">✔</span>
+                    <span><strong>산격권역 단독·다가구 경락가율 63.5% 반영:</strong> 대구 평균 경락률 68.5%에 거시 과잉 적체 페널티(-5%)를 적용하여, 최악의 청산 상황 시 보증금 유실 위험이 없는 안전 한도선에 한해 임대차를 봉인합니다.</span>
+                  </li>
+                </ul>
               </div>
             </div>
           )}
-        </section>
+        </div>
 
-        {/* 서류 기반 안심 법률 고지 블록 */}
-        <section className="px-6 pb-8">
-          <div className="p-4 rounded-md border text-[11px] leading-relaxed space-y-2" style={{ borderColor: THEME.colors.border, backgroundColor: 'rgba(255, 255, 255, 0.4)' }}>
-            <div className="font-bold text-xs" style={{ color: THEME.colors.inkText }}>⚠️ 법률 및 행정 안전 고지</div>
+        {/* 대시보드 계산기 시뮬레이터 */}
+        <section className="mx-6 p-5 bg-[#FAF9F5] border border-[#A7A091]/30 rounded-lg text-left">
+          <h3 className="text-[0.95rem] font-bold text-[#242725] mb-4 border-b border-[#A7A091]/30 pb-2">
+            📊 보증금 안전 & 주거급여 시뮬레이션
+          </h3>
+          <div className="space-y-4">
             <div>
-              본 명세서상에 도출된 연산 규칙은 보건복지부 및 국토교통부 고시 기준의 단순 점검용 모의 역산입니다. 방문자의 구체적인 근로소득, 기본 금융 정보 및 개별 가구원 상태에 따라 소득인정액 판단 기준은 실제 행정관청의 검증과 달라질 수 있습니다.
+              <label className="block text-[0.8rem] text-[#6F716B] font-bold mb-1">내 계약 보증금 (만 원 단위)</label>
+              <input 
+                type="number" 
+                value={deposit} 
+                onChange={(e) => setDeposit(Number(e.target.value))}
+                className="w-full p-2 border border-[#A7A091] rounded bg-white text-[0.9rem] font-mono focus:outline-none focus:ring-1 focus:ring-[#9E4631]"
+              />
+              <span className="text-[0.7rem] text-[#9E4631] font-bold mt-1 block">
+                * 대구 기본재산액 공제(8,000만 원) 이하: {(deposit <= 8000) ? '전액 소득공제 (안심)' : `${(deposit - 8000).toLocaleString()}만 원 재산 산입`}
+              </span>
             </div>
-            <div className="font-bold">
-              계약 전 공적 장부의 교차 열람 및 053-944-1116 유선 대조가 필수적인 이유입니다.
+
+            <div>
+              <label className="block text-[0.8rem] text-[#6F716B] font-bold mb-1">선순위 채권 / 타 세대 보증금 합계 (만 원)</label>
+              <input 
+                type="number" 
+                value={otherLoans} 
+                onChange={(e) => setOtherLoans(Number(e.target.value))}
+                className="w-full p-2 border border-[#A7A091] rounded bg-white text-[0.9rem] font-mono focus:outline-none focus:ring-1 focus:ring-[#9E4631]"
+              />
+            </div>
+
+            <div className="pt-2 border-t border-[#A7A091]/20">
+              <div className="flex justify-between items-center text-[0.85rem] font-bold">
+                <span className="text-[#242725]">경락가 낙찰선 안심 한도 (63.5% 적용):</span>
+                <span className="text-right text-[#1D211F]">{safetyLimit.toLocaleString()}만 원</span>
+              </div>
+              <div className="flex justify-between items-center text-[0.85rem] font-bold mt-1">
+                <span className="text-[#242725]">총 인수 부채액:</span>
+                <span className="text-right text-[#1D211F]">{(deposit + otherLoans).toLocaleString()}만 원</span>
+              </div>
+            </div>
+
+            <div className={`p-3 rounded-md text-center text-[0.85rem] font-bold ${isSafe ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+              {isSafe 
+                ? '✅ 대구 산격지역 경락률 대비 전세 보증금 안전 한도 내에 있습니다.' 
+                : '⚠️ 경락가 낙찰 안전 한도를 초과하여 계약 전 추가 확인이 필요합니다.'}
             </div>
           </div>
         </section>
 
-        {/* 중개사법 하단 Footer */}
-        <footer className="px-6 py-8 border-t text-[11px] space-y-2 opacity-80" style={{ borderColor: THEME.colors.border }}>
-          <div className="font-bold" style={{ color: THEME.colors.inkText }}>{OFFICE.name}</div>
-          <div>대표: {OFFICE.owner} | 등록번호: {OFFICE.registrationNumber}</div>
-          <div>소재지: {OFFICE.address} | 문의: {OFFICE.phone}</div>
+        {/* 가족/아들 설득용 요약 설명문구 */}
+        <section className="mx-6 mt-6 p-5 bg-[#E7E0D2]/20 border border-[#A7A091]/30 rounded-lg text-left">
+          <h3 className="text-[0.95rem] font-bold text-[#242725] mb-2">
+            👨‍👩‍👧‍👦 가족에게 설명하기 위한 요약
+          </h3>
+          <p className="text-[0.85rem] text-[#6F716B] mt-2 leading-relaxed">
+            {isSafe ? (
+              `현재 가상 계산 결과, 입력하신 보증금(${deposit}만 원)과 채권금액은 대구 북구 산격권역 단독·다가구 경락 기준선(${safetyLimit}만 원) 이내에 머무는 비교적 안전한 축에 속합니다. 다만, 실질적인 국세 체납 및 임차인 선순위 보증금 총액 대조를 유선으로 최종 매핑해 보셔야 안전을 보증할 수 있습니다.`
+            ) : (
+              `⚠️ 현재 가상 계산 결과, 입력하신 보증금(${deposit}만 원)과 선순위 채무금액의 합계가 대구 북구 산격권역의 경락 낙찰선 안전 한도(${safetyLimit}만 원)를 초과하여 경고등이 켜졌습니다. 계약 전 반드시 공부 대조가 요구되며, 성급하게 가계약금이나 계약금을 넣지 마시고 선린부동산 유선 상담을 통해 위험성을 정량 소명받으시기 바랍니다.`
+            )}
+          </p>
+        </section>
+
+        {/* Footer 법적 준수 사항 고지 */}
+        <footer className="px-6 py-8 mt-8 bg-[#E7E0D2] border-t border-[#A7A091]/30 text-[0.75rem] text-[#6F716B] leading-relaxed text-left">
+          <p className="mb-3">
+            <strong className="text-[#242725]">{OFFICE.name}</strong> | 대표 공인중개사: {OFFICE.owner} | 등록번호: {OFFICE.registrationNumber}
+          </p>
+          <p>
+            본 명세서는 2026년 보건복지부 개정 고시와 대구광역시 수급 지침에 근거한 모의 정보제공용 차트입니다. 실제 보증금 회수의 안전성과 수급 요건 변동의 확정 검증은 공적 공부 대조 및 <strong>{OFFICE.phone}</strong> 유선 상담이 필요합니다.
+          </p>
         </footer>
 
-        {/* 하단 고정 전화 상담 링크 독 */}
-        <div className="fixed bottom-0 left-0 right-0 z-40 max-w-[430px] mx-auto">
+        {/* 하단 고정 바 */}
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] h-[72px] bg-[#1D211F] text-[#FAF9F5] px-6 flex justify-between items-center z-40 border-t border-white/5 shadow-[0_-4px_12px_rgba(0,0,0,0.15)] pb-[env(safe-area-inset-bottom)]">
+          <div className="flex flex-col">
+            <span className="text-[0.75rem] opacity-70">상담 가능 시간 06:00 ~ 22:00</span>
+            <span className="text-[1.15rem] font-mono font-bold tracking-tight text-[#FAF9F5]">{OFFICE.phone}</span>
+          </div>
           <a
             href={OFFICE.telHref}
-            className="w-full py-4 text-center text-sm font-bold text-white tracking-wider flex items-center justify-center gap-2 hover:opacity-95 transition-opacity"
-            style={{ 
-              backgroundColor: THEME.colors.sealPoint,
-              paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
-            }}
+            className="px-5 py-2.5 bg-[#9E4631] text-[#FAF9F5] rounded font-bold text-[0.9rem] hover:opacity-90 active:scale-95 transition-all shadow-md"
+            aria-label="선린공인중개사 대표번호로 전화 걸기"
           >
-            📞 {OFFICE.phone} 즉시 안심 전화 상담 (연중무휴)
+            전화 연결
           </a>
         </div>
-      </main>
-    </>
+
+      </div>
+    </main>
   );
 }
