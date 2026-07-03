@@ -26,7 +26,7 @@ const menuItems: Array<{ id: PanelId; label: string; desc: string }> = [
   {
     id: 'rights',
     label: '권리검토 보기',
-    desc: '근저당·선순위·보증금 위험을 분리합니다.',
+    desc: '권리관계와 위험 포인트를 분리합니다.',
   },
   {
     id: 'visit',
@@ -82,15 +82,22 @@ export default function HeroMasterFinal() {
   const [activePanel, setActivePanel] = useState<PanelId | null>(null);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
   }, []);
 
   const openPanel = (id: PanelId) => {
-    setActivePanel(id);
     setMenuOpen(false);
+    setActivePanel(id);
   };
 
-  const closeOverlay = () => {
+  const closeAll = () => {
     setMenuOpen(false);
     setActivePanel(null);
   };
@@ -118,8 +125,8 @@ export default function HeroMasterFinal() {
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
             aria-expanded={menuOpen}
             onClick={() => {
-              setMenuOpen((value) => !value);
               setActivePanel(null);
+              setMenuOpen((prev) => !prev);
             }}
           >
             <span />
@@ -163,13 +170,13 @@ export default function HeroMasterFinal() {
         </section>
 
         <section className={styles.cards} aria-label="주요 상담 메뉴">
-          <button type="button" className={styles.card} onClick={() => openPanel('rights')}>
+          <button type="button" className={`${styles.card} ${styles.rightsCard}`} onClick={() => openPanel('rights')}>
             <small>DOCUMENT REVIEW</small>
             <strong>권리검토</strong>
             <span>→</span>
           </button>
 
-          <button type="button" className={styles.card} onClick={() => openPanel('visit')}>
+          <button type="button" className={`${styles.card} ${styles.visitCard}`} onClick={() => openPanel('visit')}>
             <small>LOCAL VISIT</small>
             <strong>방문 상담</strong>
             <span>→</span>
@@ -183,67 +190,67 @@ export default function HeroMasterFinal() {
             전화상담 06:00~23:00
           </button>
         </footer>
-
-        {menuOpen && (
-          <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="빠른 메뉴">
-            <button type="button" className={styles.overlayDim} onClick={closeOverlay} aria-label="메뉴 닫기" />
-
-            <nav className={styles.menuScreen}>
-              <div className={styles.menuHead}>
-                <p>QUICK MENU</p>
-                <h2>필요한 상담을 선택하세요</h2>
-              </div>
-
-              <div className={styles.menuList}>
-                {menuItems.map((item) => (
-                  <button key={item.id} type="button" onClick={() => openPanel(item.id)}>
-                    <strong>{item.label}</strong>
-                    <span>{item.desc}</span>
-                  </button>
-                ))}
-              </div>
-            </nav>
-          </div>
-        )}
-
-        {active && (
-          <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={active.title}>
-            <button type="button" className={styles.overlayDim} onClick={closeOverlay} aria-label="닫기" />
-
-            <section className={styles.panelScreen}>
-              <button type="button" className={styles.close} onClick={closeOverlay} aria-label="닫기">
-                ×
-              </button>
-
-              <p>{active.kicker}</p>
-              <h2>{active.title}</h2>
-
-              <ul>
-                {active.body.map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
-
-              {active.action === 'call' && (
-                <a className={styles.panelAction} href="tel:0539441116">
-                  053-944-1116 전화하기
-                </a>
-              )}
-
-              {active.action === 'map' && (
-                <a
-                  className={styles.panelAction}
-                  href="https://map.naver.com/p/search/대구%20북구%20산격로%2095"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  네이버 지도에서 위치 확인
-                </a>
-              )}
-            </section>
-          </div>
-        )}
       </section>
+
+      {menuOpen && (
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="빠른 메뉴">
+          <button type="button" className={styles.overlayDim} onClick={closeAll} aria-label="메뉴 닫기" />
+
+          <nav className={styles.menuScreen}>
+            <div className={styles.menuHead}>
+              <p>QUICK MENU</p>
+              <h2>필요한 상담을 선택하세요</h2>
+            </div>
+
+            <div className={styles.menuList}>
+              {menuItems.map((item) => (
+                <button key={item.id} type="button" onClick={() => openPanel(item.id)}>
+                  <strong>{item.label}</strong>
+                  <span>{item.desc}</span>
+                </button>
+              ))}
+            </div>
+          </nav>
+        </div>
+      )}
+
+      {active && (
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={active.title}>
+          <button type="button" className={styles.overlayDim} onClick={closeAll} aria-label="닫기" />
+
+          <section className={styles.panelScreen}>
+            <button type="button" className={styles.close} onClick={closeAll} aria-label="닫기">
+              ×
+            </button>
+
+            <p>{active.kicker}</p>
+            <h2>{active.title}</h2>
+
+            <ul>
+              {active.body.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+
+            {active.action === 'call' && (
+              <a className={styles.panelAction} href="tel:0539441116">
+                053-944-1116 전화하기
+              </a>
+            )}
+
+            {active.action === 'map' && (
+              <a
+                className={styles.panelAction}
+                href="https://map.naver.com/p/search/대구%20북구%20산격로%2095"
+                target="_blank"
+                rel="noreferrer"
+              >
+                네이버 지도에서 위치 확인
+              </a>
+            )}
+          </section>
+        </div>
+      )}
     </main>
   );
 }
