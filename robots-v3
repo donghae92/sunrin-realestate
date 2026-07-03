@@ -1,0 +1,7 @@
+# 대구 북구 산격동 선린공인중개사사무소 (선린부동산) 공식 로봇 배제 표준 v3
+
+User-agent: *
+Allow: /
+
+# 네이버, 구글 검색 봇 수집 허용 선언 및 사이트맵 명시
+Sitemap: https://sunrin-realestate.vercel.app/sitemap-v3.xml
