@@ -1,3 +1,6 @@
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 export const metadata = {
   title: '확인 절차 | 선린공인중개사사무소',
   description: '주소, 등기부, 건축물대장, 보증금 조건을 확인하는 상담 절차 안내',
