@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sunrin-realestate-f4u5.vercel.app/sitemap.xml
