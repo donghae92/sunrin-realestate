@@ -78,15 +78,15 @@
   z-index: 0;
   background-image: url('/assets/sunrin-hero-bg.jpg');
   background-size: cover;
-  background-position: 90% 6%;
+  background-position: 94% 5%;
   background-repeat: no-repeat;
   filter: saturate(1.04) contrast(1.02) brightness(1.08);
   pointer-events: none;
   user-select: none;
 }
 
-/* Overlay – protects only the left text column;
-   the face stays clear past 68%. No gray/black. */
+/* Overlay – solid ivory reading zone on the left,
+   fully transparent over the portrait. No gray/black. */
 .heroFinal::after {
   content: '';
   position: absolute;
@@ -98,17 +98,10 @@
     linear-gradient(
       90deg,
       rgba(253, 249, 241, 0.98) 0%,
-      rgba(253, 249, 241, 0.94) 34%,
-      rgba(253, 249, 241, 0.72) 48%,
-      rgba(253, 249, 241, 0.34) 58%,
-      rgba(253, 249, 241, 0.08) 68%,
+      rgba(253, 249, 241, 0.96) 46%,
+      rgba(253, 249, 241, 0.62) 58%,
+      rgba(253, 249, 241, 0.18) 70%,
       rgba(253, 249, 241, 0.00) 100%
-    ),
-    radial-gradient(
-      ellipse at 20% 42%,
-      rgba(255, 255, 255, 0.62) 0%,
-      rgba(255, 255, 255, 0.20) 42%,
-      rgba(255, 255, 255, 0) 72%
     );
 }
 
@@ -182,9 +175,18 @@
   padding: 60px 18px 20px;
 }
 
+/* Reading panel – keeps all hero text in the left
+   column so it never overlaps the portrait zone */
+.heroTextPanel {
+  width: min(62%, 295px);
+  padding: 18px 0 0 0;
+  position: relative;
+  z-index: 2;
+}
+
 /* Kicker – small, quiet brand mark */
 .kicker {
-  margin: 18px 0 12px;
+  margin: 0 0 12px;
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
@@ -192,19 +194,17 @@
   color: rgba(111, 78, 52, 0.72);
 }
 
-/* h1 – thin, airy myeongjo display.
-   Weight stays at 400 so the letterforms breathe
-   and never block the portrait on the right. */
+/* h1 – thin, airy myeongjo display sized to
+   stay inside the reading panel */
 .heroTitle {
   margin: 0;
   display: grid;
   gap: 0;
   font-family: "Nanum Myeongjo", "Noto Serif KR", "AppleMyungjo", "Batang", serif;
   font-weight: 400;
-  color: rgba(47, 40, 33, 0.86);
+  color: rgba(47, 40, 33, 0.88);
   letter-spacing: -0.045em;
-  line-height: 1.18;
-  max-width: 87%;
+  line-height: 1.14;
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.58),
     0 14px 32px rgba(68, 52, 38, 0.10);
@@ -215,29 +215,24 @@
   white-space: nowrap;
 }
 
-.heroTitle span:nth-child(1) {
-  font-size: clamp(2.22rem, 8.1vw, 3.28rem);
-  font-weight: 400;
-}
-
+.heroTitle span:nth-child(1),
 .heroTitle span:nth-child(2) {
-  font-size: clamp(2.18rem, 8.0vw, 3.20rem);
+  font-size: clamp(1.92rem, 6.9vw, 2.72rem);
   font-weight: 400;
 }
 
 .heroTitle span:nth-child(3) {
-  font-size: clamp(2.08rem, 7.6vw, 3.02rem);
+  font-size: clamp(1.82rem, 6.5vw, 2.56rem);
   font-weight: 400;
 }
 
-/* Subcopy – sans, constrained to the safe column */
+/* Subcopy – sans, inside the reading panel */
 .heroBody {
   margin: 14px 0 0;
   font-family: var(--font-sans);
   font-size: 0.92rem;
   line-height: 1.58;
   font-weight: 600;
-  max-width: 66%;
   color: rgba(47, 40, 33, 0.72);
   letter-spacing: -0.04em;
 }
@@ -248,7 +243,7 @@
 .ctaGroup {
   display: grid;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .primaryCta,
@@ -294,7 +289,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 13px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .featureCard {
@@ -403,7 +398,7 @@
    BOTTOM BANNER
    ============================================ */
 .bottomBanner {
-  margin-top: 14px;
+  margin-top: 10px;
   border-radius: var(--radius-md);
   background: var(--glass);
   border: 1px solid var(--line);

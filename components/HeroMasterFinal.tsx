@@ -240,19 +240,21 @@ export default function HeroMasterFinal() {
           </header>
 
           <section className={styles.heroContent}>
-            <p className={styles.kicker}>善隣 · 좋은 이웃</p>
+            <div className={styles.heroTextPanel}>
+              <p className={styles.kicker}>善隣 · 좋은 이웃</p>
 
-            <h1 className={styles.heroTitle}>
-              <span>주소와 서류를</span>
-              <span>먼저 살피고,</span>
-              <span>상담은 편하게</span>
-            </h1>
+              <h1 className={styles.heroTitle}>
+                <span>주소와 서류를</span>
+                <span>먼저 살피고,</span>
+                <span>상담은 편하게</span>
+              </h1>
 
-            <p className={styles.heroBody}>
-              등기부 · 건축물대장 · 선순위 보증금을
-              <br />
-              차분하게 함께 확인합니다.
-            </p>
+              <p className={styles.heroBody}>
+                등기부 · 건축물대장 · 선순위 보증금을
+                <br />
+                차분하게 함께 확인합니다.
+              </p>
+            </div>
 
             <div className={styles.ctaGroup}>
               <button type="button" className={styles.primaryCta} onClick={() => setConsultOpen(true)}>
