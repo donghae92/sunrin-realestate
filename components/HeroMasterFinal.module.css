@@ -59,7 +59,7 @@
    ============================================ */
 .heroFinal {
   position: relative;
-  width: min(100vw, 480px);
+  width: min(100vw, 488px);
   min-height: 100svh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -401,8 +401,8 @@
 .bottomBanner {
   margin-top: 11px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.64);
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.86);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -450,7 +450,7 @@
   inset: 0;
   z-index: 20;
   border: 0;
-  background: rgba(64, 58, 50, 0.26);
+  background: rgba(64, 58, 50, 0.20);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   cursor: pointer;
@@ -726,7 +726,7 @@
 /* ============================================
    RESPONSIVE – true mobile
    ============================================ */
-@media (max-width: 480px) {
+@media (max-width: 488px) {
   .shell {
     padding: 0;
   }
