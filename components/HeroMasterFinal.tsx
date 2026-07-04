@@ -219,7 +219,6 @@ export default function HeroMasterFinal() {
     <>
       <main className={styles.shell}>
         <section className={styles.heroFinal} aria-label="선린공인중개사사무소 모바일 메인">
-          <div className={styles.heroBg} />
 
           <header className={styles.topBar}>
             <div>
