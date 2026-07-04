@@ -105,15 +105,20 @@
   margin: 0;
   display: grid;
   gap: 0;
-  line-height: 0.98;
+  line-height: 1.0;
   letter-spacing: -0.065em;
   font-weight: 950;
+  text-wrap: balance;
 }
 
 .heroTitle span {
   display: block;
-  font-size: clamp(2.15rem, 8.8vw, 3.35rem);
-  background: linear-gradient(176deg, #1a1a18 0%, #2e2a26 38%, #6f5744 70%, #8a725b 100%);
+  font-size: clamp(2.0rem, 7.7vw, 2.95rem);
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.28),
+    0 10px 28px rgba(52,45,38,0.08);
+  background:
+    linear-gradient(178deg, #211f1d 0%, #34302b 48%, #6f5d4c 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -121,14 +126,15 @@
 
 .titleStrong {
   transform: translateY(-1px);
-  font-weight: 950 !important;
+  font-weight: 980 !important;
   letter-spacing: -0.08em;
+  font-size: clamp(2.15rem, 8.3vw, 3.12rem) !important;
 }
 
 .titleSoft {
-  font-size: clamp(1.65rem, 6.8vw, 2.5rem) !important;
-  letter-spacing: -0.07em;
-  font-weight: 700 !important;
+  font-size: clamp(1.72rem, 6.8vw, 2.48rem) !important;
+  letter-spacing: -0.072em;
+  font-weight: 780 !important;
 }
 
 .heroBody {
@@ -224,42 +230,26 @@
 }
 
 .bottomBanner {
-  margin-top: 16px;
-  min-height: 44px;
-  border-radius: 20px;
+  margin-top: 14px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.52);
   border: 1px solid rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(12px);
-  padding: 9px 12px;
-  display: flex;
-  align-items: center;
+  padding: 8px 11px;
+  display: grid;
+  gap: 3px;
 }
 
-.bannerText {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 5px 10px;
-  font-size: 0.66rem;
-  line-height: 1.35;
+.bannerRow {
+  font-size: 0.62rem;
+  line-height: 1.3;
   color: rgba(45, 43, 40, 0.72);
   font-weight: 800;
   letter-spacing: -0.02em;
+  word-break: keep-all;
 }
 
-.bannerText span {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  white-space: nowrap;
-}
-
-.bannerText b {
-  color: rgba(45, 43, 40, 0.86);
-  font-weight: 900;
-}
-
-.bannerText a {
+.bannerRow a {
   color: #1f64d1;
   font-weight: 950;
   text-decoration: none;
