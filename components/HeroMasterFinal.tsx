@@ -26,14 +26,17 @@ const drawerItems: DetailItem[] = [
   {
     index: '01',
     title: '선린부동산 소개',
-    summary: '협회가입, 손해배상 공제가입, 정식 중개사무소 안내',
+    summary: '정식 중개사무소, 대표 공인중개사, 협회·공제가입 안내',
     body: [
-      '선린부동산공인중개사사무소는 대구 북구 산격로 95에서 상담하는 정식 중개사무소입니다.',
-      '고객님이 가장 먼저 확인하셔야 할 부분은 "믿고 맡길 수 있는 곳인가"입니다. 선린부동산은 한국공인중개사협회 가입 및 손해배상 책임보장 공제가입을 갖추고 있어, 거래 전에 기본적인 안전장치를 먼저 확인하실 수 있습니다.',
-      '또한 부동산권리분석사 1급 자격을 보유하고 있어, 등기부·건축물대장·선순위 보증금처럼 계약 전에 함께 살펴봐야 할 부분을 더 차분하게 안내해드릴 수 있습니다.',
-      '저희가 생각하는 정직한 중개는 좋은 말만 앞세우는 것이 아니라, 확인된 사실을 정확하게 말씀드리는 일입니다. 계약에 필요한 내용, 미리 살펴보셔야 할 부분, 서류에서 꼭 짚어야 할 부분을 차분하게 안내해드립니다.',
-      '편하게 문의하셔도 부담 없이 설명을 들으실 수 있고, 실제 상담이 필요하실 때는 전화 또는 카카오톡으로 이어서 도와드리고 있습니다.',
+      '선린부동산공인중개사사무소는 대구 북구 산격로 95에서 상담하는 정식 등록 중개사무소입니다.',
+      '고객님이 가장 먼저 확인하셔야 할 부분은 "믿고 맡길 수 있는 정식 중개사무소인가"입니다. 선린부동산은 대표 공인중개사가 책임 있게 상담하며, 중개업 등록정보와 사업자 정보를 기준으로 확인하실 수 있습니다.',
+      '한국공인중개사협회 가입 및 손해배상 책임보장 공제가입을 갖추고 있어, 거래 전 기본적인 안전장치를 함께 확인하실 수 있습니다.',
+      '또한 부동산권리분석사 1급 자격을 보유하고 있어, 등기부·건축물대장·선순위 보증금처럼 계약 전에 살펴보셔야 할 부분을 더 차분하게 안내해드릴 수 있습니다. 다만 법률 판단을 대신하는 것이 아니라, 추가 확인이 필요한 지점을 함께 짚어드리는 보조 전문성으로 안내합니다.',
+      '저희가 생각하는 정직한 중개는 좋은 말만 앞세우는 것이 아니라, 확인된 사실을 정확하게 말씀드리는 일입니다. 계약에 필요한 내용, 미리 살펴보셔야 할 부분, 서류에서 꼭 짚어야 할 부분을 차분하게 설명드리겠습니다.',
       '정식명칭: 선린부동산공인중개사사무소',
+      '대표 공인중개사: 이용호',
+      '중개사무소 등록번호: 제27230-2023-00042호',
+      '사업자등록번호: 559-01-02996',
       '주소: 대구 북구 산격로 95',
       '대표전화: 053-944-1116',
       'FAX: 053-944-1114',
@@ -98,15 +101,66 @@ const contractModal: DetailItem = {
     'LH·도시공사 전세임대 상담은 사람의 자격과 집의 권리분석이 동시에 맞아야 합니다. 소득인정액, 보증금, 선순위, 확정일자, 전입 구조를 함께 봅니다.',
     '상속·증여 논점이 걸린 주택은 부모 지분, 자녀 간 이해관계, 잔금 시차, 세무 전문가 확인이 필요한 부분을 분리합니다.',
     '점포·상가 상담은 권리금, 영업가치, 공개 범위, 임대인·임차인 이해관계를 당사자 의사에 맞춰 신중하게 조율합니다.',
-    '필요한 경우 카카오톡 상담 또는 전화상담으로 이어서 구체적인 일정을 조율합니다.',
+    '필요한 경우 카카오톡 상담 또는 전화상담으로 이어서 구체적인 일정을 조율해드립니다.',
   ],
 };
+
+type FormulaDetail = {
+  index: string;
+  title: string;
+  summary: string;
+  body: string[];
+};
+
+const formulaItems: FormulaDetail[] = [
+  {
+    index: 'F1',
+    title: '소득인정액 산식',
+    summary: '수급 여부와 급여액 판단의 기본이 되는 계산 구조입니다',
+    body: [
+      '소득인정액은 단순 월소득만 보는 것이 아니라, 소득평가액과 재산의 소득환산액을 함께 보는 구조입니다.',
+      '기본 구조:',
+      '소득인정액 = 소득평가액 + 재산의 소득환산액',
+      '소득평가액은 실제소득에서 가구특성별 지출비용과 근로소득공제 등을 반영해 산정합니다.',
+      '재산의 소득환산액은 재산가액에서 기본재산액과 부채 등을 공제한 뒤, 재산 종류별 소득환산율을 적용해 계산합니다.',
+      '즉, 반복적으로 들어오는 사적이전소득, 금융재산, 예금·적금, 보험성 자산, 임차보증금, 부채, 지역별 기본재산액 공제 등이 함께 영향을 줄 수 있습니다.',
+      '상담에서는 고객님이 직접 공식을 계산하시게 하기보다, 어떤 금액이 심사에 영향을 줄 수 있는지 먼저 짚어드립니다.',
+    ],
+  },
+  {
+    index: 'F2',
+    title: '자기부담분 산식',
+    summary: '소득인정액이 생계급여 선정기준을 넘을 때 차감되는 금액입니다',
+    body: [
+      '주거급여 임차급여에서는 소득인정액이 생계급여 선정기준 이하인 경우 기준임대료 또는 실제임차료 범위 안에서 전액 지원될 수 있습니다.',
+      '반대로 소득인정액이 생계급여 선정기준을 넘는 경우에는 자기부담분을 차감합니다.',
+      '기본 구조:',
+      '자기부담분 = (소득인정액 - 생계급여 선정기준) × 30%',
+      '따라서 겉으로 보기에는 작은 금액 차이처럼 보여도, 심사에서는 실제 지원액에 영향을 줄 수 있습니다.',
+      '상담에서는 계약 전 보증금, 월차임, 소득인정액 변화 가능성을 함께 살펴보는 것이 중요합니다.',
+    ],
+  },
+  {
+    index: 'F3',
+    title: '주거급여액 산식',
+    summary: '기준임대료, 실제임차료, 자기부담분을 함께 봅니다',
+    body: [
+      '임차가구 주거급여는 실제 월세만 그대로 보는 것이 아니라, 지역·가구원수별 기준임대료와 실제임차료를 비교해 산정합니다.',
+      '기본 구조:',
+      '주거급여액 = 기준임대료와 실제임차료 중 낮은 금액 - 자기부담분',
+      '단, 소득인정액이 생계급여 선정기준 이하인 경우에는 자기부담분이 적용되지 않아 기준임대료 또는 실제임차료 범위에서 전액 지원될 수 있습니다.',
+      '실제 상담에서는 보증금, 월차임, 계약 형태, 선순위 보증금, 전입·확정일자 구조까지 함께 보는 것이 안전합니다.',
+      '※ 위 산식은 기초생활보장법 체계와 주거급여 고시·안내 기준을 손님이 이해하기 쉽게 정리한 설명입니다. 실제 심사 결과는 관할 행정기관과 주거급여 조사 결과에 따라 달라질 수 있습니다.',
+    ],
+  },
+];
 
 export default function HeroMasterFinal() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [consultOpen, setConsultOpen] = useState(false);
   const [drawerDetail, setDrawerDetail] = useState<DetailItem | null>(null);
   const [featureModal, setFeatureModal] = useState<FeatureModal>(null);
+  const [formulaDetail, setFormulaDetail] = useState<FormulaDetail | null>(null);
 
   const activeFeature =
     featureModal === 'rights' ? rightsModal : featureModal === 'contract' ? contractModal : null;
@@ -117,9 +171,15 @@ export default function HeroMasterFinal() {
     setConsultOpen(false);
     setDrawerDetail(null);
     setFeatureModal(null);
+    setFormulaDetail(null);
   };
 
   const closeTopLayer = () => {
+    if (formulaDetail) {
+      setFormulaDetail(null);
+      return;
+    }
+
     if (drawerDetail) {
       setDrawerDetail(null);
       return;
@@ -158,12 +218,7 @@ export default function HeroMasterFinal() {
     <>
       <main className={styles.shell}>
         <section className={styles.heroFinal} aria-label="선린공인중개사사무소 모바일 메인">
-          <img
-            className={styles.heroImage}
-            src="/assets/hero-master-final.png"
-            alt=""
-            draggable={false}
-          />
+          <div className={styles.heroBg} />
 
           <header className={styles.topBar}>
             <div>
@@ -187,15 +242,15 @@ export default function HeroMasterFinal() {
             <p className={styles.kicker}>주소 · 서류 · 권리관계 확인</p>
 
             <h1 className={styles.heroTitle}>
-              <span>주소와 서류는</span>
+              <span>권리관계는</span>
               <span className={styles.titleStrong}>정밀하게,</span>
               <span className={styles.titleSoft}>상담은 편하게</span>
             </h1>
 
             <p className={styles.heroBody}>
-              등기부 · 건축물대장 · 선순위 보증금을 함께 확인합니다.
+              등기부 · 건축물대장 ·
               <br />
-              산격로95 계약 상담과 서류 지참 상담이 가능합니다.
+              선순위 보증금을 함께 확인합니다.
             </p>
 
             <div className={styles.ctaGroup}>
@@ -223,6 +278,7 @@ export default function HeroMasterFinal() {
               >
                 <span className={styles.cardEyebrow}>DOCUMENT REVIEW</span>
                 <strong className={styles.cardTitle}>권리검토</strong>
+                <span className={styles.cardDesc}>등기·건축·보증금 등 권리관계를 정밀 검토합니다.</span>
                 <span className={styles.cardArrow}>→</span>
               </button>
 
@@ -233,6 +289,7 @@ export default function HeroMasterFinal() {
               >
                 <span className={styles.cardEyebrow}>CONTRACT CONSULT</span>
                 <strong className={styles.cardTitle}>종류별 계약 상담</strong>
+                <span className={styles.cardDesc}>매매·전세·월세 등 맞춤 계약 상담을 도와드립니다.</span>
                 <span className={styles.cardArrow}>→</span>
               </button>
             </div>
@@ -245,7 +302,7 @@ export default function HeroMasterFinal() {
         </section>
       </main>
 
-      {(drawerOpen || consultOpen || activeDetail) && (
+      {(drawerOpen || consultOpen || activeDetail || formulaDetail) && (
         <button type="button" className={styles.overlayDim} aria-label="닫기" onClick={closeTopLayer} />
       )}
 
@@ -276,11 +333,11 @@ export default function HeroMasterFinal() {
       )}
 
       {drawerOpen && (
-        <aside className={styles.drawerPanel} role="dialog" aria-modal="true" aria-label="선린 자산보호 서류철">
+        <aside className={styles.drawerPanel} role="dialog" aria-modal="true" aria-label="선린 자산보호 메뉴얼">
           <div className={styles.drawerHeader}>
             <div>
               <p>MANILA FILE INDEX</p>
-              <h2>선린 자산보호 서류철</h2>
+              <h2>선린 자산보호 메뉴얼</h2>
               <span>매물보다 먼저 보는 것은 주소, 서류, 권리, 숫자입니다.</span>
             </div>
 
@@ -334,6 +391,40 @@ export default function HeroMasterFinal() {
               상담 방식 선택하기
             </button>
           )}
+
+          {drawerDetail?.index === '02' && (
+            <div className={styles.formulaRow}>
+              {formulaItems.map((f) => (
+                <button
+                  key={f.index}
+                  type="button"
+                  className={styles.formulaBtn}
+                  onClick={() => setFormulaDetail(f)}
+                >
+                  {f.title}
+                </button>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+      {formulaDetail && (
+        <section className={styles.detailModal} role="dialog" aria-modal="true">
+          <div className={styles.detailHeader}>
+            <span>{formulaDetail.index}</span>
+            <button type="button" className={styles.closeButton} onClick={closeTopLayer} aria-label="닫기">
+              ×
+            </button>
+          </div>
+
+          <h2>{formulaDetail.title}</h2>
+          <p className={styles.detailSummary}>{formulaDetail.summary}</p>
+
+          <div className={styles.detailBody}>
+            {formulaDetail.body.map((text, index) => (
+              <p key={index}>{text}</p>
+            ))}
+          </div>
         </section>
       )}
     </>
