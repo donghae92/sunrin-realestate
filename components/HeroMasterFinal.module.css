@@ -15,7 +15,7 @@
   display: grid;
   place-items: start center;
   background: #d7e1ea;
-  padding: 16px 0;
+  padding: 14px 0;
 }
 
 .heroFinal {
@@ -41,8 +41,8 @@
 .topBar {
   position: relative;
   z-index: 2;
-  margin: 18px 18px 0;
-  padding: 18px;
+  margin: 16px 18px 0;
+  padding: 16px 18px;
   border-radius: 28px;
   background: rgba(255, 255, 255, 0.56);
   backdrop-filter: blur(14px);
@@ -53,7 +53,7 @@
 
 .topBarTitle {
   display: block;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: #3b342d;
   font-weight: 900;
   letter-spacing: -0.05em;
@@ -62,7 +62,7 @@
 .topBarAddress {
   display: block;
   margin-top: 5px;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: rgba(59, 52, 45, 0.68);
   font-weight: 650;
 }
@@ -91,49 +91,70 @@
 .heroContent {
   position: relative;
   z-index: 2;
-  padding: 94px 18px 24px;
+  padding: 72px 18px 20px;
 }
 
 .kicker {
-  margin: 24px 0 10px;
-  font-size: 0.86rem;
-  font-weight: 800;
+  margin: 18px 0 10px;
+  font-size: 0.82rem;
+  font-weight: 850;
   color: rgba(66, 57, 49, 0.7);
 }
 
 .heroTitle {
   margin: 0;
-  font-size: clamp(2.15rem, 8.6vw, 3.25rem);
+  display: grid;
+  gap: 0;
   line-height: 0.98;
-  letter-spacing: -0.06em;
-  color: #2c2a27;
-  font-weight: 900;
+  letter-spacing: -0.065em;
+  font-weight: 950;
+}
+
+.heroTitle span {
+  display: block;
+  font-size: clamp(2.15rem, 8.8vw, 3.35rem);
+  background: linear-gradient(176deg, #1a1a18 0%, #2e2a26 38%, #6f5744 70%, #8a725b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.titleStrong {
+  transform: translateY(-1px);
+  font-weight: 950 !important;
+  letter-spacing: -0.08em;
+}
+
+.titleSoft {
+  font-size: clamp(1.65rem, 6.8vw, 2.5rem) !important;
+  letter-spacing: -0.07em;
+  font-weight: 700 !important;
 }
 
 .heroBody {
-  margin: 22px 0 0;
-  font-size: 0.98rem;
-  line-height: 1.58;
+  margin: 18px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
   color: rgba(44, 42, 39, 0.82);
-  font-weight: 700;
+  font-weight: 720;
   letter-spacing: -0.04em;
 }
 
 .ctaGroup {
   display: grid;
-  gap: 14px;
-  margin-top: 28px;
+  gap: 12px;
+  margin-top: 22px;
 }
 
 .primaryCta,
 .secondaryCta {
-  min-height: 58px;
+  min-height: 54px;
   border-radius: 999px;
-  padding: 0 24px;
+  padding: 0 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   font-weight: 900;
   text-decoration: none;
   cursor: pointer;
@@ -154,18 +175,18 @@
 .cardRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 26px;
+  gap: 13px;
+  margin-top: 22px;
 }
 
 .featureCard {
   position: relative;
-  min-height: 136px;
+  min-height: 122px;
   border: none;
   border-radius: 22px;
   overflow: hidden;
   cursor: pointer;
-  padding: 16px;
+  padding: 15px;
   display: grid;
   align-content: space-between;
   text-align: left;
@@ -176,24 +197,26 @@
 }
 
 .cardEyebrow {
-  font-size: 0.74rem;
+  font-size: 0.67rem;
   font-weight: 900;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   color: rgba(255,255,255,0.78);
 }
 
 .cardTitle {
-  font-size: 1.08rem;
+  font-size: 0.99rem;
+  line-height: 1.18;
   color: #fff;
   font-weight: 900;
+  letter-spacing: -0.045em;
 }
 
 .cardArrow {
   justify-self: end;
   display: inline-grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: 999px;
   background: rgba(255,255,255,0.85);
   color: #40362e;
@@ -201,47 +224,45 @@
 }
 
 .bottomBanner {
-  margin-top: 22px;
-  border-radius: 24px;
+  margin-top: 16px;
+  min-height: 44px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.52);
   border: 1px solid rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(12px);
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
 }
 
-.bannerCell {
-  min-height: 66px;
-  padding: 12px 14px;
-  display: grid;
-  align-content: center;
-  gap: 4px;
-  color: #37322d;
+.bannerText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 10px;
+  font-size: 0.66rem;
+  line-height: 1.35;
+  color: rgba(45, 43, 40, 0.72);
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
-.bannerCell:nth-child(odd) {
-  border-right: 1px solid rgba(60, 52, 44, 0.12);
+.bannerText span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
 }
 
-.bannerCell:nth-child(-n + 2) {
-  border-bottom: 1px solid rgba(60, 52, 44, 0.12);
-}
-
-.bannerCell span {
-  font-size: 0.68rem;
-  color: rgba(55, 50, 45, 0.58);
+.bannerText b {
+  color: rgba(45, 43, 40, 0.86);
   font-weight: 900;
-  letter-spacing: 0.02em;
 }
 
-.bannerCell strong {
-  font-size: 0.84rem;
-  line-height: 1.25;
-  color: #2d2b29;
-  font-weight: 900;
-  letter-spacing: -0.045em;
-  word-break: keep-all;
+.bannerText a {
+  color: #1f64d1;
+  font-weight: 950;
+  text-decoration: none;
 }
 
 .overlayDim {
@@ -258,7 +279,7 @@
   position: fixed;
   left: 50%;
   top: 50%;
-  z-index: 31;
+  z-index: 41;
   width: min(92vw, 430px);
   max-height: min(82svh, 680px);
   overflow-y: auto;

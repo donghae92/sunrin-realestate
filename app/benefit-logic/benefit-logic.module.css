@@ -1,0 +1,354 @@
+.page {
+  min-height: 100svh;
+  background: #f6f4ee;
+  color: #242725;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR',
+    system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shell {
+  width: min(100%, 430px);
+  display: flex;
+  flex-direction: column;
+  background: #fdfbf7;
+  border: 1px solid rgba(167, 160, 145, 0.3);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(36, 39, 37, 0.12);
+  padding-bottom: 5.5rem;
+}
+
+.header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(167, 160, 145, 0.3);
+  background: #faf9f5;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  color: #9e4631;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0.25rem 0 0;
+  line-height: 1.3;
+}
+
+.lead {
+  font-size: 0.8rem;
+  color: #6f716b;
+  margin: 0.4rem 0 0;
+  line-height: 1.6;
+}
+
+.notice {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(158, 70, 49, 0.06);
+  border: 1px solid rgba(158, 70, 49, 0.18);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #6f716b;
+  line-height: 1.55;
+}
+
+.notice strong {
+  color: #242725;
+}
+
+.tabsWrap {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.tabs {
+  display: flex;
+  background: rgba(231, 224, 210, 0.5);
+  padding: 0.25rem;
+  border-radius: 6px;
+  border: 1px solid rgba(167, 160, 145, 0.2);
+  gap: 0.25rem;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.75rem 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #6f716b;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tabActive {
+  background: #1d211f;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.content {
+  padding: 2rem 1.5rem;
+  flex: 1;
+}
+
+.sectionTitle {
+  border-left: 4px solid #9e4631;
+  padding-left: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.formulaLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9e4631;
+}
+
+.formulaHeading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.15rem 0 0;
+}
+
+.formulaBox {
+  padding: 1rem;
+  background: rgba(231, 224, 210, 0.3);
+  border: 1px solid rgba(167, 160, 145, 0.3);
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.formulaBoxLabel {
+  font-size: 0.8rem;
+  color: #6f716b;
+  font-weight: 700;
+  margin: 0;
+}
+
+.formulaBoxExpr {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #9e4631;
+  margin: 0.35rem 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  word-break: keep-all;
+}
+
+.bodyHeading {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.listItem {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #6f716b;
+  line-height: 1.6;
+}
+
+.check {
+  color: #9e4631;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.simulator {
+  margin: 0 1.5rem;
+  padding: 1.25rem;
+  background: #faf9f5;
+  border: 1px solid rgba(167, 160, 145, 0.3);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.simulatorTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(167, 160, 145, 0.3);
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: #6f716b;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #a7a091;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #9e4631;
+}
+
+.hint {
+  font-size: 0.7rem;
+  color: #9e4631;
+  font-weight: 700;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.summary {
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(167, 160, 145, 0.2);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.verdictSafe {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.verdictWarn {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.family {
+  margin: 1.5rem 1.5rem 0;
+  padding: 1.25rem;
+  background: rgba(231, 224, 210, 0.2);
+  border: 1px solid rgba(167, 160, 145, 0.3);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.familyTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.familyBody {
+  font-size: 0.85rem;
+  color: #6f716b;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.footer {
+  padding: 2rem 1.5rem;
+  margin-top: 2rem;
+  background: #e7e0d2;
+  border-top: 1px solid rgba(167, 160, 145, 0.3);
+  font-size: 0.75rem;
+  color: #6f716b;
+  line-height: 1.65;
+  text-align: left;
+}
+
+.footerOffice {
+  color: #242725;
+}
+
+.fixedBar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 430px);
+  height: 4.5rem;
+  background: #1d211f;
+  color: #faf9f5;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 40;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  box-sizing: border-box;
+}
+
+.phoneMeta {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.phoneNumber {
+  font-size: 1.15rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.callBtn {
+  padding: 0.65rem 1.25rem;
+  background: #9e4631;
+  color: #faf9f5;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.callBtn:active {
+  transform: scale(0.98);
+}
+
+.anchor {
+  scroll-margin-top: 1rem;
+}
