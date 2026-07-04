@@ -4,21 +4,15 @@ import { useMemo, useState } from 'react';
 import styles from './HeroMasterFinal.module.css';
 
 const OFFICE = {
-  name: '선린공인중개사사무소',
-  officialName: '선린공인중개사사무소',
+  name: '선린부동산공인중개사사무소',
+  shortName: '선린공인중개사사무소',
   address: '대구 북구 산격로 95',
-  detailAddress: '대구 북구 산격로 95, 1층',
   phone: '053-944-1116',
-  phoneDigits: '0539441116',
   fax: '053-944-1114',
   mobile: '010-9889-2838',
-  mobileDigits: '01098892838',
+  naverMapUrl: 'https://map.naver.com/p/search/대구%20북구%20산격로%2095',
+  kakaoChannelUrl: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_URL || '#',
 };
-
-const NAVER_MAP_URL =
-  'https://map.naver.com/p/search/%EB%8C%80%EA%B5%AC%20%EB%B6%81%EA%B5%AC%20%EC%82%B0%EA%B2%A9%EB%A1%9C%2095';
-const KAKAO_CHANNEL_URL =
-  process.env.NEXT_PUBLIC_KAKAO_CHANNEL_URL || 'https://pf.kakao.com/_YOURCHANNEL';
 
 type DrawerItem = {
   index: string;
@@ -31,107 +25,121 @@ const drawerItems: DrawerItem[] = [
   {
     index: '01',
     title: '선린부동산 소개',
-    summary: '정식명칭, 등록정보, 협회·공제, 주소, 연락수단',
+    summary: '등록정보, 협회·공제, 주소, 연락수단',
     body: [
       '선린공인중개사사무소는 대구 북구 산격로 95에서 운영되는 정식 등록 중개사무소입니다.',
-      '대표 공인중개사, 중개업 등록정보, 사업자 정보, 사무소 소재지 기준을 분리해서 안내합니다.',
-      '한국공인중개사협회 회원이며, 손해배상책임 공제 가입 구조를 갖추고 있습니다. 중개사고 발생 시 공제 범위 안에서 손해배상 청구가 가능한 구조를 설명드립니다.',
-      `정식명칭: ${OFFICE.officialName}`,
-      `주소: ${OFFICE.detailAddress}`,
+      '대표 공인중개사, 중개업 등록정보, 사업자 정보, 사무소 소재지를 분리해 안내합니다.',
+      '한국공인중개사협회 관련 구조와 손해배상책임 공제 구조를 갖추고 있어 거래 안전 설명이 가능합니다.',
+      `정식명칭: ${OFFICE.name}`,
+      `주소: ${OFFICE.address}`,
       `대표전화: ${OFFICE.phone}`,
       `FAX: ${OFFICE.fax}`,
-      `휴대폰 문자: ${OFFICE.mobile}`,
-      '전화가 부담되면 카카오 채널 상담을 먼저 이용할 수 있도록 연결합니다.',
     ],
   },
   {
     index: '02',
     title: '주거급여 · LH 안심 산식',
-    summary: '기초생활보장법 구조, 소득인정액, 금융재산, 보증금, 자기부담분',
+    summary: '소득인정액, 재산 공제, 보증금 구조',
     body: [
-      '이 항목은 계산기를 보여주는 메뉴가 아니라, 선린이 복지·임대차 구조를 이해하고 있다는 점을 보여주는 서류철입니다.',
-      '소득인정액은 소득평가액과 재산의 소득환산액 구조로 분리해서 봅니다. 근로·사업·재산·공적이전·사적이전소득, 금융재산, 재산 공제, 생활준비금, 부채 차감, 주거재산 구조를 함께 확인합니다.',
-      '자녀 지원금처럼 반복 입금되는 돈, 금융소득, 예금·적금·보험성 자산, 보증금이 실제 수급액과 자격 판단에 어떤 영향을 주는지 구조적으로 설명합니다.',
-      '주거급여는 기준임대료, 실제임차료, 자기부담분만이 아니라 임차보증금, 선순위 보증금, 권리관계까지 함께 보아야 안전합니다.',
-      '고객에게 산식을 외우게 하려는 것이 아니라, 수급자격과 계약안전이 흔들릴 수 있는 숫자를 선린이 먼저 알고 본다는 점을 전달하기 위한 항목입니다.',
+      '기초생활보장법 구조를 바탕으로 소득인정액, 재산의 소득환산액, 금융재산, 보증금 구조를 함께 봅니다.',
+      '반복 입금되는 사적이전소득, 금융소득, 금융재산 공제, 대구 기준 재산 공제, 주거재산 구조가 실제 수급과 계약 안정성에 어떤 영향을 주는지 설명합니다.',
+      '손님에게 공식을 외우게 하는 것이 아니라, 선린이 위험 지점을 먼저 알고 본다는 점을 보여주는 항목입니다.',
     ],
   },
   {
     index: '03',
     title: '산격시장 상업 비공개 상담',
-    summary: '상가건물 임대차보호법, 권리금, 영업가치, 비공개 매칭',
+    summary: '상가건물 임대차보호법, 권리금, 비공개 매칭',
     body: [
-      '상가 매물은 공개 방식이 거칠수록 기존 영업, 단골, 권리금 기대치에 손상을 줄 수 있습니다.',
-      '선린은 매물 노출 자체가 리스크가 되는 상가·점포에 대해 조용한 상담 동선을 우선합니다.',
-      '상가건물 임대차보호법 구조, 권리금 회수 기회, 임대인·임차인 이해관계, 영업가치 보존 포인트를 함께 봅니다.',
-      '공개 광고보다 비공개 매칭이 유리한 경우를 분리해서 설명하고, 노출 강도를 조정하는 방식으로 접근합니다.',
+      '공개 노출이 리스크가 되는 상가·점포는 조용한 상담 동선을 우선합니다.',
+      '상가건물 임대차보호법, 권리금 회수 기회, 임대인·임차인 이해관계, 영업가치 보존 포인트를 함께 봅니다.',
+      '공개 광고보다 비공개 매칭이 유리한 경우를 분리해서 설명합니다.',
     ],
   },
   {
     index: '04',
     title: '주택 정리 · 아파트 이동 · 가족 지분 조율',
-    summary: '부모 지분, 자녀 이해관계, 상속·증여·잔금 시차, 이주 설계',
+    summary: '지분, 상속·증여 논점, 잔금 시차, 이주 설계',
     body: [
       '단순 매도·매수가 아니라 가족 안의 자산 이동을 정리하는 상담입니다.',
-      '부모 지분과 자녀 이해관계가 얽힌 경우, 상속세·증여세 논점과 잔금 시차, 기존 임차인 보증금 반환 시점을 함께 고려합니다.',
-      '단독주택·상가주택을 정리하고 아파트로 옮기려는 경우, 이주 자금 흐름과 거주 이전 리스크를 분리해서 봅니다.',
-      '가족 간 이권 다툼이 커지기 전, 중간 설명과 절차 정리를 통해 갈등을 낮추는 상담 구조를 지향합니다.',
+      '부모 지분, 자녀 이해관계, 상속세·증여세 논점, 잔금 시차, 기존 보증금 반환 시점을 함께 고려합니다.',
+      '이주 자금 흐름과 거주 이전 리스크를 분리해서 봅니다.',
     ],
   },
 ];
 
-function DetailList({ items }: { items: string[] }) {
-  return (
-    <ul className={styles.detailList}>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  );
-}
-
 export default function HeroMasterFinal() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
-  const [revealedOfficePhone, setRevealedOfficePhone] = useState(false);
-  const [revealedFooterPhone, setRevealedFooterPhone] = useState(false);
-  const [revealedMobile, setRevealedMobile] = useState(false);
-  const [expandedItem, setExpandedItem] = useState<string>('01');
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isConsultModalOpen, setIsConsultModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<DrawerItem>(drawerItems[0]);
 
-  const smsHref = useMemo(() => {
-    const body = encodeURIComponent(
-      '안녕하세요. 선린공인중개사사무소 상담 문의드립니다.'
-    );
-    return `sms:${OFFICE.mobileDigits}?body=${body}`;
-  }, []);
+  const overlayOpen = isDrawerOpen || isConsultModalOpen;
+
+  const infoRows = useMemo(
+    () => [
+      { label: '전화', value: OFFICE.phone, href: `tel:${OFFICE.phone.replace(/-/g, '')}` },
+      { label: 'FAX', value: OFFICE.fax, href: null },
+      { label: '주소', value: OFFICE.address, href: OFFICE.naverMapUrl },
+      { label: '상호', value: OFFICE.name, href: null },
+    ],
+    []
+  );
+
+  const openConsultModal = () => {
+    setIsConsultModalOpen(true);
+  };
+
+  const openDrawerItem = (item: DrawerItem) => {
+    setSelectedItem(item);
+    setIsDrawerOpen(true);
+  };
+
+  const handleKakaoConsult = () => {
+    if (!OFFICE.kakaoChannelUrl || OFFICE.kakaoChannelUrl === '#') {
+      alert('카카오 채널 URL이 아직 설정되지 않았습니다.');
+      return;
+    }
+    window.open(OFFICE.kakaoChannelUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handlePhoneConsult = () => {
+    window.location.href = `tel:${OFFICE.phone.replace(/-/g, '')}`;
+  };
 
   return (
-    <main className={styles.shell}>
-      <section className={styles.phoneFrame} aria-label="선린공인중개사사무소 메인 홈페이지">
-        <div className={styles.heroBackground} />
+    <>
+      <main className={styles.shell}>
+        <section className={styles.heroFinal} aria-label="선린공인중개사사무소 모바일 메인">
+          <img
+            className={styles.heroImage}
+            src="/assets/hero-master-final.png"
+            alt="선린공인중개사사무소 메인 배경"
+            draggable={false}
+          />
 
-        <div className={styles.contentLayer}>
-          <header className={styles.topBar}>
-            <div className={styles.topTextGroup}>
-              <strong className={styles.officeName}>{OFFICE.name}</strong>
-              <span className={styles.officeAddress}>{OFFICE.address}</span>
+          <div className={styles.topBar}>
+            <div className={styles.topBarTextWrap}>
+              <strong className={styles.topBarTitle}>{OFFICE.shortName}</strong>
+              <span className={styles.topBarAddress}>{OFFICE.address}</span>
             </div>
 
             <button
               type="button"
-              className={styles.hamburgerButton}
+              className={styles.menuButton}
               aria-label="메뉴 열기"
-              onClick={() => setDrawerOpen(true)}
+              onClick={() => {
+                setSelectedItem(drawerItems[0]);
+                setIsDrawerOpen(true);
+              }}
             >
               <span />
               <span />
               <span />
             </button>
-          </header>
+          </div>
 
-          <section className={styles.heroCopyBlock}>
-            <p className={styles.eyebrow}>주소 · 서류 · 권리관계 확인</p>
-
+          <div className={styles.heroContent}>
+            <p className={styles.kicker}>주소 · 서류 · 권리관계 확인</p>
             <h1 className={styles.heroTitle}>
               주소와 서류는
               <br />
@@ -140,25 +148,21 @@ export default function HeroMasterFinal() {
               상담은 편하게
             </h1>
 
-            <p className={styles.heroDescription}>
+            <p className={styles.heroBody}>
               등기부 · 건축물대장 · 선순위 보증금을 함께 확인합니다.
               <br />
-              산격로95 계약 상담과 서류 지참 상담이 가능합니다.
+              산격로95 방문 상담과 서류 지참 상담이 가능합니다.
             </p>
 
-            <div className={styles.ctaStack}>
-              <button
-                type="button"
-                className={styles.primaryCta}
-                onClick={() => setContactOpen(true)}
-              >
+            <div className={styles.ctaGroup}>
+              <button type="button" className={styles.primaryCta} onClick={openConsultModal}>
                 <span>상담 예약하기</span>
                 <span aria-hidden="true">→</span>
               </button>
 
               <a
                 className={styles.secondaryCta}
-                href={NAVER_MAP_URL}
+                href={OFFICE.naverMapUrl}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -166,248 +170,155 @@ export default function HeroMasterFinal() {
                 <span aria-hidden="true">→</span>
               </a>
             </div>
-          </section>
 
-          <section className={styles.cardRow} aria-label="주요 상담 바로가기">
-            <article className={styles.infoCard}>
-              <div className={styles.infoCardInner}>
-                <p className={styles.infoCardLabel}>DOCUMENT REVIEW</p>
-                <strong className={styles.infoCardTitle}>권리검토</strong>
-                <p className={styles.infoCardText}>
-                  등기부 · 대장 · 선순위 구조를
-                  <br />
-                  차분하게 분리해 봅니다.
-                </p>
-              </div>
-            </article>
+            <div className={styles.cardRow}>
+              <button
+                type="button"
+                className={`${styles.featureCard} ${styles.reviewCard}`}
+                onClick={() => openDrawerItem(drawerItems[1])}
+              >
+                <div className={styles.cardShade} />
+                <div className={styles.cardInner}>
+                  <span className={styles.cardEyebrow}>DOCUMENT REVIEW</span>
+                  <strong className={styles.cardTitle}>권리검토</strong>
+                  <span className={styles.cardArrow}>→</span>
+                </div>
+              </button>
 
-            <article
-              className={styles.visitCard}
-              aria-label="계약 상담 안내"
+              <button
+                type="button"
+                className={`${styles.featureCard} ${styles.contractCard}`}
+                onClick={() => openDrawerItem(drawerItems[3])}
+              >
+                <div className={styles.cardShade} />
+                <div className={styles.cardInner}>
+                  <span className={styles.cardEyebrow}>CONTRACT CONSULT</span>
+                  <strong className={styles.cardTitle}>계약 상담</strong>
+                  <span className={styles.cardArrow}>→</span>
+                </div>
+              </button>
+            </div>
+
+            <div className={styles.bottomBanner}>
+              {infoRows.map((item) =>
+                item.href ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target={item.label === '주소' ? '_blank' : undefined}
+                    rel={item.label === '주소' ? 'noreferrer' : undefined}
+                    className={styles.bottomBannerItem}
+                  >
+                    <span className={styles.bottomBannerLabel}>{item.label}</span>
+                    <strong className={styles.bottomBannerValue}>{item.value}</strong>
+                  </a>
+                ) : (
+                  <div key={item.label} className={styles.bottomBannerItem}>
+                    <span className={styles.bottomBannerLabel}>{item.label}</span>
+                    <strong className={styles.bottomBannerValue}>{item.value}</strong>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {overlayOpen && <div className={styles.overlayDim} onClick={() => {
+        setIsDrawerOpen(false);
+        setIsConsultModalOpen(false);
+      }} />}
+
+      {isConsultModalOpen && (
+        <div className={styles.consultModal} role="dialog" aria-modal="true" aria-label="상담 방식 선택">
+          <div className={styles.modalHeader}>
+            <div>
+              <p className={styles.modalEyebrow}>CONSULT CHANNEL</p>
+              <h2 className={styles.modalTitle}>상담 방식을 선택하세요</h2>
+            </div>
+            <button
+              type="button"
+              className={styles.closeButton}
+              aria-label="닫기"
+              onClick={() => setIsConsultModalOpen(false)}
             >
-              <div className={styles.visitCardMedia} />
-              <div className={styles.visitCardOverlay}>
-                <p className={styles.infoCardLabel}>CONTRACT CONSULT</p>
-                <strong className={styles.infoCardTitle}>계약 상담</strong>
-                <p className={styles.infoCardText}>
-                  실제 사무소 위치와
-                  <br />
-                  계약 상담 동선을 확인합니다.
-                </p>
-              </div>
-            </article>
-          </section>
+              ×
+            </button>
+          </div>
 
-          <section className={styles.footerPanel}>
-            <div className={styles.revealContactBlock}>
-              <div className={styles.revealBox}>
-                <span className={styles.revealCaption}>대표전화</span>
-                {!revealedFooterPhone ? (
-                  <button
-                    type="button"
-                    className={styles.revealButton}
-                    onClick={() => setRevealedFooterPhone(true)}
-                  >
-                    숫자 보기
-                  </button>
-                ) : (
-                  <a className={styles.revealedNumber} href={`tel:${OFFICE.phoneDigits}`}>
-                    {OFFICE.phone}
-                  </a>
-                )}
-              </div>
+          <div className={styles.modalButtonGroup}>
+            <button type="button" className={styles.modalActionButton} onClick={handleKakaoConsult}>
+              <span className={styles.modalActionTitle}>카카오톡 상담</span>
+              <span className={styles.modalActionDesc}>채널로 문의를 남기고 순서대로 답변받습니다.</span>
+            </button>
 
-              <div className={styles.revealBox}>
-                <span className={styles.revealCaption}>문자상담</span>
-                {!revealedMobile ? (
-                  <button
-                    type="button"
-                    className={styles.revealButton}
-                    onClick={() => setRevealedMobile(true)}
-                  >
-                    숫자 보기
-                  </button>
-                ) : (
-                  <a className={styles.revealedNumber} href={smsHref}>
-                    {OFFICE.mobile}
-                  </a>
-                )}
-              </div>
-            </div>
-
-            <div className={styles.officeGrid}>
-              <div className={styles.officeCell}>
-                <span className={styles.officeCellLabel}>정식명칭</span>
-                <strong>{OFFICE.officialName}</strong>
-              </div>
-
-              <div className={styles.officeCell}>
-                <span className={styles.officeCellLabel}>소재지</span>
-                <strong>{OFFICE.detailAddress}</strong>
-              </div>
-
-              <div className={styles.officeCell}>
-                <span className={styles.officeCellLabel}>대표전화</span>
-                <strong>{OFFICE.phone}</strong>
-              </div>
-
-              <div className={styles.officeCell}>
-                <span className={styles.officeCellLabel}>FAX</span>
-                <strong>{OFFICE.fax}</strong>
-              </div>
-            </div>
-          </section>
+            <button type="button" className={styles.modalActionButton} onClick={handlePhoneConsult}>
+              <span className={styles.modalActionTitle}>전화상담</span>
+              <span className={styles.modalActionDesc}>{OFFICE.phone} 연결</span>
+            </button>
+          </div>
         </div>
+      )}
 
-        {contactOpen && (
-          <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="상담 연락수단 선택">
-            <div className={styles.contactModal}>
-              <div className={styles.modalHeader}>
-                <div>
-                  <p className={styles.modalEyebrow}>CONTACT OPTIONS</p>
-                  <h2 className={styles.modalTitle}>연락수단을 먼저 선택하세요</h2>
-                </div>
-
-                <button
-                  type="button"
-                  className={styles.closeButton}
-                  aria-label="닫기"
-                  onClick={() => setContactOpen(false)}
-                >
-                  ×
-                </button>
-              </div>
-
-              <p className={styles.modalDescription}>
-                바로 통화 연결하지 않습니다.
-                <br />
-                번호를 먼저 확인한 뒤 원하는 방식으로 눌러 연결합니다.
-              </p>
-
-              <div className={styles.noticeBox}>
-                <strong>익명성 안내</strong>
-                <p>
-                  일반 문자(SMS)는 서로 전화번호가 노출됩니다.
-                  번호 노출이 부담되면 카카오 채널 상담을 우선 권장합니다.
-                </p>
-              </div>
-
-              <div className={styles.modalActionStack}>
-                <a
-                  className={styles.channelButton}
-                  href={KAKAO_CHANNEL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  카카오 채널 상담 열기
-                </a>
-
-                <div className={styles.choiceCard}>
-                  <div className={styles.choiceHeader}>
-                    <strong>사무실 대표전화</strong>
-                    <span>먼저 숫자를 보고 눌러 연결</span>
-                  </div>
-
-                  {!revealedOfficePhone ? (
-                    <button
-                      type="button"
-                      className={styles.choiceReveal}
-                      onClick={() => setRevealedOfficePhone(true)}
-                    >
-                      대표전화 숫자 보기
-                    </button>
-                  ) : (
-                    <a className={styles.choiceLink} href={`tel:${OFFICE.phoneDigits}`}>
-                      {OFFICE.phone}
-                    </a>
-                  )}
-                </div>
-
-                <div className={styles.choiceCard}>
-                  <div className={styles.choiceHeader}>
-                    <strong>휴대폰 문자 상담</strong>
-                    <span>번호 확인 후 문자 앱으로 이동</span>
-                  </div>
-
-                  <a className={styles.choiceLink} href={smsHref}>
-                    {OFFICE.mobile} 문자 보내기
-                  </a>
-                </div>
-              </div>
+      {isDrawerOpen && (
+        <aside className={styles.drawerPanel} role="dialog" aria-modal="true" aria-label="선린 자산보호 서류철">
+          <div className={styles.drawerHeader}>
+            <div>
+              <p className={styles.drawerEyebrow}>MANILA FILE INDEX</p>
+              <h2 className={styles.drawerTitle}>선린 자산보호 서류철</h2>
+              <p className={styles.drawerLead}>매물보다 먼저 보는 것은 주소, 서류, 권리, 숫자입니다.</p>
             </div>
+
+            <button
+              type="button"
+              className={styles.closeButton}
+              aria-label="메뉴 닫기"
+              onClick={() => setIsDrawerOpen(false)}
+            >
+              ×
+            </button>
           </div>
-        )}
 
-        {drawerOpen && (
-          <div className={styles.drawerOverlay} role="dialog" aria-modal="true" aria-label="선린 자산보호 서류철">
-            <aside className={styles.drawer}>
-              <div className={styles.drawerHeader}>
-                <div>
-                  <p className={styles.drawerEyebrow}>MANILA FILE INDEX</p>
-                  <h2 className={styles.drawerTitle}>선린 자산보호 서류철</h2>
-                  <p className={styles.drawerLead}>
-                    매물보다 먼저 보는 것은 주소, 서류, 권리, 숫자입니다.
-                  </p>
-                </div>
-
+          <div className={styles.drawerBody}>
+            <nav className={styles.drawerIndex}>
+              {drawerItems.map((item) => (
                 <button
+                  key={item.index}
                   type="button"
-                  className={styles.closeButton}
-                  aria-label="메뉴 닫기"
-                  onClick={() => setDrawerOpen(false)}
+                  className={`${styles.drawerIndexButton} ${
+                    selectedItem.index === item.index ? styles.drawerIndexButtonActive : ''
+                  }`}
+                  onClick={() => setSelectedItem(item)}
                 >
-                  ×
+                  <span className={styles.drawerIndexNumber}>{item.index}</span>
+                  <span className={styles.drawerIndexTextWrap}>
+                    <strong className={styles.drawerIndexTitle}>{item.title}</strong>
+                    <span className={styles.drawerIndexSummary}>{item.summary}</span>
+                  </span>
                 </button>
+              ))}
+            </nav>
+
+            <section className={styles.drawerDetail}>
+              <div className={styles.drawerDetailHeader}>
+                <span className={styles.drawerDetailNumber}>{selectedItem.index}</span>
+                <div>
+                  <h3 className={styles.drawerDetailTitle}>{selectedItem.title}</h3>
+                  <p className={styles.drawerDetailSummary}>{selectedItem.summary}</p>
+                </div>
               </div>
 
-              <div className={styles.drawerList}>
-                {drawerItems.map((item) => {
-                  const active = expandedItem === item.index;
-
-                  return (
-                    <article
-                      key={item.index}
-                      className={`${styles.drawerItem} ${active ? styles.drawerItemActive : ''}`}
-                    >
-                      <button
-                        type="button"
-                        className={styles.drawerItemButton}
-                        onClick={() => setExpandedItem(active ? '' : item.index)}
-                      >
-                        <span className={styles.drawerIndex}>{item.index}</span>
-
-                        <span className={styles.drawerTextWrap}>
-                          <strong className={styles.drawerItemTitle}>{item.title}</strong>
-                          <span className={styles.drawerItemSummary}>{item.summary}</span>
-                        </span>
-
-                        <span className={styles.drawerChevron}>{active ? '−' : '+'}</span>
-                      </button>
-
-                      {active && (
-                        <div className={styles.drawerDetail}>
-                          <DetailList items={item.body} />
-
-                          {item.index === '06' && (
-                            <div className={styles.drawerContactLinks}>
-                              <a href={NAVER_MAP_URL} target="_blank" rel="noreferrer">
-                                네이버지도 열기
-                              </a>
-                              <button type="button" onClick={() => setContactOpen(true)}>
-                                연락수단 선택 열기
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </article>
-                  );
-                })}
+              <div className={styles.drawerDetailBody}>
+                {selectedItem.body.map((paragraph, idx) => (
+                  <p key={`${selectedItem.index}-${idx}`} className={styles.drawerParagraph}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
-            </aside>
+            </section>
           </div>
-        )}
-      </section>
-    </main>
+        </aside>
+      )}
+    </>
   );
 }
