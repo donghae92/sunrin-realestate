@@ -111,8 +111,8 @@
 .topBar {
   position: relative;
   z-index: 2;
-  margin: 12px 18px 0;
-  padding: 12px 18px;
+  margin: 10px 18px 0;
+  padding: 10px 18px;
   border-radius: var(--radius-xl);
   background: var(--glass);
   border: 1px solid var(--line);
@@ -172,7 +172,7 @@
 .heroContent {
   position: relative;
   z-index: 2;
-  padding: 60px 18px 20px;
+  padding: 46px 18px 20px;
 }
 
 /* Reading panel – keeps all hero text in the left
@@ -186,7 +186,7 @@
 
 /* Kicker – small, quiet brand mark */
 .kicker {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
@@ -204,7 +204,8 @@
   font-weight: 400;
   color: rgba(47, 40, 33, 0.88);
   letter-spacing: -0.045em;
-  line-height: 1.14;
+  line-height: 1.09;
+  margin-bottom: 12px;
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.58),
     0 14px 32px rgba(68, 52, 38, 0.10);
@@ -228,10 +229,10 @@
 
 /* Subcopy – sans, inside the reading panel */
 .heroBody {
-  margin: 14px 0 0;
+  margin: 0 0 16px;
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  line-height: 1.58;
+  line-height: 1.48;
   font-weight: 600;
   color: rgba(47, 40, 33, 0.72);
   letter-spacing: -0.04em;
@@ -242,13 +243,13 @@
    ============================================ */
 .ctaGroup {
   display: grid;
-  gap: 12px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .primaryCta,
 .secondaryCta {
-  min-height: 54px;
+  min-height: 50px;
   border-radius: 999px;
   padding: 0 22px;
   display: flex;
@@ -288,16 +289,16 @@
 .cardRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 13px;
+  gap: 12px;
   margin-top: 14px;
 }
 
 .featureCard {
   position: relative;
-  min-height: 148px;
+  min-height: 118px;
   overflow: hidden;
   cursor: pointer;
-  padding: 16px;
+  padding: 14px;
   text-align: left;
   display: grid;
   border-radius: var(--radius-lg);
@@ -329,7 +330,7 @@
   min-height: 100%;
   display: grid;
   align-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 
 .cardEyebrow {
@@ -362,8 +363,8 @@
 }
 
 .cardDesc {
-  font-size: 0.66rem;
-  line-height: 1.42;
+  font-size: 0.68rem;
+  line-height: 1.36;
   color: rgba(55, 47, 40, 0.70);
   font-weight: 750;
   white-space: pre-line;
@@ -405,7 +406,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 9px 12px;
+  padding: 8px 12px;
   display: grid;
   gap: 4px;
 }
@@ -415,8 +416,8 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   column-gap: 12px;
-  font-size: 0.62rem;
-  line-height: 1.32;
+  font-size: 0.59rem;
+  line-height: 1.28;
   color: rgba(45, 43, 40, 0.74);
   font-weight: 800;
   letter-spacing: -0.025em;
