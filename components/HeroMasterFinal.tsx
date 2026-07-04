@@ -242,15 +242,15 @@ export default function HeroMasterFinal() {
             <p className={styles.kicker}>주소 · 서류 · 권리관계 확인</p>
 
             <h1 className={styles.heroTitle}>
-              <span>권리관계는</span>
-              <span className={styles.titleStrong}>정밀하게,</span>
-              <span className={styles.titleSoft}>상담은 편하게</span>
+              <span>선린은</span>
+              <span className={styles.titleStrong}>좋은 이웃이라는</span>
+              <span className={styles.titleSoft}>뜻입니다</span>
             </h1>
 
             <p className={styles.heroBody}>
-              등기부 · 건축물대장 ·
+              주소와 서류를 먼저 살피고,
               <br />
-              선순위 보증금을 함께 확인합니다.
+              권리관계는 차분하게 확인합니다.
             </p>
 
             <div className={styles.ctaGroup}>
@@ -278,7 +278,7 @@ export default function HeroMasterFinal() {
               >
                 <span className={styles.cardEyebrow}>DOCUMENT REVIEW</span>
                 <strong className={styles.cardTitle}>권리검토</strong>
-                <span className={styles.cardDesc}>등기·건축·보증금 등 계약 전 확인사항을 함께 살펴봅니다.</span>
+                <span className={styles.cardDesc}>등기·건축·보증금을{'\n'}정밀하게 살펴봅니다.</span>
                 <span className={styles.cardArrow}>→</span>
               </button>
 
@@ -289,7 +289,7 @@ export default function HeroMasterFinal() {
               >
                 <span className={styles.cardEyebrow}>CONTRACT CONSULT</span>
                 <strong className={styles.cardTitle}>종류별 계약 상담</strong>
-                <span className={styles.cardDesc}>매매·전월세·LH·점포 등 상황별 계약 흐름을 조율해드립니다.</span>
+                <span className={styles.cardDesc}>매매·전월세·점포 등{'\n'}상황에 맞게 안내드립니다.</span>
                 <span className={styles.cardArrow}>→</span>
               </button>
             </div>
