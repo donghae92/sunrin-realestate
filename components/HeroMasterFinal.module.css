@@ -82,8 +82,8 @@
 .topBar {
   position: relative;
   z-index: 2;
-  margin: 16px 18px 0;
-  padding: 16px 18px;
+  margin: 12px 18px 0;
+  padding: 12px 18px;
   border-radius: 28px;
   background: rgba(255, 252, 246, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.76);
@@ -143,7 +143,7 @@
 .heroContent {
   position: relative;
   z-index: 2;
-  padding: 72px 18px 20px;
+  padding: 62px 18px 20px;
 }
 
 /* Kicker – sans, small brand explanation */
@@ -164,7 +164,7 @@
   font-family: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
   color: #302922;
   letter-spacing: -0.07em;
-  line-height: 1.08;
+  line-height: 1.05;
   font-weight: 700;
   text-wrap: balance;
   text-shadow:
@@ -207,7 +207,7 @@
 .ctaGroup {
   display: grid;
   gap: 12px;
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .primaryCta,
@@ -253,12 +253,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 13px;
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .featureCard {
   position: relative;
-  min-height: 148px;
+  min-height: 140px;
   border-radius: 22px;
   overflow: hidden;
   cursor: pointer;
@@ -552,7 +552,7 @@
 
 /* Drawer item list */
 .drawerList {
-  padding: 14px;
+  padding: 18px 14px;
   display: grid;
   gap: 14px;
   overflow-y: auto;
@@ -567,7 +567,7 @@
   border: 1px solid rgba(255, 255, 255, 0.78);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 16px 34px rgba(78, 62, 46, 0.09);
+    0 12px 28px rgba(72, 58, 44, 0.07);
   display: grid;
   grid-template-columns: 52px 1fr auto;
   align-items: center;
@@ -580,14 +580,14 @@
 .drawerList button:active {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 6px 18px rgba(78, 62, 46, 0.05);
+    0 4px 14px rgba(72, 58, 44, 0.04);
 }
 
 /* Number badge – serif, muted warm brown */
 .drawerList b {
   font-family: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
-  color: rgba(143, 95, 61, 0.86);
-  font-size: 1.42rem;
+  color: rgba(128, 88, 56, 0.78);
+  font-size: 1.28rem;
   font-weight: 600;
 }
 
@@ -597,17 +597,17 @@
 }
 
 .drawerList strong {
-  font-size: 1.02rem;
-  font-weight: 850;
+  font-size: 1.04rem;
+  font-weight: 860;
   letter-spacing: -0.04em;
-  color: #2f2821;
+  color: #2b241d;
 }
 
 .drawerList small {
-  font-size: 0.78rem;
-  line-height: 1.45;
-  color: rgba(54, 46, 39, 0.64);
-  font-weight: 650;
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: rgba(54, 46, 39, 0.56);
+  font-weight: 600;
 }
 
 .drawerList i {

@@ -30,6 +30,7 @@ const drawerItems: DetailItem[] = [
     body: [
       '선린부동산공인중개사사무소는 대구 북구 산격로 95에서 상담하는 정식 등록 중개사무소입니다.',
       '대표 공인중개사 이용호가 책임 있게 상담하며, 중개사무소 등록번호와 사업자등록번호를 기준으로 확인하실 수 있습니다.',
+      '선린이라는 이름은 \'좋은 이웃\'이라는 뜻을 담고 있습니다.',
       '한국공인중개사협회 가입 및 손해배상 책임보장 공제가입을 갖추고 있어, 거래 전 기본적인 안전장치를 함께 확인하실 수 있습니다.',
       '선린부동산은 좋은 말만 앞세우기보다, 확인된 사실과 서류상 필요한 내용을 차분하게 안내해드리는 것을 중요하게 생각합니다.',
       '정식명칭: 선린부동산공인중개사사무소',
@@ -239,11 +240,11 @@ export default function HeroMasterFinal() {
           </header>
 
           <section className={styles.heroContent}>
-            <p className={styles.kicker}>善隣 · 좋은 이웃이라는 뜻</p>
+            <p className={styles.kicker}>善隣 · 좋은 이웃</p>
 
             <h1 className={styles.heroTitle}>
               <span>주소와 서류를</span>
-              <span>먼저 살피고</span>
+              <span>먼저 살피고,</span>
               <span>상담은 편하게</span>
             </h1>
 
