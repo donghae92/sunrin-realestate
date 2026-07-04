@@ -239,18 +239,18 @@ export default function HeroMasterFinal() {
           </header>
 
           <section className={styles.heroContent}>
-            <p className={styles.kicker}>주소 · 서류 · 권리관계 확인</p>
+            <p className={styles.kicker}>善隣 · 좋은 이웃이라는 뜻</p>
 
             <h1 className={styles.heroTitle}>
-              <span>선린은</span>
-              <span className={styles.titleStrong}>좋은 이웃이라는</span>
-              <span className={styles.titleSoft}>뜻입니다</span>
+              <span>주소와 서류를</span>
+              <span>먼저 살피고</span>
+              <span>상담은 편하게</span>
             </h1>
 
             <p className={styles.heroBody}>
-              주소와 서류를 먼저 살피고,
+              등기부 · 건축물대장 · 선순위 보증금을
               <br />
-              권리관계는 차분하게 확인합니다.
+              차분하게 함께 확인합니다.
             </p>
 
             <div className={styles.ctaGroup}>
