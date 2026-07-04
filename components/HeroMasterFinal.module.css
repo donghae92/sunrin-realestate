@@ -78,7 +78,7 @@
   z-index: 0;
   background-image: url('/assets/sunrin-hero-bg.jpg');
   background-size: cover;
-  background-position: 84% 6%;
+  background-position: 90% 6%;
   background-repeat: no-repeat;
   filter: saturate(1.04) contrast(1.02) brightness(1.08);
   pointer-events: none;
@@ -204,8 +204,7 @@
   color: rgba(47, 40, 33, 0.86);
   letter-spacing: -0.045em;
   line-height: 1.18;
-  max-width: 72%;
-  text-wrap: balance;
+  max-width: 87%;
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.58),
     0 14px 32px rgba(68, 52, 38, 0.10);
@@ -213,6 +212,7 @@
 
 .heroTitle span {
   display: block;
+  white-space: nowrap;
 }
 
 .heroTitle span:nth-child(1) {
@@ -232,7 +232,7 @@
 
 /* Subcopy – sans, constrained to the safe column */
 .heroBody {
-  margin: 16px 0 0;
+  margin: 14px 0 0;
   font-family: var(--font-sans);
   font-size: 0.92rem;
   line-height: 1.58;
@@ -248,7 +248,7 @@
 .ctaGroup {
   display: grid;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .primaryCta,
