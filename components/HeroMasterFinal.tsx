@@ -277,10 +277,12 @@ export default function HeroMasterFinal() {
                 className={styles.featureCard}
                 onClick={() => setFeatureModal('rights')}
               >
-                <span className={styles.cardEyebrow}>DOCUMENT REVIEW</span>
-                <strong className={styles.cardTitle}>권리검토</strong>
-                <span className={styles.cardDesc}>등기·건축·보증금을{'\n'}정밀하게 살펴봅니다.</span>
-                <span className={styles.cardArrow}>→</span>
+                <div className={styles.featureCardInner}>
+                  <span className={styles.cardEyebrow}>DOCUMENT REVIEW</span>
+                  <strong className={styles.cardTitle}>권리검토</strong>
+                  <span className={styles.cardDesc}>등기·건축·보증금을{'\n'}정밀하게 살펴봅니다.</span>
+                  <span className={styles.cardArrow}>→</span>
+                </div>
               </button>
 
               <button
@@ -288,10 +290,12 @@ export default function HeroMasterFinal() {
                 className={styles.featureCard}
                 onClick={() => setFeatureModal('contract')}
               >
-                <span className={styles.cardEyebrow}>CONTRACT CONSULT</span>
-                <strong className={styles.cardTitle}>종류별 계약 상담</strong>
-                <span className={styles.cardDesc}>매매·전월세·점포 등{'\n'}상황에 맞게 안내드립니다.</span>
-                <span className={styles.cardArrow}>→</span>
+                <div className={styles.featureCardInner}>
+                  <span className={styles.cardEyebrow}>CONTRACT CONSULT</span>
+                  <strong className={styles.cardTitle}>종류별 계약 상담</strong>
+                  <span className={styles.cardDesc}>매매·전월세·점포 등{'\n'}상황에 맞게 안내드립니다.</span>
+                  <span className={styles.cardArrow}>→</span>
+                </div>
               </button>
             </div>
 

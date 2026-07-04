@@ -3,19 +3,55 @@
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background: #d7e1ea;
+  background: #e6dfd3;
 }
 
 :global(*) {
   box-sizing: border-box;
 }
 
+/* ============================================
+   DESIGN TOKENS
+   Declared on every top-level surface so the
+   drawer/modals (rendered outside .heroFinal)
+   resolve the same variables.
+   ============================================ */
+.heroFinal,
+.drawerPanel,
+.consultModal,
+.detailModal,
+.overlayDim {
+  --paper: #f6efe3;
+  --paper-light: #fffaf1;
+  --ink: #2f2821;
+  --ink-soft: rgba(47, 40, 33, 0.72);
+  --brown: #9b6a45;
+  --brown-soft: rgba(139, 94, 60, 0.72);
+  --blue: #2f8bd0;
+  --blue-soft: rgba(188, 218, 239, 0.88);
+  --glass: rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.72);
+  --line: rgba(255, 255, 255, 0.72);
+  --shadow-soft: 0 18px 48px rgba(74, 58, 43, 0.13);
+  --shadow-card: 0 16px 38px rgba(80, 64, 48, 0.11);
+  --radius-xl: 30px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --font-serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
+  --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+}
+
+/* ============================================
+   SHELL (desktop presentation)
+   ============================================ */
 .shell {
   min-height: 100svh;
   display: grid;
   place-items: start center;
-  background: #d7e1ea;
-  padding: 14px 0;
+  background:
+    radial-gradient(circle at 22% 8%, rgba(255, 252, 244, 0.65), rgba(255, 252, 244, 0) 52%),
+    linear-gradient(180deg, #e9e2d6, #e0d8ca);
+  padding: 18px 0;
 }
 
 /* ============================================
@@ -23,15 +59,18 @@
    ============================================ */
 .heroFinal {
   position: relative;
-  width: min(100vw, 430px);
+  width: min(100vw, 444px);
   min-height: 100svh;
   overflow-x: hidden;
   overflow-y: auto;
-  background: #efe8dc;
-  box-shadow: 0 24px 60px rgba(29, 33, 40, 0.16);
+  background: var(--paper);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 28px 70px rgba(58, 48, 38, 0.18);
 }
 
-/* Background image – warm, no gray cast */
+/* Background portrait – face-safe framing.
+   Positioned so the subject stays right of the
+   text column; eyes remain in the low-overlay zone. */
 .heroFinal::before {
   content: '';
   position: absolute;
@@ -39,14 +78,16 @@
   z-index: 0;
   background-image: url('/assets/sunrin-hero-bg.jpg');
   background-size: cover;
-  background-position: 61% top;
+  background-position: 70% 8%;
   background-repeat: no-repeat;
-  filter: saturate(0.96) contrast(0.96) brightness(1.05);
+  filter: saturate(1.02) contrast(0.98) brightness(1.08);
   pointer-events: none;
   user-select: none;
 }
 
-/* Overlay – warm ivory veil, no black/gray dim */
+/* Overlay – ivory light veil. Strong on the left
+   text column, fades before the face (68%+ nearly
+   transparent). No gray/black anywhere. */
 .heroFinal::after {
   content: '';
   position: absolute;
@@ -57,39 +98,40 @@
   background:
     linear-gradient(
       90deg,
-      rgba(252, 248, 239, 0.97) 0%,
-      rgba(252, 248, 239, 0.88) 34%,
-      rgba(252, 248, 239, 0.50) 58%,
-      rgba(252, 248, 239, 0.16) 100%
+      rgba(253, 249, 241, 0.97) 0%,
+      rgba(253, 249, 241, 0.90) 34%,
+      rgba(253, 249, 241, 0.58) 52%,
+      rgba(253, 249, 241, 0.18) 68%,
+      rgba(253, 249, 241, 0.04) 100%
     ),
     radial-gradient(
-      circle at 24% 36%,
-      rgba(255, 255, 255, 0.58) 0%,
-      rgba(255, 255, 255, 0.22) 42%,
+      circle at 20% 34%,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(255, 255, 255, 0.24) 42%,
       rgba(255, 255, 255, 0) 70%
     ),
     linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.32) 0%,
-      rgba(255, 255, 255, 0.02) 45%,
-      rgba(244, 234, 218, 0.40) 100%
+      rgba(255, 255, 255, 0.02) 46%,
+      rgba(244, 234, 218, 0.36) 100%
     );
 }
 
 /* ============================================
-   TOP BAR
+   TOP BAR – frosted ivory header
    ============================================ */
 .topBar {
   position: relative;
   z-index: 2;
   margin: 12px 18px 0;
   padding: 12px 18px;
-  border-radius: 28px;
-  background: rgba(255, 252, 246, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: var(--radius-xl);
+  background: var(--glass);
+  border: 1px solid var(--line);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    0 18px 44px rgba(76, 62, 46, 0.12);
+    var(--shadow-soft);
   backdrop-filter: blur(22px) saturate(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(1.08);
   display: flex;
@@ -100,7 +142,7 @@
 .topBarTitle {
   display: block;
   font-size: 1.02rem;
-  color: #3b342d;
+  color: var(--ink);
   font-weight: 850;
   letter-spacing: -0.05em;
 }
@@ -109,7 +151,7 @@
   display: block;
   margin-top: 5px;
   font-size: 0.76rem;
-  color: rgba(59, 52, 45, 0.68);
+  color: var(--ink-soft);
   font-weight: 650;
 }
 
@@ -138,38 +180,38 @@
 }
 
 /* ============================================
-   HERO CONTENT AREA
+   HERO CONTENT
    ============================================ */
 .heroContent {
   position: relative;
   z-index: 2;
-  padding: 62px 18px 20px;
+  padding: 60px 18px 20px;
 }
 
-/* Kicker – sans, small brand explanation */
+/* Kicker – serif brand mark */
 .kicker {
   margin: 18px 0 10px;
-  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+  font-family: var(--font-serif);
+  color: var(--brown);
   font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  color: rgba(65, 52, 42, 0.72);
+  letter-spacing: -0.015em;
+  font-weight: 650;
 }
 
-/* h1 – serif, warm charcoal, refined */
+/* h1 – serif display, light but firm */
 .heroTitle {
   margin: 0;
   display: grid;
   gap: 0;
-  font-family: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
-  color: #302922;
-  letter-spacing: -0.07em;
-  line-height: 1.05;
-  font-weight: 700;
+  font-family: var(--font-serif);
+  color: var(--ink);
+  letter-spacing: -0.075em;
+  line-height: 1.045;
+  font-weight: 650;
   text-wrap: balance;
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.55),
-    0 18px 38px rgba(72, 56, 42, 0.16);
+    0 1px 0 rgba(255, 255, 255, 0.64),
+    0 18px 42px rgba(68, 52, 38, 0.14);
 }
 
 .heroTitle span {
@@ -177,27 +219,27 @@
 }
 
 .heroTitle span:nth-child(1) {
-  font-size: clamp(2.25rem, 8.6vw, 3.45rem);
+  font-size: clamp(2.38rem, 8.7vw, 3.48rem);
 }
 
 .heroTitle span:nth-child(2) {
-  font-size: clamp(2.18rem, 8.3vw, 3.32rem);
-  font-weight: 800;
+  font-size: clamp(2.26rem, 8.3vw, 3.34rem);
+  font-weight: 720;
 }
 
 .heroTitle span:nth-child(3) {
-  font-size: clamp(1.98rem, 7.4vw, 2.92rem);
-  font-weight: 650;
+  font-size: clamp(2.02rem, 7.4vw, 2.96rem);
+  font-weight: 620;
 }
 
 /* Subcopy – sans */
 .heroBody {
-  margin: 18px 0 0;
-  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+  margin: 16px 0 0;
+  font-family: var(--font-sans);
   font-size: 0.92rem;
   line-height: 1.58;
   font-weight: 650;
-  color: rgba(50, 43, 36, 0.78);
+  color: var(--ink-soft);
   letter-spacing: -0.04em;
 }
 
@@ -222,32 +264,32 @@
   font-weight: 900;
   text-decoration: none;
   cursor: pointer;
-  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
-/* Powder blue glass */
+/* Warm bronze glass */
 .primaryCta {
   background:
-    linear-gradient(180deg, rgba(215, 232, 246, 0.94), rgba(171, 204, 228, 0.88));
-  border: 1px solid rgba(255, 255, 255, 0.78);
+    linear-gradient(180deg, rgba(176, 133, 88, 0.92), rgba(139, 103, 69, 0.90));
+  color: #fffaf2;
+  border: 1px solid rgba(255, 255, 255, 0.70);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 14px 30px rgba(72, 104, 128, 0.18);
-  color: #26313a;
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 16px 34px rgba(111, 75, 42, 0.22);
 }
 
-/* Ivory translucent glass */
+/* Ivory glass */
 .secondaryCta {
-  background: rgba(255, 252, 246, 0.54);
-  border: 1px solid rgba(255, 255, 255, 0.74);
+  background: rgba(255, 252, 246, 0.56);
+  color: rgba(45, 39, 33, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.78);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    0 10px 24px rgba(73, 58, 44, 0.08);
-  color: rgba(45, 39, 33, 0.80);
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    0 12px 28px rgba(74, 58, 43, 0.10);
 }
 
 /* ============================================
-   FEATURE CARDS
+   FEATURE CARDS – double glass layer
    ============================================ */
 .cardRow {
   display: grid;
@@ -258,36 +300,54 @@
 
 .featureCard {
   position: relative;
-  min-height: 140px;
-  border-radius: 22px;
+  min-height: 148px;
   overflow: hidden;
   cursor: pointer;
-  padding: 15px;
-  display: grid;
-  align-content: space-between;
+  padding: 16px;
   text-align: left;
+  border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(250, 244, 234, 0.42)),
-    radial-gradient(circle at 75% 15%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 46%);
-  border: 1px solid rgba(255, 255, 255, 0.74);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(248, 240, 226, 0.30));
+  border: 1px solid rgba(255, 255, 255, 0.72);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    0 16px 36px rgba(80, 64, 48, 0.12);
-  backdrop-filter: blur(14px) saturate(1.04);
-  -webkit-backdrop-filter: blur(14px) saturate(1.04);
+    var(--shadow-card);
+  backdrop-filter: blur(12px) saturate(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
+}
+
+/* Inner translucent sheet */
+.featureCard::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.16));
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  pointer-events: none;
+}
+
+.featureCardInner {
+  position: relative;
+  z-index: 1;
+  min-height: 116px;
+  display: grid;
+  align-content: space-between;
+  gap: 10px;
 }
 
 .cardEyebrow {
-  font-size: 0.67rem;
+  font-size: 0.64rem;
   font-weight: 900;
   letter-spacing: 0.08em;
-  color: rgba(60, 50, 40, 0.6);
+  color: var(--brown-soft);
 }
 
 .cardTitle {
   font-size: 0.99rem;
   line-height: 1.18;
-  color: #352b22;
+  color: var(--ink);
   font-weight: 850;
   letter-spacing: -0.045em;
 }
@@ -299,10 +359,10 @@
   width: 34px;
   height: 34px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--glass-strong);
   border: 1px solid rgba(255, 255, 255, 0.78);
   box-shadow: 0 8px 18px rgba(68, 54, 42, 0.10);
-  color: #5a4a3a;
+  color: var(--brown);
   font-weight: 900;
 }
 
@@ -311,12 +371,11 @@
   line-height: 1.42;
   color: rgba(55, 47, 40, 0.70);
   font-weight: 750;
-  margin-top: 4px;
   white-space: pre-line;
 }
 
 /* ============================================
-   FORMULA (drawer detail for LH)
+   FORMULA BUTTONS (inside LH detail modal)
    ============================================ */
 .formulaRow {
   display: grid;
@@ -328,8 +387,8 @@
   min-height: 48px;
   border-radius: 14px;
   border: 1px solid rgba(79, 63, 49, 0.12);
-  background: rgba(178, 79, 47, 0.08);
-  color: #b24f2f;
+  background: rgba(155, 106, 69, 0.08);
+  color: #9b6a45;
   font-size: 0.92rem;
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -345,9 +404,10 @@
    ============================================ */
 .bottomBanner {
   margin-top: 14px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.56);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: var(--radius-md);
+  background: var(--glass);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   padding: 9px 12px;
@@ -387,7 +447,7 @@
 }
 
 /* ============================================
-   OVERLAY DIM
+   OVERLAY DIM – warm, never gray
    ============================================ */
 .overlayDim {
   position: fixed;
@@ -415,7 +475,7 @@
   transform: translate(-50%, -50%);
   border-radius: 28px;
   background: #f6f0e7;
-  box-shadow: 0 26px 70px rgba(20, 18, 16, 0.24);
+  box-shadow: 0 26px 70px rgba(52, 43, 34, 0.28);
 }
 
 .modalHeader {
@@ -428,14 +488,13 @@
 .modalHeader p,
 .drawerHeader p {
   margin: 0 0 4px;
-  font-size: 0.74rem;
-  color: #a7603c;
+  font-size: 0.72rem;
+  color: #a36a43;
   font-weight: 900;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
 }
 
 .modalHeader h2,
-.drawerHeader h2,
 .detailModal h2 {
   margin: 0;
   font-size: 1.45rem;
@@ -495,23 +554,25 @@
 }
 
 /* ============================================
-   DRAWER – Premium consultation panel
+   DRAWER – premium paper-glass advisory sheet
    ============================================ */
 .drawerPanel {
   position: fixed;
   top: 0;
   right: 0;
   z-index: 30;
-  width: min(92vw, 420px);
+  width: min(94vw, 424px);
   height: 100svh;
   background:
-    linear-gradient(180deg, rgba(253, 248, 239, 0.94), rgba(246, 238, 224, 0.90)),
-    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0) 44%),
-    radial-gradient(circle at 82% 100%, rgba(210, 190, 160, 0.18), rgba(210, 190, 160, 0) 48%);
-  border-left: 1px solid rgba(255, 255, 255, 0.70);
-  box-shadow: -24px 0 70px rgba(52, 43, 34, 0.14);
-  backdrop-filter: blur(24px) saturate(1.08);
-  -webkit-backdrop-filter: blur(24px) saturate(1.08);
+    linear-gradient(180deg, rgba(253, 249, 241, 0.96), rgba(247, 239, 226, 0.92)),
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0) 42%),
+    radial-gradient(circle at 88% 100%, rgba(190, 150, 104, 0.14), rgba(190, 150, 104, 0) 52%);
+  border-left: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    -28px 0 80px rgba(52, 43, 34, 0.16),
+    inset 1px 0 0 rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(26px) saturate(1.08);
+  -webkit-backdrop-filter: blur(26px) saturate(1.08);
   display: flex;
   flex-direction: column;
 }
@@ -525,20 +586,14 @@
   border-bottom: 1px solid rgba(88, 68, 48, 0.10);
 }
 
-.drawerHeader p {
-  color: #a36a43;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-}
-
 .drawerHeader h2 {
-  font-family: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
-  font-size: 1.72rem;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.68rem;
   line-height: 1.15;
-  letter-spacing: -0.055em;
-  color: #302820;
-  font-weight: 700;
+  letter-spacing: -0.07em;
+  color: var(--ink);
+  font-weight: 650;
 }
 
 .drawerHeader span {
@@ -550,28 +605,28 @@
   font-weight: 600;
 }
 
-/* Drawer item list */
+/* Drawer item list – 24px gap to header, 15px between cards */
 .drawerList {
-  padding: 18px 14px;
+  padding: 24px 16px 18px;
   display: grid;
-  gap: 14px;
+  gap: 15px;
   overflow-y: auto;
 }
 
 .drawerList button {
   min-height: 94px;
-  padding: 20px 22px;
-  border-radius: 24px;
+  padding: 19px 21px;
+  border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.68), rgba(253, 248, 239, 0.54));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 250, 242, 0.58));
   border: 1px solid rgba(255, 255, 255, 0.78);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 12px 28px rgba(72, 58, 44, 0.07);
+    0 14px 34px rgba(78, 62, 46, 0.085);
   display: grid;
-  grid-template-columns: 52px 1fr auto;
+  grid-template-columns: 50px 1fr auto;
   align-items: center;
-  column-gap: 16px;
+  column-gap: 15px;
   text-align: left;
   cursor: pointer;
   transition: box-shadow 0.15s;
@@ -580,15 +635,15 @@
 .drawerList button:active {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 4px 14px rgba(72, 58, 44, 0.04);
+    0 4px 14px rgba(78, 62, 46, 0.05);
 }
 
-/* Number badge – serif, muted warm brown */
+/* Number – serif, decorative but quiet */
 .drawerList b {
-  font-family: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
-  color: rgba(128, 88, 56, 0.78);
+  font-family: var(--font-serif);
   font-size: 1.28rem;
-  font-weight: 600;
+  font-weight: 520;
+  color: rgba(139, 94, 60, 0.78);
 }
 
 .drawerList span {
@@ -597,23 +652,23 @@
 }
 
 .drawerList strong {
-  font-size: 1.04rem;
-  font-weight: 860;
+  font-size: 1.02rem;
+  font-weight: 850;
   letter-spacing: -0.04em;
-  color: #2b241d;
+  color: var(--ink);
 }
 
 .drawerList small {
-  font-size: 0.74rem;
-  line-height: 1.4;
-  color: rgba(54, 46, 39, 0.56);
+  font-size: 0.76rem;
+  line-height: 1.42;
+  color: rgba(54, 46, 39, 0.58);
   font-weight: 600;
 }
 
 .drawerList i {
   font-style: normal;
   color: rgba(126, 86, 58, 0.72);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 900;
 }
 
@@ -635,8 +690,8 @@
   width: 48px;
   height: 48px;
   border-radius: 16px;
-  background: rgba(178, 79, 47, 0.12);
-  color: #b24f2f;
+  background: rgba(155, 106, 69, 0.12);
+  color: #9b6a45;
   display: grid;
   place-items: center;
   font-weight: 900;
@@ -673,15 +728,20 @@
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE – true mobile
    ============================================ */
-@media (max-width: 430px) {
+@media (max-width: 444px) {
   .shell {
     padding: 0;
   }
 
   .heroFinal {
     width: 100vw;
+    border-radius: 0;
     box-shadow: none;
+  }
+
+  .drawerPanel {
+    width: min(100vw, 424px);
   }
 }
