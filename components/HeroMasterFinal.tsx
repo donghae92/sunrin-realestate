@@ -295,8 +295,14 @@ export default function HeroMasterFinal() {
             </div>
 
             <section className={styles.bottomBanner} aria-label="사무소 기본 정보">
-              <div className={styles.bannerRow}>{OFFICE.name} · 전화{' '}<a href={`tel:${OFFICE.phone.replace(/-/g, '')}`}>{OFFICE.phone}</a></div>
-              <div className={styles.bannerRow}>주소 {OFFICE.address} · FAX {OFFICE.fax}</div>
+              <div className={styles.bannerRow}>
+                <span>{OFFICE.name}</span>
+                <span>전화 <a href={`tel:${OFFICE.phone.replace(/-/g, '')}`}>{OFFICE.phone}</a></span>
+              </div>
+              <div className={styles.bannerRow}>
+                <span>주소 {OFFICE.address}</span>
+                <span>FAX {OFFICE.fax}</span>
+              </div>
             </section>
           </section>
         </section>
