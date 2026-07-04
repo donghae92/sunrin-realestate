@@ -1,0 +1,599 @@
+.shell {
+  min-height: 100svh;
+  background: #d9e5ee;
+  padding: 18px 12px 28px;
+  display: grid;
+  place-items: start center;
+  overflow-y: auto;
+}
+
+.phoneFrame {
+  position: relative;
+  width: min(100%, 430px);
+  min-height: 100svh;
+  background: #f4eee6;
+  overflow: hidden;
+  box-shadow: 0 28px 80px rgba(36, 39, 37, 0.2);
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(245, 240, 233, 0.14) 0%, rgba(245, 240, 233, 0.72) 38%, rgba(245, 240, 233, 0.94) 70%, rgba(245, 240, 233, 0.98) 100%),
+    url('/assets/hero-background.png') center top / cover no-repeat;
+}
+
+.contentLayer {
+  position: relative;
+  z-index: 1;
+  padding: 20px 20px 28px;
+  display: grid;
+  gap: 22px;
+}
+
+.topBar {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 28px;
+  background: rgba(255, 250, 244, 0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.topTextGroup {
+  display: grid;
+  gap: 6px;
+}
+
+.officeName {
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+  color: #312f2d;
+}
+
+.officeAddress {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: rgba(49, 47, 45, 0.58);
+}
+
+.hamburgerButton {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  border: 2px solid #2662c6;
+  background: rgba(255, 250, 244, 0.6);
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.hamburgerButton span {
+  width: 24px;
+  height: 2px;
+  background: #4a4744;
+  border-radius: 999px;
+  display: block;
+}
+
+.heroCopyBlock {
+  padding: 52px 8px 0;
+  display: grid;
+  gap: 18px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: rgba(49, 47, 45, 0.62);
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(52px, 9vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.085em;
+  color: #2f2c29;
+}
+
+.heroDescription {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.72;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  color: rgba(49, 47, 45, 0.74);
+}
+
+.ctaStack {
+  display: grid;
+  gap: 12px;
+}
+
+.primaryCta,
+.secondaryCta {
+  min-height: 62px;
+  padding: 0 22px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  box-sizing: border-box;
+}
+
+.primaryCta {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: #e8f1fa;
+  color: #2f2c29;
+  cursor: pointer;
+}
+
+.secondaryCta {
+  border: 1px solid rgba(191, 178, 164, 0.5);
+  background: rgba(255, 250, 244, 0.62);
+  color: #61564b;
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.infoCard,
+.visitCard {
+  min-height: 184px;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, rgba(201, 185, 165, 0.9), rgba(171, 152, 127, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.infoCardInner,
+.visitCardOverlay {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.visitCardMedia {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(25, 23, 20, 0.08), rgba(25, 23, 20, 0.38)),
+    url('/assets/visit-storefront.jpg') center center / cover no-repeat;
+}
+
+.infoCardLabel {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  color: rgba(255, 250, 244, 0.82);
+}
+
+.infoCardTitle {
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+  color: #fffaf4;
+}
+
+.infoCardText {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(255, 250, 244, 0.9);
+}
+
+.footerPanel {
+  display: grid;
+  gap: 14px;
+  padding-top: 2px;
+}
+
+.revealContactBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.revealBox {
+  min-height: 88px;
+  padding: 14px 14px 16px;
+  border-radius: 20px;
+  background: rgba(255, 250, 244, 0.78);
+  border: 1px solid rgba(203, 191, 175, 0.58);
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.revealCaption {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #9d6a52;
+}
+
+.revealButton {
+  min-height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(157, 106, 82, 0.34);
+  background: #fffaf4;
+  color: #423d39;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  cursor: pointer;
+}
+
+.revealedNumber {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #2f2c29;
+}
+
+.officeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.officeCell {
+  min-height: 92px;
+  padding: 14px 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 250, 244, 0.78);
+  border: 1px solid rgba(203, 191, 175, 0.58);
+  display: grid;
+  gap: 8px;
+}
+
+.officeCellLabel {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #9d6a52;
+}
+
+.officeCell strong {
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: -0.045em;
+  color: #312f2d;
+  word-break: keep-all;
+}
+
+.overlay,
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 39, 37, 0.42);
+  z-index: 60;
+}
+
+.contactModal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(92vw, 430px);
+  transform: translate(-50%, -50%);
+  background: #fffaf4;
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  display: grid;
+  gap: 16px;
+}
+
+.modalHeader,
+.drawerHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modalEyebrow,
+.drawerEyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  color: #b06e55;
+}
+
+.modalTitle,
+.drawerTitle {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.08;
+  letter-spacing: -0.08em;
+  color: #2f2c29;
+}
+
+.modalDescription,
+.drawerLead {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.68;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(49, 47, 45, 0.72);
+}
+
+.closeButton {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 14px;
+  background: #efe5d6;
+  color: #2f2c29;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.noticeBox {
+  padding: 14px 14px 16px;
+  border-radius: 18px;
+  background: #f7f1e8;
+  border: 1px solid rgba(176, 110, 85, 0.18);
+  display: grid;
+  gap: 8px;
+}
+
+.noticeBox strong {
+  font-size: 14px;
+  color: #2f2c29;
+}
+
+.noticeBox p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: rgba(49, 47, 45, 0.74);
+}
+
+.modalActionStack {
+  display: grid;
+  gap: 12px;
+}
+
+.channelButton,
+.choiceLink,
+.drawerContactLinks a,
+.drawerContactLinks button {
+  min-height: 52px;
+  border-radius: 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  box-sizing: border-box;
+}
+
+.channelButton {
+  background: #f4d85b;
+  color: #312f2d;
+}
+
+.choiceCard {
+  padding: 14px;
+  border-radius: 18px;
+  background: #f8f3ed;
+  border: 1px solid rgba(203, 191, 175, 0.58);
+  display: grid;
+  gap: 12px;
+}
+
+.choiceHeader {
+  display: grid;
+  gap: 5px;
+}
+
+.choiceHeader strong {
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  color: #2f2c29;
+}
+
+.choiceHeader span {
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 700;
+  color: rgba(49, 47, 45, 0.68);
+}
+
+.choiceReveal {
+  min-height: 48px;
+  border-radius: 16px;
+  border: 1px solid rgba(176, 110, 85, 0.34);
+  background: #fffaf4;
+  color: #423d39;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.choiceLink {
+  background: #fffaf4;
+  color: #2f2c29;
+  border: 1px solid rgba(176, 110, 85, 0.24);
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(92vw, 430px);
+  height: 100svh;
+  background: #ead9b9;
+  padding: 18px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: -18px 0 60px rgba(0,0,0,0.18);
+}
+
+.drawerList {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.drawerItem {
+  border-radius: 22px;
+  background: rgba(255, 250, 244, 0.72);
+  border: 1px solid rgba(205, 191, 165, 0.72);
+  overflow: hidden;
+}
+
+.drawerItemButton {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 16px 16px 16px 14px;
+  display: grid;
+  grid-template-columns: 46px 1fr 24px;
+  gap: 12px;
+  align-items: start;
+  text-align: left;
+  cursor: pointer;
+}
+
+.drawerIndex {
+  font-size: 20px;
+  font-weight: 900;
+  color: #b14f2f;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.drawerTextWrap {
+  display: grid;
+  gap: 6px;
+}
+
+.drawerItemTitle {
+  font-size: 22px;
+  line-height: 1.08;
+  letter-spacing: -0.07em;
+  color: #2f2c29;
+}
+
+.drawerItemSummary {
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: rgba(49, 47, 45, 0.64);
+}
+
+.drawerChevron {
+  font-size: 22px;
+  font-weight: 900;
+  color: #7c6d61;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.drawerDetail {
+  padding: 0 16px 16px 72px;
+  display: grid;
+  gap: 14px;
+}
+
+.detailList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.detailList li {
+  font-size: 14px;
+  line-height: 1.68;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(49, 47, 45, 0.78);
+}
+
+.drawerContactLinks {
+  display: grid;
+  gap: 10px;
+}
+
+.drawerContactLinks button {
+  border: 0;
+  cursor: pointer;
+  background: #fffaf4;
+  color: #2f2c29;
+}
+
+.drawerContactLinks a {
+  background: #fffaf4;
+  color: #2f2c29;
+}
+
+@media (max-width: 430px) {
+  .shell {
+    padding: 0;
+  }
+
+  .phoneFrame {
+    width: 100%;
+    min-height: 100svh;
+    box-shadow: none;
+  }
+
+  .contentLayer {
+    padding: 16px 16px 24px;
+  }
+
+  .heroCopyBlock {
+    padding-top: 42px;
+  }
+
+  .heroTitle {
+    font-size: 50px;
+  }
+
+  .cardRow,
+  .revealContactBlock,
+  .officeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .drawer {
+    width: 100%;
+  }
+}
