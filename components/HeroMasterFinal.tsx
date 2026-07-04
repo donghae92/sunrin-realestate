@@ -18,11 +18,19 @@ type DetailSection = {
   text: string;
 };
 
+type InfoRow = {
+  label: string;
+  value: string;
+};
+
 type DetailItem = {
   index: string;
   title: string;
   summary: string;
-  sections: DetailSection[];
+  intro?: string[];
+  infoTitle?: string;
+  infoRows?: InfoRow[];
+  sections?: DetailSection[];
 };
 
 type FeatureModal = 'rights' | 'contract' | null;
@@ -32,27 +40,20 @@ const drawerItems: DetailItem[] = [
     index: '01',
     title: '선린부동산 소개',
     summary: '정식 중개사무소, 대표 공인중개사, 협회·공제가입 안내',
-    sections: [
-      {
-        heading: '정식 등록 중개사무소',
-        text: '선린부동산공인중개사사무소는 대구 북구 산격로 95에서 상담하는 정식 등록 중개사무소입니다. 대표 공인중개사 이용호가 책임 있게 상담하며, 중개사무소 등록번호와 사업자등록번호를 기준으로 확인하실 수 있습니다.',
-      },
-      {
-        heading: '이름에 담긴 뜻',
-        text: '선린이라는 이름은 \'좋은 이웃\'이라는 뜻을 담고 있습니다. 방문이 부담스럽지 않은, 편하게 물어볼 수 있는 이웃 같은 사무소가 되고자 합니다.',
-      },
-      {
-        heading: '협회 가입과 공제 보장',
-        text: '한국공인중개사협회 가입 및 손해배상 책임보장 공제가입을 갖추고 있어, 거래 전 기본적인 안전장치를 함께 확인하실 수 있습니다.',
-      },
-      {
-        heading: '상담 원칙',
-        text: '선린부동산은 좋은 말만 앞세우기보다, 확인된 사실과 서류상 필요한 내용을 차분하게 안내해드리는 것을 중요하게 생각합니다.',
-      },
-      {
-        heading: '기본 정보',
-        text: '정식명칭 선린부동산공인중개사사무소 · 대표 공인중개사 이용호 · 중개사무소 등록번호 제27230-2023-00042호 · 사업자등록번호 559-01-02996 · 주소 대구 북구 산격로 95 · 대표전화 053-944-1116 · FAX 053-944-1114',
-      },
+    intro: [
+      '선린부동산은 대구 북구 산격로 95에서 운영 중인 정식 등록 중개사무소입니다. 상담은 대표 공인중개사가 책임 있게 진행합니다.',
+      '\'선린\'은 좋은 이웃이라는 뜻을 담고 있습니다. 좋은 말만 앞세우기보다, 확인된 사실과 서류상 필요한 내용을 차분하게 안내해드리는 것을 중요하게 생각합니다.',
+    ],
+    infoTitle: '확인 가능한 기준',
+    infoRows: [
+      { label: '정식명칭', value: '선린부동산공인중개사사무소' },
+      { label: '대표 공인중개사', value: '이용호' },
+      { label: '중개사무소 등록번호', value: '제27230-2023-00042호' },
+      { label: '사업자등록번호', value: '559-01-02996' },
+      { label: '협회·공제가입', value: '한국공인중개사협회 / 손해배상 책임보장 공제' },
+      { label: '주소', value: '대구 북구 산격로 95' },
+      { label: '대표전화', value: '053-944-1116' },
+      { label: 'FAX', value: '053-944-1114' },
     ],
   },
   {
@@ -462,7 +463,27 @@ export default function HeroMasterFinal() {
           <p className={styles.detailSummary}>{activeDetail.summary}</p>
 
           <div className={styles.detailBody}>
-            {activeDetail.sections.map((section, index) => (
+            {activeDetail.intro?.map((text, index) => (
+              <p key={`intro-${index}`} className={styles.detailIntro}>{text}</p>
+            ))}
+
+            {activeDetail.infoRows && (
+              <div className={styles.infoTable}>
+                {activeDetail.infoTitle && (
+                  <p className={styles.infoTableTitle}>{activeDetail.infoTitle}</p>
+                )}
+                <dl>
+                  {activeDetail.infoRows.map((row) => (
+                    <div key={row.label} className={styles.infoRow}>
+                      <dt>{row.label}</dt>
+                      <dd>{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+
+            {activeDetail.sections?.map((section, index) => (
               <div key={section.heading} className={styles.detailSection}>
                 <span className={styles.detailSectionBadge}>{String(index + 1).padStart(2, '0')}</span>
                 <div className={styles.detailSectionContent}>
