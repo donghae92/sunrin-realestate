@@ -320,15 +320,17 @@ export default function HeroMasterFinal() {
               <p className={styles.kicker}>善隣 · 좋은 이웃</p>
 
               <h1 className={styles.heroTitle}>
-                <span>주소와 서류를</span>
-                <span>먼저 살피고,</span>
-                <span>상담은 편하게</span>
+                <span>편하게 문의하고,</span>
+                <span>필요한 내용은</span>
+                <span>차례대로</span>
               </h1>
 
               <p className={styles.heroBody}>
-                등기부 · 건축물대장 · 선순위 보증금을
+                매매 · 전월세 · 점포 · LH전세임대 등
                 <br />
-                차분하게 함께 확인합니다.
+                상담 목적에 맞춰 필요한 사항만
+                <br />
+                차분하게 함께 확인해드립니다.
               </p>
             </div>
 
