@@ -328,9 +328,11 @@ export default function HeroMasterFinal() {
               <p className={styles.heroBody}>
                 매매 · 전월세 · 점포 · LH전세임대 등
                 <br />
-                상담 목적에 맞춰 필요한 사항만
+                다양한 상담을 부담 없이 시작하세요.
                 <br />
-                차분하게 함께 확인해드립니다.
+                필요한 내용은 상담 과정에서
+                <br />
+                차례대로 함께 안내해드립니다.
               </p>
             </div>
 
@@ -346,7 +348,7 @@ export default function HeroMasterFinal() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span>주소 찾기</span>
+                <span>오시는 길</span>
                 <span aria-hidden="true">→</span>
               </a>
             </div>
